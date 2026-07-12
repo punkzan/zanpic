@@ -57,7 +57,11 @@ export function useAds(platform: AdPlatform, slot: string) {
           const slotId = slot === 'sidebar' ? googleSidebarSlotId : googleBannerSlotId
           if (!googlePublisherId || !slotId) return
 
-          await injectScript(googleAds.src)
+          // Skip injection if AdSense script is already loaded from index.html
+          const w0 = window as unknown as Record<string, unknown>
+          if (!w0.adsbygoogle) {
+            await injectScript(googleAds.src)
+          }
 
           if (containerRef.current && !pushAttemptedRef.current) {
             pushAttemptedRef.current = true
