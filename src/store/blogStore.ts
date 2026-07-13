@@ -155,7 +155,8 @@ export const useBlogStore = create<BlogStore>((set) => ({
 
 /**
  * Get a localized field from a blog post.
- * - Seed posts: use i18n keys (blog.{seedKey}.{field})
+ * - Seed posts: use i18n keys (blog.{seedKey}.{field}), UNLESS the user has
+ *   customized that field — in which case return the user's custom value.
  * - User posts: always return the original text as entered
  */
 export function getPostField(
@@ -164,12 +165,18 @@ export function getPostField(
   _lang: string,
   t: (key: string) => string,
 ): string {
-  // Seed posts: use i18n
+  // Seed posts: check if user has customized this field
   if (post.seedKey) {
-    const key = `blog.${post.seedKey}.${field}`
-    const translated = t(key)
-    // If i18n returns the key itself, translation is missing — fall back to stored default
-    if (translated && translated !== key) return translated
+    const seedPost = SEED_POSTS.find((p) => p.id === post.id)
+    const isCustomized = !seedPost || seedPost[field] !== post[field]
+
+    if (!isCustomized) {
+      // Not customized — use i18n translation
+      const key = `blog.${post.seedKey}.${field}`
+      const translated = t(key)
+      if (translated && translated !== key) return translated
+    }
+    // Customized — fall through to return the user's custom value
   }
   // User posts: always return original text
   return post[field]
