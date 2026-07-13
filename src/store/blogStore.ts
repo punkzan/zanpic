@@ -92,19 +92,37 @@ function loadPosts(): BlogPost[] {
           return p
         })
         if (needsPersist) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated))
+          safeSetItem(STORAGE_KEY, JSON.stringify(migrated))
         }
         return migrated
       }
+      // Data exists but is empty/invalid — don't overwrite user data
+      return []
     }
-  } catch { /* corrupt data — fall through to seed */ }
+  } catch {
+    // Data is corrupt — back it up to prevent data loss, then seed
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) {
+      try { localStorage.setItem(STORAGE_KEY + '_backup', raw) } catch {}
+    }
+  }
   // First visit — seed and persist
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_POSTS))
+  safeSetItem(STORAGE_KEY, JSON.stringify(SEED_POSTS))
   return [...SEED_POSTS]
 }
 
+/** localStorage.setItem with error handling (quota, private mode, etc.) */
+function safeSetItem(key: string, value: string): boolean {
+  try {
+    localStorage.setItem(key, value)
+    return true
+  } catch {
+    return false
+  }
+}
+
 function persist(posts: BlogPost[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts))
+  safeSetItem(STORAGE_KEY, JSON.stringify(posts))
 }
 
 let _idCounter = 0
