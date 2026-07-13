@@ -71,6 +71,7 @@ const SEED_POSTS: BlogPost[] = [
 ]
 
 const STORAGE_KEY = 'zanpic_blog_posts'
+const DIAG_PREFIX = '[ZanPic BlogStore]'
 
 function loadPosts(): BlogPost[] {
   try {
@@ -78,6 +79,7 @@ function loadPosts(): BlogPost[] {
     if (raw) {
       const parsed = JSON.parse(raw)
       if (Array.isArray(parsed) && parsed.length > 0) {
+        console.log(DIAG_PREFIX, 'loadPosts: loaded', parsed.length, 'posts from localStorage')
         // Migration: add seedKey to seed posts that were stored before the i18n update
         const seedKeyMap: Record<string, string> = {
           'seed-1': 'seed1', 'seed-2': 'seed2', 'seed-3': 'seed3',
@@ -97,32 +99,67 @@ function loadPosts(): BlogPost[] {
         return migrated
       }
       // Data exists but is empty/invalid — don't overwrite user data
+      console.warn(DIAG_PREFIX, 'loadPosts: data exists but is empty/invalid, returning []')
       return []
     }
-  } catch {
+    console.log(DIAG_PREFIX, 'loadPosts: no data in localStorage, will seed')
+  } catch (err) {
     // Data is corrupt — back it up to prevent data loss, then seed
+    console.error(DIAG_PREFIX, 'loadPosts: corrupt data, backing up', err)
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       try { localStorage.setItem(STORAGE_KEY + '_backup', raw) } catch {}
     }
   }
   // First visit — seed and persist
+  console.log(DIAG_PREFIX, 'loadPosts: first visit, seeding', SEED_POSTS.length, 'default posts')
   safeSetItem(STORAGE_KEY, JSON.stringify(SEED_POSTS))
   return [...SEED_POSTS]
 }
 
-/** localStorage.setItem with error handling (quota, private mode, etc.) */
+/** localStorage.setItem with error handling and diagnostics */
 function safeSetItem(key: string, value: string): boolean {
   try {
     localStorage.setItem(key, value)
+    // Verify the write actually took effect
+    const verify = localStorage.getItem(key)
+    if (verify !== value) {
+      console.error(DIAG_PREFIX, 'safeSetItem: VERIFY FAILED for', key, '- written value differs from read-back')
+      return false
+    }
     return true
-  } catch {
+  } catch (err) {
+    console.error(DIAG_PREFIX, 'safeSetItem: WRITE FAILED for', key, '-', err, '- value length:', value.length)
     return false
   }
 }
 
 function persist(posts: BlogPost[]) {
-  safeSetItem(STORAGE_KEY, JSON.stringify(posts))
+  const json = JSON.stringify(posts)
+  const ok = safeSetItem(STORAGE_KEY, json)
+  if (!ok) {
+    console.error(DIAG_PREFIX, 'persist: FAILED to save', posts.length, 'posts. Check browser console for details.')
+    // Attempt emergency write to sessionStorage as fallback
+    try { sessionStorage.setItem(STORAGE_KEY + '_emergency', json) } catch {}
+  } else {
+    console.log(DIAG_PREFIX, 'persist: saved', posts.length, 'posts OK')
+  }
+}
+
+// Expose diagnostic function for debugging
+if (typeof window !== 'undefined') {
+  ;(window as any).__zanpic_blog_diag__ = () => {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    const sessionBackup = sessionStorage.getItem(STORAGE_KEY + '_emergency')
+    const state = useBlogStore.getState()
+    console.group(DIAG_PREFIX + ' DIAGNOSTIC')
+    console.log('Zustand state posts:', state.posts.length)
+    console.log('localStorage     posts:', raw ? JSON.parse(raw).length : '(empty)')
+    console.log('sessionStorage emergency:', sessionBackup ? JSON.parse(sessionBackup).length : '(empty)')
+    if (raw) console.log('localStorage sample (first 200 chars):', raw.slice(0, 200))
+    console.groupEnd()
+    return { zustand: state.posts.length, localStorage: raw ? JSON.parse(raw).length : 0, sessionEmergency: sessionBackup ? JSON.parse(sessionBackup).length : 0 }
+  }
 }
 
 let _idCounter = 0
@@ -152,6 +189,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
         date: post.date || new Date().toISOString().slice(0, 10),
       }
       const updated = [next, ...s.posts]
+      console.log(DIAG_PREFIX, 'addPost: creating post id=' + next.id + ', title="' + next.title.slice(0, 30) + '", total now=' + updated.length)
       persist(updated)
       return { posts: updated }
     }),
