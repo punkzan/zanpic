@@ -40,13 +40,15 @@ export default function AdminPage() {
     if (session === '1') setAuthenticated(true)
   }, [])
 
-  const handleLogin = useCallback(() => {
+  const handleLogin = useCallback((pwd: string) => {
     sessionStorage.setItem(AUTH_KEY, '1')
+    sessionStorage.setItem('zanpic_admin_pwd', pwd)
     setAuthenticated(true)
   }, [])
 
   const handleLogout = useCallback(() => {
     sessionStorage.removeItem(AUTH_KEY)
+    sessionStorage.removeItem('zanpic_admin_pwd')
     setAuthenticated(false)
   }, [])
 
@@ -59,7 +61,7 @@ export default function AdminPage() {
 
 /* ── Login view ── */
 
-function LoginView({ onLogin }: { onLogin: () => void }) {
+function LoginView({ onLogin }: { onLogin: (password: string) => void }) {
   const { t } = useTranslation()
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
@@ -72,7 +74,7 @@ function LoginView({ onLogin }: { onLogin: () => void }) {
       const inputHash = await hashPassword(password)
       if (inputHash === ADMIN_HASH) {
         setError(false)
-        onLogin()
+        onLogin(password)
       } else {
         setError(true)
         setPassword('')

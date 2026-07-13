@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@imgly/background-removal": "^1.7.0",
+    "@vercel/kv": "^1.0.1",
     "fabric": "^6.4.3",
     "i18next": "^26.3.6",
     "lucide-react": "^0.408.0",

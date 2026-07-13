@@ -199,13 +199,20 @@ function ContactContent() {
 function BlogContent() {
   const { t } = useTranslation()
   const posts = useBlogStore((s) => s.posts)
-  const reloadPosts = useBlogStore((s) => s.reloadPosts)
+  const syncFromApi = useBlogStore((s) => s.syncFromApi)
+  const loading = useBlogStore((s) => s.loading)
 
-  // Always re-read from localStorage when the blog page opens, so that changes
-  // made in another tab/window (or before this component mounted) are visible.
+  // On mount: pull latest posts from API (Vercel KV), fallback to localStorage
   useEffect(() => {
-    reloadPosts()
-  }, [reloadPosts])
+    syncFromApi()
+  }, [syncFromApi])
+
+  // Reset API sync flag when component unmounts (allow re-fetch next time it opens)
+  useEffect(() => {
+    return () => {
+      useBlogStore.setState({ loading: false })
+    }
+  }, [])
 
   return (
     <>
@@ -213,7 +220,9 @@ function BlogContent() {
         {t('pages.blog.intro')}
       </p>
 
-      {posts.length > 0 ? (
+      {loading && posts.length === 0 ? (
+        <p className="blog-more">{t('pages.blog.loading') || 'Loading...'}</p>
+      ) : posts.length > 0 ? (
         <div className="blog-grid">
           {posts.map((post) => (
             <article key={post.id} className="blog-card blog-card-article">
