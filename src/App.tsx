@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useEditorStore } from './store/editorStore'
+import { useBlogStore } from './store/blogStore'
 import { useTheme } from './hooks/useTheme'
 import { useDailyBackground } from './hooks/useDailyBackground'
 import { useSeoMeta } from './hooks/useSeoMeta'
@@ -24,6 +25,12 @@ export default function App() {
   const setExportOpen = useEditorStore((s) => s.setExportOpen)
   const shortcutsOpen = useEditorStore((s) => s.shortcutsOpen)
   const setShortcutsOpen = useEditorStore((s) => s.setShortcutsOpen)
+
+  // DIAGNOSTIC: force blog store init and log state on mount
+  const blogPosts = useBlogStore((s) => s.posts)
+  useEffect(() => {
+    console.warn('[ZanPic App Mount] blogStore posts count:', blogPosts.length)
+  }, [blogPosts.length])
 
   // Global keyboard shortcuts
   useEffect(() => {

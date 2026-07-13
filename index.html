@@ -36,6 +36,29 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- DIAGNOSTIC: check localStorage before React loads -->
+    <script>
+      (function() {
+        var key = 'zanpic_blog_posts';
+        var raw = localStorage.getItem(key);
+        console.group('[ZanPic Pre-React DIAG]');
+        console.log('localStorage key:', key);
+        if (raw) {
+          try {
+            var data = JSON.parse(raw);
+            console.log('Post count:', data.length);
+            console.log('Post IDs:', data.map(function(p) { return p.id; }).join(', '));
+            console.log('Post titles:', data.map(function(p) { return p.title; }).join(' | '));
+          } catch(e) {
+            console.error('PARSE ERROR:', e.message);
+            console.log('Raw (first 200 chars):', raw.slice(0, 200));
+          }
+        } else {
+          console.log('localStorage is EMPTY (no key: ' + key + ')');
+        }
+        console.groupEnd();
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -79,7 +79,7 @@ function loadPosts(): BlogPost[] {
     if (raw) {
       const parsed = JSON.parse(raw)
       if (Array.isArray(parsed) && parsed.length > 0) {
-        console.log(DIAG_PREFIX, 'loadPosts: loaded', parsed.length, 'posts from localStorage')
+        console.warn(DIAG_PREFIX, 'loadPosts: loaded', parsed.length, 'posts from localStorage')
         // Migration: add seedKey to seed posts that were stored before the i18n update
         const seedKeyMap: Record<string, string> = {
           'seed-1': 'seed1', 'seed-2': 'seed2', 'seed-3': 'seed3',
@@ -102,7 +102,7 @@ function loadPosts(): BlogPost[] {
       console.warn(DIAG_PREFIX, 'loadPosts: data exists but is empty/invalid, returning []')
       return []
     }
-    console.log(DIAG_PREFIX, 'loadPosts: no data in localStorage, will seed')
+    console.warn(DIAG_PREFIX, 'loadPosts: no data in localStorage, will seed')
   } catch (err) {
     // Data is corrupt — back it up to prevent data loss, then seed
     console.error(DIAG_PREFIX, 'loadPosts: corrupt data, backing up', err)
@@ -112,7 +112,7 @@ function loadPosts(): BlogPost[] {
     }
   }
   // First visit — seed and persist
-  console.log(DIAG_PREFIX, 'loadPosts: first visit, seeding', SEED_POSTS.length, 'default posts')
+  console.warn(DIAG_PREFIX, 'loadPosts: first visit, seeding', SEED_POSTS.length, 'default posts')
   safeSetItem(STORAGE_KEY, JSON.stringify(SEED_POSTS))
   return [...SEED_POSTS]
 }
@@ -142,7 +142,7 @@ function persist(posts: BlogPost[]) {
     // Attempt emergency write to sessionStorage as fallback
     try { sessionStorage.setItem(STORAGE_KEY + '_emergency', json) } catch {}
   } else {
-    console.log(DIAG_PREFIX, 'persist: saved', posts.length, 'posts OK')
+    console.warn(DIAG_PREFIX, 'persist: saved', posts.length, 'posts OK')
   }
 }
 
@@ -153,10 +153,10 @@ if (typeof window !== 'undefined') {
     const sessionBackup = sessionStorage.getItem(STORAGE_KEY + '_emergency')
     const state = useBlogStore.getState()
     console.group(DIAG_PREFIX + ' DIAGNOSTIC')
-    console.log('Zustand state posts:', state.posts.length)
-    console.log('localStorage     posts:', raw ? JSON.parse(raw).length : '(empty)')
-    console.log('sessionStorage emergency:', sessionBackup ? JSON.parse(sessionBackup).length : '(empty)')
-    if (raw) console.log('localStorage sample (first 200 chars):', raw.slice(0, 200))
+    console.warn('Zustand state posts:', state.posts.length)
+    console.warn('localStorage     posts:', raw ? JSON.parse(raw).length : '(empty)')
+    console.warn('sessionStorage emergency:', sessionBackup ? JSON.parse(sessionBackup).length : '(empty)')
+    if (raw) console.warn('localStorage sample (first 200 chars):', raw.slice(0, 200))
     console.groupEnd()
     return { zustand: state.posts.length, localStorage: raw ? JSON.parse(raw).length : 0, sessionEmergency: sessionBackup ? JSON.parse(sessionBackup).length : 0 }
   }
@@ -189,7 +189,7 @@ export const useBlogStore = create<BlogStore>((set) => ({
         date: post.date || new Date().toISOString().slice(0, 10),
       }
       const updated = [next, ...s.posts]
-      console.log(DIAG_PREFIX, 'addPost: creating post id=' + next.id + ', title="' + next.title.slice(0, 30) + '", total now=' + updated.length)
+      console.warn(DIAG_PREFIX, 'addPost: creating post id=' + next.id + ', title="' + next.title.slice(0, 30) + '", total now=' + updated.length)
       persist(updated)
       return { posts: updated }
     }),

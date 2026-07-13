@@ -20,12 +20,10 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     terserOptions: {
       compress: {
-        // Remove all console.* calls in production
-        drop_console: true,
-        // Remove debugger statements
+        // Drop debugger statements
         drop_debugger: true,
-        // Remove unused functions
-        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
+        // Remove verbose console calls; keep warn/error for diagnostics
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
       },
       mangle: {
         // Obfuscate variable and function names
