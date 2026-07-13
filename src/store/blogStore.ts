@@ -157,9 +157,18 @@ if (typeof window !== 'undefined') {
     console.warn('localStorage     posts:', raw ? JSON.parse(raw).length : '(empty)')
     console.warn('sessionStorage emergency:', sessionBackup ? JSON.parse(sessionBackup).length : '(empty)')
     if (raw) console.warn('localStorage sample (first 200 chars):', raw.slice(0, 200))
+    console.warn('Tip: if Zustand < localStorage, call useBlogStore.getState().reloadPosts()')
     console.groupEnd()
     return { zustand: state.posts.length, localStorage: raw ? JSON.parse(raw).length : 0, sessionEmergency: sessionBackup ? JSON.parse(sessionBackup).length : 0 }
   }
+
+  // Sync state when another tab/window changes localStorage
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      console.warn(DIAG_PREFIX, 'storage event: localStorage changed in another tab, reloading')
+      useBlogStore.setState({ posts: loadPosts() })
+    }
+  })
 }
 
 let _idCounter = 0
@@ -176,6 +185,8 @@ interface BlogStore {
   updatePost: (id: string, patch: Partial<Omit<BlogPost, 'id'>>) => void
   /** Delete a post by id */
   deletePost: (id: string) => void
+  /** Reload posts from localStorage — useful when another tab/window changed storage */
+  reloadPosts: () => void
 }
 
 export const useBlogStore = create<BlogStore>((set) => ({
@@ -207,6 +218,12 @@ export const useBlogStore = create<BlogStore>((set) => ({
       persist(updated)
       return { posts: updated }
     }),
+
+  reloadPosts: () => {
+    const fresh = loadPosts()
+    console.warn(DIAG_PREFIX, 'reloadPosts: loaded', fresh.length, 'posts')
+    set({ posts: fresh })
+  },
 }))
 
 /**

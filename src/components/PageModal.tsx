@@ -199,34 +199,19 @@ function ContactContent() {
 function BlogContent() {
   const { t } = useTranslation()
   const posts = useBlogStore((s) => s.posts)
+  const reloadPosts = useBlogStore((s) => s.reloadPosts)
+
+  // Always re-read from localStorage when the blog page opens, so that changes
+  // made in another tab/window (or before this component mounted) are visible.
+  useEffect(() => {
+    reloadPosts()
+  }, [reloadPosts])
 
   return (
     <>
       <p style={{ color: 'var(--text-secondary)' }}>
         {t('pages.blog.intro')}
       </p>
-
-      {/* TEMP diagnostic: show exactly what BlogContent is trying to render */}
-      <div
-        style={{
-          background: 'red',
-          color: 'white',
-          padding: '12px',
-          borderRadius: '8px',
-          marginBottom: '12px',
-          fontFamily: 'monospace',
-          fontSize: '13px',
-        }}
-      >
-        <strong>BlogContent DIAG — posts.length = {posts.length}</strong>
-        <ul style={{ margin: '8px 0 0', paddingLeft: '18px' }}>
-          {posts.map((p) => (
-            <li key={p.id}>
-              {p.id}: {p.title || '(empty title)'}
-            </li>
-          ))}
-        </ul>
-      </div>
 
       {posts.length > 0 ? (
         <div className="blog-grid">
