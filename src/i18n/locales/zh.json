@@ -357,7 +357,10 @@
       "title": "经验分享",
       "intro": "这里分享图片编辑技巧、AI 抠图技术解析、证件照制作指南等实用内容。",
       "empty": "暂无文章，敬请期待。",
-      "more": "更多文章持续更新中…"
+      "more": "更多文章持续更新中…",
+      "loading": "加载中…",
+      "readMore": "阅读全文 →",
+      "backToList": "← 返回列表"
     }
   },
   "admin": {
@@ -443,6 +446,9 @@
       "excerptLabel": "摘要",
       "excerptPlaceholder": "输入文章摘要内容…",
       "wordCount": "{{n}} 字",
+      "contentLabel": "正文内容",
+      "contentHint": "支持 Markdown，选填",
+      "contentPlaceholder": "在此输入文章正文内容（支持标题、粗体、列表、表格等 Markdown 格式）…",
       "cancel": "取消",
       "saveEdit": "保存修改",
       "publish": "发布文章",

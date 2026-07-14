@@ -357,7 +357,10 @@
       "title": "Blog",
       "intro": "Partage de conseils d'édition d'images, d'informations sur la technologie de détourage IA et de guides de photos d'identité.",
       "empty": "Aucun article pour le moment, restez à l'écoute.",
-      "more": "D'autres articles arrivent bientôt…"
+      "more": "D'autres articles arrivent bientôt…",
+      "loading": "Chargement…",
+      "readMore": "Lire la suite →",
+      "backToList": "← Retour à la liste"
     }
   },
   "admin": {
@@ -448,7 +451,10 @@
       "publish": "Publier",
       "defaultTab": "Par défaut",
       "translationFor": "Traduction {{lang}}",
-      "uncategorized": "Non classé"
+      "uncategorized": "Non classé",
+      "contentLabel": "Contenu",
+      "contentHint": "Markdown supporté, optionnel",
+      "contentPlaceholder": "Saisissez le corps complet de l'article ici (prend en charge les titres, gras, listes, tableaux en Markdown)..."
     }
   },
   "adSlot": {

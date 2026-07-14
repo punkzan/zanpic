@@ -357,7 +357,10 @@
       "title": "Blog",
       "intro": "Sharing image editing tips, AI cutout technology insights, and ID photo guides.",
       "empty": "No articles yet, stay tuned.",
-      "more": "More articles coming soon…"
+      "more": "More articles coming soon…",
+      "loading": "Loading...",
+      "readMore": "Read More →",
+      "backToList": "← Back to List"
     }
   },
   "admin": {
@@ -448,7 +451,10 @@
       "publish": "Publish",
       "defaultTab": "Default",
       "translationFor": "{{lang}} Translation",
-      "uncategorized": "Uncategorized"
+      "uncategorized": "Uncategorized",
+      "contentLabel": "Content",
+      "contentHint": "Markdown supported, optional",
+      "contentPlaceholder": "Enter the full article body here (supports headings, bold, lists, tables in Markdown)..."
     }
   },
   "adSlot": {

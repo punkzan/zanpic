@@ -357,7 +357,10 @@
       "title": "ブログ",
       "intro": "画像編集のコツ、AI切り抜き技術のインサイト、証明写真ガイドを共有しています。",
       "empty": "記事はまだありません。お楽しみに。",
-      "more": "さらに記事を追加予定…"
+      "more": "さらに記事を追加予定…",
+      "loading": "読み込み中…",
+      "readMore": "続きを読む →",
+      "backToList": "← 一覧に戻る"
     }
   },
   "admin": {
@@ -448,7 +451,10 @@
       "publish": "公開",
       "defaultTab": "デフォルト",
       "translationFor": "{{lang}}翻訳",
-      "uncategorized": "未分類"
+      "uncategorized": "未分類",
+      "contentLabel": "本文",
+      "contentHint": "Markdown対応、任意",
+      "contentPlaceholder": "記事の本文を入力してください（見出し、太字、リスト、表などのMarkdown形式に対応）..."
     }
   },
   "adSlot": {

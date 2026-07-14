@@ -357,7 +357,10 @@
       "title": "블로그",
       "intro": "이미지 편집 팁, AI 누끼 기술 인사이트, 증명사진 가이드를 공유해요.",
       "empty": "아직 게시글이 없어요. 기대해 주세요.",
-      "more": "더 많은 게시글이 곧 올라와요…"
+      "more": "더 많은 게시글이 곧 올라와요…",
+      "loading": "로딩 중…",
+      "readMore": "전문 보기 →",
+      "backToList": "← 목록으로 돌아가기"
     }
   },
   "admin": {
@@ -448,7 +451,10 @@
       "publish": "게시",
       "defaultTab": "기본",
       "translationFor": "{{lang}} 번역",
-      "uncategorized": "미분류"
+      "uncategorized": "미분류",
+      "contentLabel": "본문",
+      "contentHint": "Markdown 지원, 선택사항",
+      "contentPlaceholder": "여기에 전체 기사 본문을 입력하세요(제목, 굵은 글씨, 목록, 표 등 Markdown 지원)..."
     }
   },
   "adSlot": {

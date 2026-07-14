@@ -9,6 +9,7 @@ export interface BlogEditorPayload {
   date: string
   category: string
   excerpt: string
+  content?: string // Full article body (supports basic markdown)
 }
 
 interface Props {
@@ -24,6 +25,7 @@ export function BlogEditor({ existing, onSave, onClose }: Props) {
   const [date, setDate] = useState(existing?.date ?? new Date().toISOString().slice(0, 10))
   const [category, setCategory] = useState(existing?.category ?? '')
   const [excerpt, setExcerpt] = useState(existing?.excerpt ?? '')
+  const [content, setContent] = useState(existing?.content ?? '')
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -41,6 +43,7 @@ export function BlogEditor({ existing, onSave, onClose }: Props) {
       date,
       category: category.trim() || t('admin.blogEditor.uncategorized'),
       excerpt: excerpt.trim(),
+      content: content.trim() || undefined,
     })
   }
 
@@ -120,6 +123,23 @@ export function BlogEditor({ existing, onSave, onClose }: Props) {
             />
             <div className="mt-1 text-right text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
               {t('admin.blogEditor.wordCount', { n: excerpt.length })}
+            </div>
+          </div>
+          <div>
+            <label className="block mb-1.5 text-[13px] font-medium" style={{ color: 'var(--text-secondary)' }}>
+              {t('admin.blogEditor.contentLabel') || '正文内容'}
+              <span style={{ color: 'var(--text-tertiary)', fontWeight: 400, marginLeft: 4 }}>({t('admin.blogEditor.contentHint') || '支持 Markdown，选填'})</span>
+            </label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder={t('admin.blogEditor.contentPlaceholder') || '在此输入文章正文内容（支持标题、粗体、列表、表格等 Markdown 格式）...'}
+              className="blog-editor-input blog-editor-textarea"
+              rows={12}
+              style={{ minHeight: 180 }}
+            />
+            <div className="mt-1 text-right text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
+              {content.length > 0 ? t('admin.blogEditor.wordCount', { n: content.length }) : ''}
             </div>
           </div>
         </div>

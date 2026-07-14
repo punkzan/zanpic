@@ -357,7 +357,10 @@
       "title": "Blog",
       "intro": "Teilt Tipps zur Bildbearbeitung, Einblicke in die AI-Freistellungstechnologie und Passfoto-Anleitungen.",
       "empty": "Noch keine Artikel, bleiben Sie dran.",
-      "more": "Weitere Artikel folgen in Kürze…"
+      "more": "Weitere Artikel folgen in Kürze…",
+      "loading": "Laden…",
+      "readMore": "Weiterlesen →",
+      "backToList": "← Zurück zur Liste"
     }
   },
   "admin": {
@@ -448,7 +451,10 @@
       "publish": "Veröffentlichen",
       "defaultTab": "Standard",
       "translationFor": "{{lang}}-Übersetzung",
-      "uncategorized": "Unkategorisiert"
+      "uncategorized": "Unkategorisiert",
+      "contentLabel": "Inhalt",
+      "contentHint": "Markdown unterstützt, optional",
+      "contentPlaceholder": "Geben Sie hier den vollständigen Artikeltext ein (unterstützt Überschriften, Fettung, Listen, Tabellen in Markdown)..."
     }
   },
   "adSlot": {
