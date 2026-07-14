@@ -577,19 +577,18 @@ export const useBlogStore = create<BlogStore>((set, get) => ({
       const updated = [next, ...s.posts]
       persist(updated)
 
-      // Fire API call in background (don't block UI)
-      if (s.usingApi) {
-        const pwd = sessionStorage.getItem('zanpic_admin_pwd')
-        if (pwd) {
-          blogApi.createPost(post).then((res) => {
-            // Replace the temporary id with the server-assigned one
-            set({ posts: res.posts })
-            persist(res.posts)
-          }).catch((err) => {
-            console.error(DIAG_PREFIX, 'addPost API failed:', err.message)
-            set({ error: 'Failed to sync with server. Saved locally.' })
-          })
-        }
+      // Always attempt API call if admin password is available.
+      // Fallback: post stays in localStorage if API is unreachable.
+      const pwd = sessionStorage.getItem('zanpic_admin_pwd')
+      if (pwd) {
+        blogApi.createPost(post).then((res) => {
+          // Replace the temporary id with the server-assigned one
+          set({ posts: res.posts, usingApi: true })
+          persist(res.posts)
+        }).catch((err) => {
+          console.error(DIAG_PREFIX, 'addPost API failed:', err.message)
+          set({ error: 'Failed to sync with server. Saved locally.' })
+        })
       }
 
       return { posts: updated, error: '' }
@@ -600,14 +599,12 @@ export const useBlogStore = create<BlogStore>((set, get) => ({
       const updated = s.posts.map((p) => (p.id === id ? { ...p, ...patch } : p))
       persist(updated)
 
-      if (s.usingApi) {
-        const pwd = sessionStorage.getItem('zanpic_admin_pwd')
-        if (pwd) {
-          blogApi.updatePost(id, patch).catch((err) => {
-            console.error(DIAG_PREFIX, 'updatePost API failed:', err.message)
-            set({ error: 'Failed to sync with server. Saved locally.' })
-          })
-        }
+      const pwd = sessionStorage.getItem('zanpic_admin_pwd')
+      if (pwd) {
+        blogApi.updatePost(id, patch).catch((err) => {
+          console.error(DIAG_PREFIX, 'updatePost API failed:', err.message)
+          set({ error: 'Failed to sync with server. Saved locally.' })
+        })
       }
 
       return { posts: updated, error: '' }
@@ -618,14 +615,12 @@ export const useBlogStore = create<BlogStore>((set, get) => ({
       const updated = s.posts.filter((p) => p.id !== id)
       persist(updated)
 
-      if (s.usingApi) {
-        const pwd = sessionStorage.getItem('zanpic_admin_pwd')
-        if (pwd) {
-          blogApi.removePost(id).catch((err) => {
-            console.error(DIAG_PREFIX, 'deletePost API failed:', err.message)
-            set({ error: 'Failed to sync with server. Saved locally.' })
-          })
-        }
+      const pwd = sessionStorage.getItem('zanpic_admin_pwd')
+      if (pwd) {
+        blogApi.removePost(id).catch((err) => {
+          console.error(DIAG_PREFIX, 'deletePost API failed:', err.message)
+          set({ error: 'Failed to sync with server. Saved locally.' })
+        })
       }
 
       return { posts: updated, error: '' }

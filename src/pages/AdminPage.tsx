@@ -216,6 +216,12 @@ function BlogSection() {
   const addPost = useBlogStore((s) => s.addPost)
   const updatePost = useBlogStore((s) => s.updatePost)
   const deletePost = useBlogStore((s) => s.deletePost)
+  const syncFromApi = useBlogStore((s) => s.syncFromApi)
+
+  // On mount: pull latest posts from API (Vercel KV) so admin sees live data
+  useEffect(() => {
+    syncFromApi()
+  }, [syncFromApi])
 
   const [editorOpen, setEditorOpen] = useState(false)
   const [editingPost, setEditingPost] = useState<BlogPost | undefined>(undefined)
