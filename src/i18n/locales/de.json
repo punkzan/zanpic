@@ -200,7 +200,12 @@
     "resultAlt": "Vorschau des vergrößerten Bildes",
     "applyToCanvas": "Auf Leinwand anwenden",
     "applied": "Angewendet",
-    "download": "Bild herunterladen"
+    "download": "Bild herunterladen",
+    "errorSizeLimit": "Ausgabegröße überschreitet Browser-Limit. Versuchen Sie 2×, Zuschneiden oder Verkleinern des Bildes.",
+    "errorModelLoad": "KI-Modell konnte nicht geladen werden. Bitte Netzwerkverbindung prüfen und erneut versuchen.",
+    "errorInference": "KI-Inferenz fehlgeschlagen. Versuchen Sie Seite neu zu laden oder das 2×-Modell zu verwenden.",
+    "errorMemory": "Bild ist zu groß für den verfügbaren Speicher. Bitte zuerst zuschneiden oder verkleinern.",
+    "errorUnknownModel": "Unbekanntes Upscaling-Modell. Bitte wählen Sie ein Modell erneut aus."
   },
   "export": {
     "title": "Bild exportieren",

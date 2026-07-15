@@ -404,6 +404,15 @@ function upscaleAlpha(
 
 // ── Main Upscale Function ────────────────────────────────────────────
 
+// Browser canvas hard limits (conservative value that works across Chromium, Safari, Firefox)
+const MAX_CANVAS_DIMENSION = 16384
+const MAX_CANVAS_PIXELS = MAX_CANVAS_DIMENSION * MAX_CANVAS_DIMENSION
+
+/** Build a human-readable size string */
+function sizeStr(w: number, h: number): string {
+  return `${w}×${h}px`
+}
+
 /**
  * Upscale an image using Real-ESRGAN via ONNX Runtime Web.
  *
@@ -419,7 +428,7 @@ export async function upscaleImage(
 ): Promise<{ canvas: HTMLCanvasElement; width: number; height: number }> {
   const model = getModelById(modelId)
   if (!model) {
-    throw new Error(`Unknown model: ${modelId}`)
+    throw new Error(`UPSCALE_UNKNOWN_MODEL: ${modelId}`)
   }
 
   const scale = model.scale
@@ -428,9 +437,37 @@ export async function upscaleImage(
   const outW = srcW * scale
   const outH = srcH * scale
 
+  // Guard against browser Canvas size limits before allocating memory
+  if (outW > MAX_CANVAS_DIMENSION || outH > MAX_CANVAS_DIMENSION) {
+    throw new Error(
+      `UPSCALE_SIZE_LIMIT_EXCEEDED: Output size ${sizeStr(outW, outH)} exceeds the browser ` +
+        `canvas limit of ${MAX_CANVAS_DIMENSION}px per side. Try the 2× model, or crop/resize the image first.`,
+    )
+  }
+  const totalOutPixels = outW * outH
+  if (totalOutPixels > MAX_CANVAS_PIXELS) {
+    throw new Error(
+      `UPSCALE_SIZE_LIMIT_EXCEEDED: Output size ${sizeStr(outW, outH)} (` +
+        `${(totalOutPixels / 1e6).toFixed(1)}M pixels) exceeds the browser canvas pixel limit. ` +
+        `Try the 2× model, or crop/resize the image first.`,
+    )
+  }
+  if (srcW === 0 || srcH === 0) {
+    throw new Error(`UPSCALE_INVALID_INPUT: Source image has zero width or height (${sizeStr(srcW, srcH)}).`)
+  }
+
   // Get source image data
-  const srcCtx = sourceCanvas.getContext('2d', { willReadFrequently: true })!
-  const srcImageData = srcCtx.getImageData(0, 0, srcW, srcH)
+  let srcCtx: CanvasRenderingContext2D
+  let srcImageData: ImageData
+  try {
+    srcCtx = sourceCanvas.getContext('2d', { willReadFrequently: true })!
+    srcImageData = srcCtx.getImageData(0, 0, srcW, srcH)
+  } catch (err) {
+    throw new Error(
+      `UPSCALE_READ_FAILED: Could not read source image pixels (${sizeStr(srcW, srcH)}). ` +
+        (err instanceof Error ? err.message : String(err)),
+    )
+  }
 
   // Check for alpha channel
   const imageHasAlpha = hasAlpha(srcImageData)
@@ -442,7 +479,14 @@ export async function upscaleImage(
 
   // Load model and create session
   onProgress?.('inference', 0, 'Loading AI model...')
-  const session = await getSession(model, onProgress)
+  let session: ort.InferenceSession
+  try {
+    session = await getSession(model, onProgress)
+  } catch (err) {
+    throw new Error(
+      `UPSCALE_MODEL_LOAD_FAILED: ${err instanceof Error ? err.message : String(err)}`,
+    )
+  }
 
   // Determine tiling parameters
   const useTiling = Math.max(srcW, srcH) > model.tileThreshold
@@ -466,12 +510,20 @@ export async function upscaleImage(
     for (let i = 0; i < totalTiles; i++) {
       const tile = tiles[i]
 
+      // Validate tile core dimensions to avoid zero/negative draws
+      if (tile.dw <= 0 || tile.dh <= 0) {
+        throw new Error(
+          `UPSCALE_TILE_INVALID: Tile ${i + 1}/${totalTiles} has invalid core size ` +
+            `${tile.dw}×${tile.dh} at position (${tile.sx}, ${tile.sy}).`,
+        )
+      }
+
       // Extract tile region from source
       const tileCanvas = document.createElement('canvas')
       tileCanvas.width = tile.sw
       tileCanvas.height = tile.sh
       const tileCtx = tileCanvas.getContext('2d', { willReadFrequently: true })!
-      const tileImageData = tileCtx.getImageData(0, 0, tile.sw, tile.sh)
+      const tileImageData = tileCtx.createImageData(tile.sw, tile.sh)
 
       // Copy pixels from source
       const srcData = srcImageData.data
@@ -484,7 +536,15 @@ export async function upscaleImage(
       }
 
       // Run inference on this tile
-      const tileResult = await runInference(session, tile.sw, tile.sh, tileImageData, upscaledAlpha ? true : false)
+      let tileResult: Uint8ClampedArray
+      try {
+        tileResult = await runInference(session, tile.sw, tile.sh, tileImageData, upscaledAlpha ? true : false)
+      } catch (err) {
+        throw new Error(
+          `UPSCALE_INFERENCE_FAILED: Tile ${i + 1}/${totalTiles} (${sizeStr(tile.sw, tile.sh)}) failed. ` +
+            (err instanceof Error ? err.message : String(err)),
+        )
+      }
 
       // Calculate the core region in the tile output (excluding overlap)
       const coreOffsetX = tile.sx > 0 ? overlap : 0
@@ -498,18 +558,32 @@ export async function upscaleImage(
       tileOutCanvas.height = tile.sh * scale
       const tileOutCtx = tileOutCanvas.getContext('2d')!
 
-      const tileOutImageData = tileOutCtx.createImageData(tile.sw * scale, tile.sh * scale)
-      tileOutImageData.data.set(tileResult)
-      tileOutCtx.putImageData(tileOutImageData, 0, 0)
+      try {
+        const tileOutImageData = tileOutCtx.createImageData(tile.sw * scale, tile.sh * scale)
+        tileOutImageData.data.set(tileResult)
+        tileOutCtx.putImageData(tileOutImageData, 0, 0)
+      } catch (err) {
+        throw new Error(
+          `UPSCALE_TILE_OUTPUT_FAILED: Could not create tile ${i + 1} output canvas (${sizeStr(tile.sw * scale, tile.sh * scale)}). ` +
+            (err instanceof Error ? err.message : String(err)),
+        )
+      }
 
       // Draw the core region onto the output canvas
-      outCtx.drawImage(
-        tileOutCanvas,
-        coreOffsetX * scale, coreOffsetY * scale,  // source x, y
-        coreW * scale, coreH * scale,              // source w, h
-        tile.dx, tile.dy,                          // dest x, y
-        coreW * scale, coreH * scale,              // dest w, h
-      )
+      try {
+        outCtx.drawImage(
+          tileOutCanvas,
+          coreOffsetX * scale, coreOffsetY * scale, // source x, y
+          coreW * scale, coreH * scale,              // source w, h
+          tile.dx, tile.dy,                          // dest x, y
+          coreW * scale, coreH * scale,              // dest w, h
+        )
+      } catch (err) {
+        throw new Error(
+          `UPSCALE_TILE_DRAW_FAILED: Could not composite tile ${i + 1} onto output. ` +
+            (err instanceof Error ? err.message : String(err)),
+        )
+      }
 
       // Update progress
       const pct = ((i + 1) / totalTiles) * 100
@@ -521,11 +595,25 @@ export async function upscaleImage(
   } else {
     // ── Whole image processing ──
     onProgress?.('inference', 10, 'Running AI inference...')
-    const result = await runInference(session, srcW, srcH, srcImageData, imageHasAlpha)
+    let result: Uint8ClampedArray
+    try {
+      result = await runInference(session, srcW, srcH, srcImageData, imageHasAlpha)
+    } catch (err) {
+      throw new Error(
+        `UPSCALE_INFERENCE_FAILED: ${err instanceof Error ? err.message : String(err)}`,
+      )
+    }
 
-    const outImageData = outCtx.createImageData(outW, outH)
-    outImageData.data.set(result)
-    outCtx.putImageData(outImageData, 0, 0)
+    try {
+      const outImageData = outCtx.createImageData(outW, outH)
+      outImageData.data.set(result)
+      outCtx.putImageData(outImageData, 0, 0)
+    } catch (err) {
+      throw new Error(
+        `UPSCALE_OUTPUT_FAILED: Could not create output canvas (${sizeStr(outW, outH)}). ` +
+          (err instanceof Error ? err.message : String(err)),
+      )
+    }
   }
 
   // Apply upscaled alpha if needed

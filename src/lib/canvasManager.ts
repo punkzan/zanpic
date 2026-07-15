@@ -1285,10 +1285,10 @@ export class CanvasManager {
   async upscaleImage(
     modelId: string,
     onProgress?: UpscaleProgressFn,
-  ): Promise<boolean> {
+  ): Promise<void> {
     if (!this.canvas) {
       console.error('[CanvasManager] upscaleImage: canvas not initialized')
-      return false
+      throw new Error('Canvas not initialized')
     }
 
     const c = this.canvas
@@ -1345,11 +1345,11 @@ export class CanvasManager {
       await this.loadImage(dataUrl)
 
       onProgress?.('done', 100, i18n.t('upscale.done'))
-      return true
     } catch (err) {
+      const message = err instanceof Error ? err.message : String(err)
       console.error('[CanvasManager] upscaleImage failed:', err)
       onProgress?.('error', 0, i18n.t('upscale.failed'))
-      return false
+      throw new Error(message)
     } finally {
       this.isRestoring = false
     }

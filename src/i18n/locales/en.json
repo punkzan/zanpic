@@ -200,7 +200,12 @@
     "resultAlt": "Upscaled image preview",
     "applyToCanvas": "Apply to Canvas",
     "applied": "Applied",
-    "download": "Download Image"
+    "download": "Download Image",
+    "errorSizeLimit": "Output size exceeds browser limit. Try 2×, crop, or resize the image first.",
+    "errorModelLoad": "AI model failed to load. Please check your network and try again.",
+    "errorInference": "AI inference failed. Try refreshing the page or using the 2× model.",
+    "errorMemory": "Image is too large for available memory. Try cropping or resizing first.",
+    "errorUnknownModel": "Unknown upscaling model. Please select a model again."
   },
   "export": {
     "title": "Export Image",

@@ -13,7 +13,7 @@ export function UpscalePanel() {
 
   const [applied, setApplied] = useState(false)
 
-  const handleUpscale = async () => {
+    const handleUpscale = async () => {
     const c = canvasManager.getCanvas()
     if (!c) return
 
@@ -28,14 +28,14 @@ export function UpscalePanel() {
       resultHeight: 0,
     })
 
-    const success = await canvasManager.upscaleImage(
-      upscale.selectedModel,
-      (phase: UpscalePhase, progress: number, message: string) => {
-        setUpscale({ phase, progress, message })
-      },
-    )
+    try {
+      await canvasManager.upscaleImage(
+        upscale.selectedModel,
+        (phase: UpscalePhase, progress: number, message: string) => {
+          setUpscale({ phase, progress, message })
+        },
+      )
 
-    if (success) {
       // Get the result from canvas
       const size = canvasManager.getCanvasSize()
       const dataUrl = canvasManager.exportImage('png', 1, 1)
@@ -48,12 +48,37 @@ export function UpscalePanel() {
         resultWidth: size?.width || 0,
         resultHeight: size?.height || 0,
       })
-    } else {
+    } catch (err) {
+      const raw = err instanceof Error ? err.message : String(err)
+      const code = raw.split(':')[0]
+      let message = t('upscale.failed')
+
+      switch (code) {
+        case 'UPSCALE_SIZE_LIMIT_EXCEEDED':
+          message = t('upscale.errorSizeLimit')
+          break
+        case 'UPSCALE_MODEL_LOAD_FAILED':
+          message = t('upscale.errorModelLoad')
+          break
+        case 'UPSCALE_INFERENCE_FAILED':
+          message = t('upscale.errorInference')
+          break
+        case 'UPSCALE_READ_FAILED':
+        case 'UPSCALE_OUTPUT_FAILED':
+        case 'UPSCALE_TILE_OUTPUT_FAILED':
+        case 'UPSCALE_TILE_DRAW_FAILED':
+          message = t('upscale.errorMemory')
+          break
+        case 'UPSCALE_UNKNOWN_MODEL':
+          message = t('upscale.errorUnknownModel')
+          break
+      }
+
       setUpscale({
         active: false,
         phase: 'error',
         progress: 0,
-        message: t('upscale.failed'),
+        message,
       })
     }
   }
