@@ -25,6 +25,7 @@
     "cutout": "切り抜き",
     "tools": "ツール",
     "idphoto": "証明写真",
+    "upscale": "拡大",
     "export": "エクスポート",
     "shortcuts": "ショートカット",
     "smartCutout": "スマート切り抜き",
@@ -181,6 +182,26 @@
     "bg_blue": "青",
     "bg_red": "赤"
   },
+  "upscale": {
+    "title": "AI 超解像",
+    "model": "倍率",
+    "start": "拡大開始",
+    "processing": "処理中…",
+    "preparing": "準備中…",
+    "done": "拡大完了",
+    "failed": "拡大に失敗しました。再試行してください",
+    "pleaseImport": "画像を先にインポートしてください",
+    "webgpuReady": "WebGPU 加速対応",
+    "wasmMode": "WASM モード（低速）",
+    "x4Desc": "4倍拡大 · 汎用写真 · 高品質",
+    "x2Desc": "2倍拡大 · 汎用写真 · 高速",
+    "firstUseHint": "初回使用時にAIモデル（約67MB）をダウンロードします。以降は自動キャッシュされます",
+    "resultLabel": "結果プレビュー（{{w}}×{{h}}px）",
+    "resultAlt": "拡大結果プレビュー",
+    "applyToCanvas": "キャンバスに適用",
+    "applied": "適用済み",
+    "download": "画像をダウンロード"
+  },
   "export": {
     "title": "画像をエクスポート",
     "format": "形式",
@@ -278,6 +299,7 @@
     "filter": "フィルター",
     "crop": "切り抜き",
     "idphoto": "証明写真",
+    "upscale": "拡大",
     "close": "パネルを閉じる"
   },
   "pages": {

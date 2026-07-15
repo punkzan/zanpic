@@ -25,6 +25,7 @@
     "cutout": "Détourage",
     "tools": "Outils",
     "idphoto": "Photo d'identité",
+    "upscale": "Agrandir",
     "export": "Exporter",
     "shortcuts": "Raccourcis",
     "smartCutout": "Détourage intelligent",
@@ -181,6 +182,26 @@
     "bg_blue": "Bleu",
     "bg_red": "Rouge"
   },
+  "upscale": {
+    "title": "Agrandissement IA",
+    "model": "Échelle",
+    "start": "Démarrer l'agrandissement",
+    "processing": "Traitement…",
+    "preparing": "Préparation…",
+    "done": "Agrandissement terminé",
+    "failed": "Échec de l'agrandissement, veuillez réessayer",
+    "pleaseImport": "Veuillez d'abord importer une image",
+    "webgpuReady": "Accélération WebGPU prête",
+    "wasmMode": "Mode WASM (plus lent)",
+    "x4Desc": "Agrandissement 4x · Photos générales · Haute qualité",
+    "x2Desc": "Agrandissement 2x · Photos générales · Rapide",
+    "firstUseHint": "La première utilisation télécharge le modèle IA (~67 Mo), ensuite mis en cache automatiquement",
+    "resultLabel": "Aperçu du résultat ({{w}}×{{h}}px)",
+    "resultAlt": "Aperçu de l'image agrandie",
+    "applyToCanvas": "Appliquer au canevas",
+    "applied": "Appliqué",
+    "download": "Télécharger l'image"
+  },
   "export": {
     "title": "Exporter l'image",
     "format": "Format",
@@ -278,6 +299,7 @@
     "filter": "Filtre",
     "crop": "Recadrer",
     "idphoto": "Photo d'identité",
+    "upscale": "Agrandir",
     "close": "Fermer le panneau"
   },
   "pages": {

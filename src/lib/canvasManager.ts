@@ -7,6 +7,7 @@ import {
   refineMask,
   applyAlpha,
 } from './maskRefine'
+import { upscaleImage as runUpscale, type UpscaleProgressFn } from './upscaler'
 import i18n from '../i18n'
 
 type HistoryCallback = (canUndo: boolean, canRedo: boolean) => void
@@ -1275,6 +1276,52 @@ export class CanvasManager {
   /** Check whether the canvas has any objects. */
   hasObjects(): boolean {
     return (this.canvas?.getObjects().length ?? 0) > 0
+  }
+
+  /**
+   * AI Upscale — run Real-ESRGAN on the current canvas image.
+   * Loads the result back onto the canvas.
+   */
+  async upscaleImage(
+    modelId: string,
+    onProgress?: UpscaleProgressFn,
+  ): Promise<boolean> {
+    if (!this.canvas) {
+      console.error('[CanvasManager] upscaleImage: canvas not initialized')
+      return false
+    }
+
+    const c = this.canvas
+
+    // Exit any active mode
+    if (this.isCropMode) this.exitCropMode()
+    if (this.isBrushMode) this.exitBrushMode()
+
+    // Deselect active object
+    const active = c.getActiveObject()
+    if (active) c.discardActiveObject()
+    c.renderAll()
+
+    // Get source canvas at 1:1 scale
+    const sourceCanvas = c.toCanvasElement(1) as HTMLCanvasElement
+
+    try {
+      const result = await runUpscale(sourceCanvas, modelId, onProgress)
+
+      // Convert result canvas to data URL and load back
+      const dataUrl = result.canvas.toDataURL('image/png')
+      this.isRestoring = true
+      await this.loadImage(dataUrl)
+
+      onProgress?.('done', 100, i18n.t('upscale.done'))
+      return true
+    } catch (err) {
+      console.error('[CanvasManager] upscaleImage failed:', err)
+      onProgress?.('error', 0, i18n.t('upscale.failed'))
+      return false
+    } finally {
+      this.isRestoring = false
+    }
   }
 }
 

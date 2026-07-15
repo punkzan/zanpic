@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export type Theme = 'light' | 'dark'
 export type Tool = 'select' | 'move'
-export type PanelType = 'adjust' | 'filter' | 'crop' | 'idphoto' | null
+export type PanelType = 'adjust' | 'filter' | 'crop' | 'idphoto' | 'upscale' | null
 export type BrushMode = 'foreground' | 'background' | 'erase'
 export type PageKey = 'about' | 'privacy' | 'contact' | 'blog'
 
@@ -28,6 +28,19 @@ export interface IdPhotoState {
   selectedBg: string            // bg color id
   wantPrint: boolean            // generate print layout
 }
+
+/** AI Upscale (Real-ESRGAN) state */
+export interface UpscaleState {
+  active: boolean
+  phase: 'idle' | 'download' | 'inference' | 'done' | 'error'
+  progress: number       // 0-100
+  message: string
+  resultUrl: string | null
+  resultWidth: number
+  resultHeight: number
+  selectedModel: string  // model id
+  selectedScale: number  // 2 or 4
+}
 export type CropRatio = 'free' | '1:1' | '4:3' | '3:4' | '16:9' | '9:16' | '3:2'
 
 export interface AdjustValues {
@@ -52,6 +65,7 @@ interface EditorState {
   brushMode: BrushMode
   brushSize: number
   idPhoto: IdPhotoState
+  upscale: UpscaleState
   shortcutsOpen: boolean
   activePage: PageKey | null
 
@@ -71,6 +85,7 @@ interface EditorState {
   setBrushMode: (mode: BrushMode) => void
   setBrushSize: (size: number) => void
   setIdPhoto: (partial: Partial<IdPhotoState>) => void
+  setUpscale: (partial: Partial<UpscaleState>) => void
   setShortcutsOpen: (open: boolean) => void
   setActivePage: (page: PageKey | null) => void
 }
@@ -107,6 +122,17 @@ export const useEditorStore = create<EditorState>((set) => ({
     selectedBg: 'blue',
     wantPrint: false,
   },
+  upscale: {
+    active: false,
+    phase: 'idle',
+    progress: 0,
+    message: '',
+    resultUrl: null,
+    resultWidth: 0,
+    resultHeight: 0,
+    selectedModel: 'realesrgan-x4',
+    selectedScale: 4,
+  },
 
   setTool: (tool) => set({ tool }),
   setHasImage: (hasImage) => set((s) => ({ hasImage, activePanel: hasImage ? s.activePanel : null })),
@@ -124,6 +150,7 @@ export const useEditorStore = create<EditorState>((set) => ({
   setBrushMode: (brushMode) => set({ brushMode }),
   setBrushSize: (brushSize) => set({ brushSize }),
   setIdPhoto: (partial) => set((s) => ({ idPhoto: { ...s.idPhoto, ...partial } })),
+  setUpscale: (partial) => set((s) => ({ upscale: { ...s.upscale, ...partial } })),
   setShortcutsOpen: (shortcutsOpen) => set({ shortcutsOpen }),
   setActivePage: (activePage) => set({ activePage }),
 }))

@@ -3,8 +3,9 @@ import { AdjustPanel } from './AdjustPanel'
 import { FilterPanel } from './FilterPanel'
 import { CropPanel } from './CropPanel'
 import { IdPhotoPanel } from './IdPhotoPanel'
+import { UpscalePanel } from './UpscalePanel'
 import { AdSlot } from './AdSlot'
-import { SlidersHorizontal, Sparkles, Crop, ContactRound, X } from 'lucide-react'
+import { SlidersHorizontal, Sparkles, Crop, ContactRound, ZoomIn, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 export function SidePanel() {
@@ -17,6 +18,7 @@ export function SidePanel() {
     { key: 'filter', label: t('sidePanel.filter'), icon: Sparkles },
     { key: 'crop', label: t('sidePanel.crop'), icon: Crop },
     { key: 'idphoto', label: t('sidePanel.idphoto'), icon: ContactRound },
+    { key: 'upscale', label: t('sidePanel.upscale'), icon: ZoomIn },
   ]
 
   return (
@@ -72,6 +74,7 @@ export function SidePanel() {
             {activePanel === 'filter' && <FilterPanel />}
             {activePanel === 'crop' && <CropPanel />}
             {activePanel === 'idphoto' && <IdPhotoPanel />}
+            {activePanel === 'upscale' && <UpscalePanel />}
           </div>
 
           {/* Ad slot — sidebar */}

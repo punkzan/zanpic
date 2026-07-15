@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           fabric: ['fabric'],
           react: ['react', 'react-dom'],
-          ai: ['@imgly/background-removal'],
+          ai: ['@imgly/background-removal', 'onnxruntime-web'],
           utils: ['zustand'],
         },
       },

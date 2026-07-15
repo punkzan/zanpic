@@ -25,6 +25,7 @@
     "cutout": "抠图",
     "tools": "工具",
     "idphoto": "证件照",
+    "upscale": "超分",
     "export": "导出",
     "shortcuts": "快捷键",
     "smartCutout": "智能抠图",
@@ -181,6 +182,26 @@
     "bg_blue": "蓝色",
     "bg_red": "红色"
   },
+  "upscale": {
+    "title": "AI 超分辨率",
+    "model": "放大倍数",
+    "start": "开始放大",
+    "processing": "处理中…",
+    "preparing": "准备中…",
+    "done": "放大完成",
+    "failed": "放大失败，请重试",
+    "pleaseImport": "请先导入图片",
+    "webgpuReady": "WebGPU 加速已就绪",
+    "wasmMode": "WASM 模式（速度较慢）",
+    "x4Desc": "4 倍放大 · 通用照片 · 高质量",
+    "x2Desc": "2 倍放大 · 通用照片 · 快速",
+    "firstUseHint": "首次使用需下载 AI 模型（约 67MB），之后自动缓存，下次秒开",
+    "resultLabel": "结果预览（{{w}}×{{h}}px）",
+    "resultAlt": "放大结果预览",
+    "applyToCanvas": "应用到画布",
+    "applied": "已应用",
+    "download": "下载图片"
+  },
   "export": {
     "title": "导出图片",
     "format": "格式",
@@ -278,6 +299,7 @@
     "filter": "滤镜",
     "crop": "裁剪",
     "idphoto": "证件照",
+    "upscale": "超分",
     "close": "关闭面板"
   },
   "pages": {

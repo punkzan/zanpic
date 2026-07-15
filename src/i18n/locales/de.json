@@ -25,6 +25,7 @@
     "cutout": "Freistellen",
     "tools": "Werkzeuge",
     "idphoto": "Passfoto",
+    "upscale": "Vergrößern",
     "export": "Exportieren",
     "shortcuts": "Tastenkürzel",
     "smartCutout": "Smart Cutout",
@@ -181,6 +182,26 @@
     "bg_blue": "Blau",
     "bg_red": "Rot"
   },
+  "upscale": {
+    "title": "KI-Hochskalierung",
+    "model": "Skalierung",
+    "start": "Hochskalierung starten",
+    "processing": "Verarbeitung…",
+    "preparing": "Vorbereitung…",
+    "done": "Hochskalierung abgeschlossen",
+    "failed": "Hochskalierung fehlgeschlagen, bitte erneut versuchen",
+    "pleaseImport": "Bitte zuerst ein Bild importieren",
+    "webgpuReady": "WebGPU-Beschleunigung bereit",
+    "wasmMode": "WASM-Modus (langsamer)",
+    "x4Desc": "4x Vergrößerung · Allgemeine Fotos · Hohe Qualität",
+    "x2Desc": "2x Vergrößerung · Allgemeine Fotos · Schnell",
+    "firstUseHint": "Erste Nutzung lädt das KI-Modell herunter (~67 MB), danach automatisch zwischengespeichert",
+    "resultLabel": "Ergebnisvorschau ({{w}}×{{h}}px)",
+    "resultAlt": "Vorschau des vergrößerten Bildes",
+    "applyToCanvas": "Auf Leinwand anwenden",
+    "applied": "Angewendet",
+    "download": "Bild herunterladen"
+  },
   "export": {
     "title": "Bild exportieren",
     "format": "Format",
@@ -278,6 +299,7 @@
     "filter": "Filter",
     "crop": "Zuschneiden",
     "idphoto": "Passfoto",
+    "upscale": "Vergrößern",
     "close": "Panel schließen"
   },
   "pages": {

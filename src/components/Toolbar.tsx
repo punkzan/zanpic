@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
-import { Upload, Undo2, Redo2, Trash2, Download, Image as ImageIcon, SlidersHorizontal, Sparkles, Crop, Wand2, Brush, ContactRound, Keyboard, X, Wrench, FileDown, FileImage, Type } from 'lucide-react'
+import { Upload, Undo2, Redo2, Trash2, Download, Image as ImageIcon, SlidersHorizontal, Sparkles, Crop, Wand2, Brush, ContactRound, Keyboard, X, Wrench, FileDown, FileImage, Type, ZoomIn } from 'lucide-react'
 import { useEditorStore, type PanelType } from '../store/editorStore'
 import { canvasManager } from '../lib/canvasManager'
 import { ThemeToggle } from './ThemeToggle'
@@ -302,6 +302,13 @@ export function Toolbar() {
           label={t('toolbar.idphoto')}
           disabled={!hasImage}
           active={activePanel === 'idphoto'}
+        />
+        <ToolbarButton
+          onClick={() => togglePanel('upscale')}
+          icon={<ZoomIn size={18} />}
+          label={t('toolbar.upscale')}
+          disabled={!hasImage}
+          active={activePanel === 'upscale'}
         />
         <ToolbarButton
           onClick={() => setExportOpen(true)}

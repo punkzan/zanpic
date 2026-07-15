@@ -25,6 +25,7 @@
     "cutout": "Cutout",
     "tools": "Tools",
     "idphoto": "ID Photo",
+    "upscale": "Upscale",
     "export": "Export",
     "shortcuts": "Shortcuts",
     "smartCutout": "Smart Cutout",
@@ -181,6 +182,26 @@
     "bg_blue": "Blue",
     "bg_red": "Red"
   },
+  "upscale": {
+    "title": "AI Upscale",
+    "model": "Scale",
+    "start": "Start Upscaling",
+    "processing": "Processing…",
+    "preparing": "Preparing…",
+    "done": "Upscaling complete",
+    "failed": "Upscaling failed, please retry",
+    "pleaseImport": "Please import an image first",
+    "webgpuReady": "WebGPU acceleration ready",
+    "wasmMode": "WASM mode (slower)",
+    "x4Desc": "4x upscale · General photos · High quality",
+    "x2Desc": "2x upscale · General photos · Fast",
+    "firstUseHint": "First use downloads the AI model (~67MB), then it's cached for instant access next time",
+    "resultLabel": "Result preview ({{w}}x{{h}}px)",
+    "resultAlt": "Upscaled image preview",
+    "applyToCanvas": "Apply to Canvas",
+    "applied": "Applied",
+    "download": "Download Image"
+  },
   "export": {
     "title": "Export Image",
     "format": "Format",
@@ -278,6 +299,7 @@
     "filter": "Filter",
     "crop": "Crop",
     "idphoto": "ID Photo",
+    "upscale": "Upscale",
     "close": "Close panel"
   },
   "pages": {

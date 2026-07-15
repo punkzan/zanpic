@@ -25,6 +25,7 @@
     "cutout": "누끼",
     "tools": "도구",
     "idphoto": "증명사진",
+    "upscale": "확대",
     "export": "내보내기",
     "shortcuts": "단축키",
     "smartCutout": "스마트 누끼",
@@ -181,6 +182,26 @@
     "bg_blue": "파란색",
     "bg_red": "빨간색"
   },
+  "upscale": {
+    "title": "AI 초해상도",
+    "model": "배율",
+    "start": "확대 시작",
+    "processing": "처리 중…",
+    "preparing": "준비 중…",
+    "done": "확대 완료",
+    "failed": "확대 실패, 다시 시도해주세요",
+    "pleaseImport": "이미지를 먼저 가져와주세요",
+    "webgpuReady": "WebGPU 가속 준비됨",
+    "wasmMode": "WASM 모드 (느림)",
+    "x4Desc": "4배 확대 · 일반 사진 · 고품질",
+    "x2Desc": "2배 확대 · 일반 사진 · 빠름",
+    "firstUseHint": "첫 사용 시 AI 모델(약 67MB)을 다운로드합니다. 이후 자동 캐시됩니다",
+    "resultLabel": "결과 미리보기 ({{w}}×{{h}}px)",
+    "resultAlt": "확대 결과 미리보기",
+    "applyToCanvas": "캔버스에 적용",
+    "applied": "적용됨",
+    "download": "이미지 다운로드"
+  },
   "export": {
     "title": "이미지 내보내기",
     "format": "형식",
@@ -278,6 +299,7 @@
     "filter": "필터",
     "crop": "자르기",
     "idphoto": "증명사진",
+    "upscale": "확대",
     "close": "패널 닫기"
   },
   "pages": {
