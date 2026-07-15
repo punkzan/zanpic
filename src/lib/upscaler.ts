@@ -509,8 +509,11 @@ export async function upscaleImage(
   // Determine tiling parameters
   const useTiling = Math.max(srcW, srcH) > model.tileThreshold
   const isWebGPU = typeof navigator !== 'undefined' && 'gpu' in navigator
-  const tileSize = useTiling ? (isWebGPU ? 128 : 64) : Math.max(srcW, srcH)
-  const overlap = useTiling ? 12 : 0
+  // Larger tiles = fewer inference calls = less per-tile overhead.
+  // WebGPU 256px: a 1024² image needs ~25 tiles instead of ~100.
+  // WASM 128px: same image needs ~121 tiles instead of ~676.
+  const tileSize = useTiling ? (isWebGPU ? 256 : 128) : Math.max(srcW, srcH)
+  const overlap = useTiling ? 16 : 0
 
   // Create output canvas
   const outCanvas = document.createElement('canvas')
@@ -525,6 +528,12 @@ export async function upscaleImage(
 
     onProgress?.('inference', 0, `Processing ${totalTiles} tiles...`)
 
+    // Pre-allocate reusable canvas elements — avoids per-tile createElement + getContext overhead
+    const tileCanvas = document.createElement('canvas')
+    const tileCtx = tileCanvas.getContext('2d', { willReadFrequently: true })!
+    const tileOutCanvas = document.createElement('canvas')
+    const tileOutCtx = tileOutCanvas.getContext('2d')!
+
     for (let i = 0; i < totalTiles; i++) {
       const tile = tiles[i]
 
@@ -536,11 +545,9 @@ export async function upscaleImage(
         )
       }
 
-      // Extract tile region from source
-      const tileCanvas = document.createElement('canvas')
+      // Extract tile region from source (reuse pre-allocated canvas)
       tileCanvas.width = tile.sw
       tileCanvas.height = tile.sh
-      const tileCtx = tileCanvas.getContext('2d', { willReadFrequently: true })!
       const tileImageData = tileCtx.createImageData(tile.sw, tile.sh)
 
       // Copy pixels from source
@@ -582,11 +589,9 @@ export async function upscaleImage(
       const coreW = Math.floor(tile.dw / scale)
       const coreH = Math.floor(tile.dh / scale)
 
-      // Create a temp canvas for the tile output
-      const tileOutCanvas = document.createElement('canvas')
+      // Reuse pre-allocated output canvas for this tile
       tileOutCanvas.width = tile.sw * scale
       tileOutCanvas.height = tile.sh * scale
-      const tileOutCtx = tileOutCanvas.getContext('2d')!
 
       try {
         const tileOutImageData = tileOutCtx.createImageData(tile.sw * scale, tile.sh * scale)
@@ -619,8 +624,11 @@ export async function upscaleImage(
       const pct = ((i + 1) / totalTiles) * 100
       onProgress?.('inference', pct, `Processing tile ${i + 1}/${totalTiles}...`)
 
-      // Yield to UI thread
-      await new Promise((r) => setTimeout(r, 0))
+      // Yield to UI thread every 3 tiles — balances responsiveness vs throughput.
+      // setTimeout(0) has ~4ms minimum delay; yielding every tile wastes 400ms on 100 tiles.
+      if (i % 3 === 2 || i === totalTiles - 1) {
+        await new Promise((r) => setTimeout(r, 0))
+      }
     }
   } else {
     // ── Whole image processing ──
