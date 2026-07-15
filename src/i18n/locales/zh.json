@@ -203,7 +203,7 @@
     "download": "下载图片",
     "errorSizeLimit": "输出尺寸超过浏览器限制，请尝试 2 倍放大、裁剪或缩小图片后再试",
     "errorModelLoad": "AI 模型加载失败，请检查网络连接后重试",
-    "errorInference": "AI 推理失败，请尝试刷新页面或换用 2 倍模型",
+    "errorInference": "AI 推理失败，请尝试刷新页面或更换模型",
     "errorMemory": "图片尺寸过大，内存不足，请尝试裁剪或缩小图片",
     "errorUnknownModel": "未知的超分模型，请重新选择模型"
   },

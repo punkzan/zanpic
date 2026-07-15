@@ -202,21 +202,24 @@ async function downloadModel(
 
 // ── ORT Session Management ───────────────────────────────────────────
 
-const sessionCache = new Map<string, ort.InferenceSession>()
+const sessionCache = new Map<string, { session: ort.InferenceSession; wasmOnly: boolean }>()
 
 async function getSession(
   model: UpscaleModel,
   onProgress?: UpscaleProgressFn,
-): Promise<ort.InferenceSession> {
-  // Return cached session if available
-  const cached = sessionCache.get(model.id)
+  forceWasm = false,
+): Promise<{ session: ort.InferenceSession; wasmOnly: boolean }> {
+  const cacheKey = forceWasm ? `${model.id}:wasm` : model.id
+  const cached = sessionCache.get(cacheKey)
   if (cached) return cached
 
   await ensureOrtReady()
 
   const modelData = await downloadModel(model.url, model.id, onProgress)
 
-  const providers = await getExecutionProviders()
+  const providers = forceWasm
+    ? ['wasm']
+    : await getExecutionProviders()
   onProgress?.('inference', 0, `Initializing ${providers[0].toUpperCase()} backend...`)
 
   const session = await ort.InferenceSession.create(modelData, {
@@ -224,8 +227,19 @@ async function getSession(
     graphOptimizationLevel: 'all',
   })
 
-  sessionCache.set(model.id, session)
-  return session
+  const entry = { session, wasmOnly: forceWasm }
+  sessionCache.set(cacheKey, entry)
+  return entry
+}
+
+/** Release and remove a cached session (e.g. before retrying with a different backend) */
+function evictSession(modelId: string, wasmOnly: boolean) {
+  const cacheKey = wasmOnly ? `${modelId}:wasm` : modelId
+  const entry = sessionCache.get(cacheKey)
+  if (entry) {
+    try { entry.session.release() } catch { /* ignore */ }
+    sessionCache.delete(cacheKey)
+  }
 }
 
 // ── Tensor Conversion ────────────────────────────────────────────────
@@ -480,8 +494,12 @@ export async function upscaleImage(
   // Load model and create session
   onProgress?.('inference', 0, 'Loading AI model...')
   let session: ort.InferenceSession
+  let sessionWasmOnly = false
+  let fallbackAttempted = false
   try {
-    session = await getSession(model, onProgress)
+    const sessionEntry = await getSession(model, onProgress)
+    session = sessionEntry.session
+    sessionWasmOnly = sessionEntry.wasmOnly
   } catch (err) {
     throw new Error(
       `UPSCALE_MODEL_LOAD_FAILED: ${err instanceof Error ? err.message : String(err)}`,
@@ -540,10 +558,22 @@ export async function upscaleImage(
       try {
         tileResult = await runInference(session, tile.sw, tile.sh, tileImageData, upscaledAlpha ? true : false)
       } catch (err) {
-        throw new Error(
-          `UPSCALE_INFERENCE_FAILED: Tile ${i + 1}/${totalTiles} (${sizeStr(tile.sw, tile.sh)}) failed. ` +
-            (err instanceof Error ? err.message : String(err)),
-        )
+        // If WebGPU inference fails, fall back to WASM-only and retry once
+        if (!sessionWasmOnly && !fallbackAttempted) {
+          fallbackAttempted = true
+          console.warn('[Upscaler] WebGPU inference failed on tile, falling back to WASM:', err)
+          evictSession(model.id, false)
+          onProgress?.('inference', 0, 'Switching to CPU backend (WASM)...')
+          const entry = await getSession(model, onProgress, true)
+          session = entry.session
+          sessionWasmOnly = true
+          tileResult = await runInference(session, tile.sw, tile.sh, tileImageData, upscaledAlpha ? true : false)
+        } else {
+          throw new Error(
+            `UPSCALE_INFERENCE_FAILED: Tile ${i + 1}/${totalTiles} (${sizeStr(tile.sw, tile.sh)}) failed. ` +
+              (err instanceof Error ? err.message : String(err)),
+          )
+        }
       }
 
       // Calculate the core region in the tile output (excluding overlap)
@@ -599,9 +629,21 @@ export async function upscaleImage(
     try {
       result = await runInference(session, srcW, srcH, srcImageData, imageHasAlpha)
     } catch (err) {
-      throw new Error(
-        `UPSCALE_INFERENCE_FAILED: ${err instanceof Error ? err.message : String(err)}`,
-      )
+      // If WebGPU inference fails, fall back to WASM-only and retry once
+      if (!sessionWasmOnly && !fallbackAttempted) {
+        fallbackAttempted = true
+        console.warn('[Upscaler] WebGPU inference failed, falling back to WASM:', err)
+        evictSession(model.id, false)
+        onProgress?.('inference', 10, 'Switching to CPU backend (WASM)...')
+        const entry = await getSession(model, onProgress, true)
+        session = entry.session
+        sessionWasmOnly = true
+        result = await runInference(session, srcW, srcH, srcImageData, imageHasAlpha)
+      } else {
+        throw new Error(
+          `UPSCALE_INFERENCE_FAILED: ${err instanceof Error ? err.message : String(err)}`,
+        )
+      }
     }
 
     try {
@@ -667,8 +709,8 @@ async function runInference(
 
 /** Release all cached ORT sessions to free memory */
 export function releaseSessions() {
-  for (const session of sessionCache.values()) {
-    session.release()
+  for (const entry of sessionCache.values()) {
+    try { entry.session.release() } catch { /* ignore */ }
   }
   sessionCache.clear()
 }

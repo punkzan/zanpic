@@ -203,7 +203,7 @@
     "download": "Télécharger l'image",
     "errorSizeLimit": "La taille de sortie dépasse la limite du navigateur. Essayez 2×, rogner ou réduire l'image d'abord.",
     "errorModelLoad": "Échec du chargement du modèle IA. Vérifiez votre connexion et réessayez.",
-    "errorInference": "Échec de l'inférence IA. Essayez d'actualiser la page ou d'utiliser le modèle 2×.",
+    "errorInference": "Échec de l'inférence IA. Essayez d'actualiser la page ou de changer de modèle.",
     "errorMemory": "L'image est trop grande pour la mémoire disponible. Essayez de rogner ou de réduire d'abord.",
     "errorUnknownModel": "Modèle de mise à l'échelle inconnu. Veuillez sélectionner à nouveau un modèle."
   },

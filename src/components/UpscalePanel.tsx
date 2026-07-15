@@ -49,6 +49,7 @@ export function UpscalePanel() {
         resultHeight: size?.height || 0,
       })
     } catch (err) {
+      console.error('[UpscalePanel] Upscale failed:', err)
       const raw = err instanceof Error ? err.message : String(err)
       const code = raw.split(':')[0]
       let message = t('upscale.failed')
