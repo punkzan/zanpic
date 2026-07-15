@@ -1302,8 +1302,39 @@ export class CanvasManager {
     if (active) c.discardActiveObject()
     c.renderAll()
 
-    // Get source canvas at 1:1 scale
-    const sourceCanvas = c.toCanvasElement(1) as HTMLCanvasElement
+    // Export full canvas at 1:1 scale
+    const fullCanvas = c.toCanvasElement(1) as HTMLCanvasElement
+
+    // Crop to image region — avoids processing transparent canvas borders
+    // (which the model would interpret as black, producing black edges)
+    const img = this.getActiveImage()
+    let sourceCanvas: HTMLCanvasElement
+
+    if (img) {
+      const bounds = img.getBoundingRect()
+      const cropX = Math.max(0, Math.round(bounds.left))
+      const cropY = Math.max(0, Math.round(bounds.top))
+      const cropW = Math.min(fullCanvas.width - cropX, Math.round(bounds.width))
+      const cropH = Math.min(fullCanvas.height - cropY, Math.round(bounds.height))
+
+      if (cropW > 0 && cropH > 0) {
+        sourceCanvas = document.createElement('canvas')
+        sourceCanvas.width = cropW
+        sourceCanvas.height = cropH
+        const srcCtx = sourceCanvas.getContext('2d')!
+        srcCtx.drawImage(
+          fullCanvas,
+          cropX, cropY, cropW, cropH,
+          0, 0, cropW, cropH,
+        )
+      } else {
+        // Fallback: use full canvas if bounds are invalid
+        sourceCanvas = fullCanvas
+      }
+    } else {
+      // No image object found — use full canvas
+      sourceCanvas = fullCanvas
+    }
 
     try {
       const result = await runUpscale(sourceCanvas, modelId, onProgress)

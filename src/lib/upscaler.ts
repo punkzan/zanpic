@@ -341,13 +341,19 @@ function calculateTiles(
       const sw = Math.min(tileSize, width - sx)
       const sh = Math.min(tileSize, height - sy)
 
-      // Calculate the non-overlap region (the "core" of this tile)
-      // Left overlap: sx > 0 ? overlap : 0
-      // Top overlap: sy > 0 ? overlap : 0
-      const coreX = sx > 0 ? sx + overlap : sx
-      const coreY = sy > 0 ? sy + overlap : sy
-      const coreW = Math.min(step, width - coreX)
-      const coreH = Math.min(step, height - coreY)
+      // Calculate the core region — the non-overlap portion of this tile.
+      // Each tile has `overlap` padding on sides that face a neighbor.
+      // Edge sides (no neighbor) have no overlap, so the core extends to the edge.
+      // This ensures seamless coverage with NO gaps between adjacent tiles.
+      const leftOverlap = sx > 0 ? overlap : 0
+      const rightOverlap = (sx + sw < width) ? overlap : 0
+      const topOverlap = sy > 0 ? overlap : 0
+      const bottomOverlap = (sy + sh < height) ? overlap : 0
+
+      const coreX = sx + leftOverlap
+      const coreY = sy + topOverlap
+      const coreW = sw - leftOverlap - rightOverlap
+      const coreH = sh - topOverlap - bottomOverlap
 
       tiles.push({
         sx, sy, sw, sh,
