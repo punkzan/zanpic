@@ -481,7 +481,13 @@
       "publish": "发布文章",
       "defaultTab": "默认内容",
       "translationFor": "{{lang}} 翻译",
-      "uncategorized": "未分类"
+      "uncategorized": "未分类",
+      "importFile": "导入文件",
+      "importing": "导入中…",
+      "importSuccess": "已导入：{{name}}",
+      "importError": "导入失败",
+      "importUnsupported": "不支持的文件格式，支持 .md、.txt、.docx、.html",
+      "dragDropHint": "拖放文件到此处"
     }
   },
   "adSlot": {

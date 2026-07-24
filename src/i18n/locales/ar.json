@@ -481,7 +481,13 @@
       "uncategorized": "غير مصنف",
       "contentLabel": "المحتوى",
       "contentHint": "Markdown مدعوم، اختياري",
-      "contentPlaceholder": "أدخل نص المقال الكامل هنا (يدعم العناوين والخط العريض والقوائم والجداول بصيغة Markdown)..."
+      "contentPlaceholder": "أدخل نص المقال الكامل هنا (يدعم العناوين والخط العريض والقوائم والجداول بصيغة Markdown)...",
+      "importFile": "استيراد ملف",
+      "importing": "جارٍ الاستيراد...",
+      "importSuccess": "تم الاستيراد: {{name}}",
+      "importError": "فشل الاستيراد",
+      "importUnsupported": "تنسيق غير مدعوم. المدعوم: .md, .txt, .docx, .html",
+      "dragDropHint": "أفلت الملف هنا"
     }
   },
   "adSlot": {

@@ -481,7 +481,13 @@
       "uncategorized": "미분류",
       "contentLabel": "본문",
       "contentHint": "Markdown 지원, 선택사항",
-      "contentPlaceholder": "여기에 전체 기사 본문을 입력하세요(제목, 굵은 글씨, 목록, 표 등 Markdown 지원)..."
+      "contentPlaceholder": "여기에 전체 기사 본문을 입력하세요(제목, 굵은 글씨, 목록, 표 등 Markdown 지원)...",
+      "importFile": "파일 가져오기",
+      "importing": "가져오는 중...",
+      "importSuccess": "가져오기 완료: {{name}}",
+      "importError": "가져오기 실패",
+      "importUnsupported": "지원되지 않는 형식입니다. 지원: .md, .txt, .docx, .html",
+      "dragDropHint": "파일을 여기에 드롭"
     }
   },
   "adSlot": {

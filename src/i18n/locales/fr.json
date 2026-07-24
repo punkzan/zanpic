@@ -481,7 +481,13 @@
       "uncategorized": "Non classé",
       "contentLabel": "Contenu",
       "contentHint": "Markdown supporté, optionnel",
-      "contentPlaceholder": "Saisissez le corps complet de l'article ici (prend en charge les titres, gras, listes, tableaux en Markdown)..."
+      "contentPlaceholder": "Saisissez le corps complet de l'article ici (prend en charge les titres, gras, listes, tableaux en Markdown)...",
+      "importFile": "Importer un fichier",
+      "importing": "Importation...",
+      "importSuccess": "Importe : {{name}}",
+      "importError": "Echec de l'importation",
+      "importUnsupported": "Format non supporte. Supportes : .md, .txt, .docx, .html",
+      "dragDropHint": "Deposez le fichier ici"
     }
   },
   "adSlot": {

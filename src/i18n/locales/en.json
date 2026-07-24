@@ -481,7 +481,13 @@
       "uncategorized": "Uncategorized",
       "contentLabel": "Content",
       "contentHint": "Markdown supported, optional",
-      "contentPlaceholder": "Enter the full article body here (supports headings, bold, lists, tables in Markdown)..."
+      "contentPlaceholder": "Enter the full article body here (supports headings, bold, lists, tables in Markdown)...",
+      "importFile": "Import File",
+      "importing": "Importing...",
+      "importSuccess": "Imported: {{name}}",
+      "importError": "Import failed",
+      "importUnsupported": "Unsupported file format. Supported: .md, .txt, .docx, .html",
+      "dragDropHint": "Drop file here"
     }
   },
   "adSlot": {

@@ -481,7 +481,13 @@
       "uncategorized": "Unkategorisiert",
       "contentLabel": "Inhalt",
       "contentHint": "Markdown unterstützt, optional",
-      "contentPlaceholder": "Geben Sie hier den vollständigen Artikeltext ein (unterstützt Überschriften, Fettung, Listen, Tabellen in Markdown)..."
+      "contentPlaceholder": "Geben Sie hier den vollständigen Artikeltext ein (unterstützt Überschriften, Fettung, Listen, Tabellen in Markdown)...",
+      "importFile": "Datei importieren",
+      "importing": "Importieren...",
+      "importSuccess": "Importiert: {{name}}",
+      "importError": "Import fehlgeschlagen",
+      "importUnsupported": "Nicht unterstütztes Format. Unterstützt: .md, .txt, .docx, .html",
+      "dragDropHint": "Datei hier ablegen"
     }
   },
   "adSlot": {

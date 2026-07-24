@@ -481,7 +481,13 @@
       "uncategorized": "未分類",
       "contentLabel": "本文",
       "contentHint": "Markdown対応、任意",
-      "contentPlaceholder": "記事の本文を入力してください（見出し、太字、リスト、表などのMarkdown形式に対応）..."
+      "contentPlaceholder": "記事の本文を入力してください（見出し、太字、リスト、表などのMarkdown形式に対応）...",
+      "importFile": "ファイルをインポート",
+      "importing": "インポート中...",
+      "importSuccess": "インポート完了: {{name}}",
+      "importError": "インポート失敗",
+      "importUnsupported": "サポートされていない形式です。対応: .md, .txt, .docx, .html",
+      "dragDropHint": "ファイルをドロップ"
     }
   },
   "adSlot": {
