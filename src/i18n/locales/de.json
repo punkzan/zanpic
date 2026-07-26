@@ -293,7 +293,8 @@
     "privacy": "Datenschutz",
     "contact": "Kontakt",
     "blog": "Blog",
-    "friendLinks": "Links"
+    "friendLinks": "Links",
+    "backToEditor": "Zurück zum Editor"
   },
   "theme": {
     "toDark": "Zum dunklen Modus wechseln",
@@ -387,7 +388,8 @@
       "more": "Weitere Artikel folgen in Kürze…",
       "loading": "Laden…",
       "readMore": "Weiterlesen →",
-      "backToList": "← Zurück zur Liste"
+      "backToList": "← Zurück zur Liste",
+      "notFound": "Artikel nicht gefunden"
     }
   },
   "admin": {

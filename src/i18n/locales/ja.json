@@ -293,7 +293,8 @@
     "privacy": "プライバシー",
     "contact": "お問い合わせ",
     "blog": "ブログ",
-    "friendLinks": "リンク"
+    "friendLinks": "リンク",
+    "backToEditor": "エディタに戻る"
   },
   "theme": {
     "toDark": "ダークモードに切替",
@@ -387,7 +388,8 @@
       "more": "さらに記事を追加予定…",
       "loading": "読み込み中…",
       "readMore": "続きを読む →",
-      "backToList": "← 一覧に戻る"
+      "backToList": "← 一覧に戻る",
+      "notFound": "記事が見つかりません"
     }
   },
   "admin": {

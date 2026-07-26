@@ -3,7 +3,7 @@ import { useEditorStore } from './store/editorStore'
 import { useBlogStore } from './store/blogStore'
 import { useTheme } from './hooks/useTheme'
 import { useDailyBackground } from './hooks/useDailyBackground'
-import { useSeoMeta } from './hooks/useSeoMeta'
+import { usePageMeta } from './hooks/usePageMeta'
 import { canvasManager } from './lib/canvasManager'
 import { Toolbar } from './components/Toolbar'
 import { EditorCanvas } from './components/EditorCanvas'
@@ -14,12 +14,11 @@ import { CutoutOverlay } from './components/CutoutOverlay'
 import { BrushPanel } from './components/BrushPanel'
 import { IdPhotoOverlay } from './components/IdPhotoOverlay'
 import { Footer } from './components/Footer'
-import { PageModal } from './components/PageModal'
 
 export default function App() {
   useTheme()
   useDailyBackground()
-  useSeoMeta()
+  usePageMeta()
   const hasImage = useEditorStore((s) => s.hasImage)
   const exportOpen = useEditorStore((s) => s.exportOpen)
   const setExportOpen = useEditorStore((s) => s.setExportOpen)
@@ -80,7 +79,6 @@ export default function App() {
       <CutoutOverlay />
       <IdPhotoOverlay />
       <Footer />
-      <PageModal />
     </div>
   )
 }

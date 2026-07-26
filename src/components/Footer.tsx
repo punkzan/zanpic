@@ -1,22 +1,48 @@
-import { useEditorStore, type PageKey } from '../store/editorStore'
+import { Link, useLocation } from 'react-router-dom'
 import { useSiteStore } from '../store/siteStore'
 import { Info, Shield, Mail, BookOpen, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { type ReactNode } from 'react'
+
+const IS_MOBILE = typeof navigator !== 'undefined' && /Mobi|Android|iPhone/i.test(navigator.userAgent)
 
 export function Footer() {
   const { t } = useTranslation()
-  const setActivePage = useEditorStore((s) => s.setActivePage)
+  const location = useLocation()
   const icpFilingNumber = useSiteStore((s) => s.icpFilingNumber)
   const publicSecurityFilingNumber = useSiteStore((s) => s.publicSecurityFilingNumber)
   const companyName = useSiteStore((s) => s.companyName)
   const friendLinks = useSiteStore((s) => s.friendLinks)
 
-  const links: { key: PageKey; label: string; icon: typeof Info }[] = [
-    { key: 'about', label: t('footer.about'), icon: Info },
-    { key: 'privacy', label: t('footer.privacy'), icon: Shield },
-    { key: 'contact', label: t('footer.contact'), icon: Mail },
-    { key: 'blog', label: t('footer.blog'), icon: BookOpen },
+  const isEditor = location.pathname === '/'
+  const openInNewTab = !IS_MOBILE && isEditor
+
+  const links: { path: string; label: string; icon: typeof Info }[] = [
+    { path: '/about', label: t('footer.about'), icon: Info },
+    { path: '/privacy', label: t('footer.privacy'), icon: Shield },
+    { path: '/contact', label: t('footer.contact'), icon: Mail },
+    { path: '/blog', label: t('footer.blog'), icon: BookOpen },
   ]
+
+  const linkClass = 'flex items-center gap-1 transition-colors hover:text-[var(--accent)]'
+  const linkStyle = { color: 'inherit', textDecoration: 'none' } as const
+
+  function renderLink(path: string, label: string, Icon: typeof Info): ReactNode {
+    if (openInNewTab) {
+      return (
+        <a key={path} href={path} target="_blank" rel="noopener noreferrer" className={linkClass} style={linkStyle}>
+          <Icon size={16} />
+          {label}
+        </a>
+      )
+    }
+    return (
+      <Link key={path} to={path} className={linkClass} style={linkStyle}>
+        <Icon size={16} />
+        {label}
+      </Link>
+    )
+  }
 
   return (
     <footer
@@ -32,17 +58,7 @@ export function Footer() {
         <span style={{ opacity: 0.6 }}>
           © 2026 {companyName || 'Zan Pic'}
         </span>
-        {links.map(({ key, label, icon: Icon }) => (
-          <button
-            key={key}
-            onClick={() => setActivePage(key)}
-            className="flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
-            style={{ color: 'inherit' }}
-          >
-            <Icon size={16} />
-            {label}
-          </button>
-        ))}
+        {links.map(({ path, label, icon }) => renderLink(path, label, icon))}
       </div>
 
       {/* ICP / 备案 row */}

@@ -293,7 +293,8 @@
     "privacy": "Confidentialité",
     "contact": "Contact",
     "blog": "Blog",
-    "friendLinks": "Liens"
+    "friendLinks": "Liens",
+    "backToEditor": "Retour à l'éditeur"
   },
   "theme": {
     "toDark": "Passer au mode sombre",
@@ -387,7 +388,8 @@
       "more": "D'autres articles arrivent bientôt…",
       "loading": "Chargement…",
       "readMore": "Lire la suite →",
-      "backToList": "← Retour à la liste"
+      "backToList": "← Retour à la liste",
+      "notFound": "Article introuvable"
     }
   },
   "admin": {

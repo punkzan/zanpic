@@ -293,7 +293,8 @@
     "privacy": "隐私政策",
     "contact": "联系我们",
     "blog": "经验分享",
-    "friendLinks": "友情链接"
+    "friendLinks": "友情链接",
+    "backToEditor": "返回编辑器"
   },
   "theme": {
     "toDark": "切换到深色",
@@ -387,7 +388,8 @@
       "more": "更多文章持续更新中…",
       "loading": "加载中…",
       "readMore": "阅读全文 →",
-      "backToList": "← 返回列表"
+      "backToList": "← 返回列表",
+      "notFound": "文章未找到"
     }
   },
   "admin": {

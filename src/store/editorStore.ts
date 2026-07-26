@@ -4,7 +4,6 @@ export type Theme = 'light' | 'dark'
 export type Tool = 'select' | 'move'
 export type PanelType = 'adjust' | 'filter' | 'crop' | 'idphoto' | 'upscale' | null
 export type BrushMode = 'foreground' | 'background' | 'erase'
-export type PageKey = 'about' | 'privacy' | 'contact' | 'blog'
 
 /** Cutout (AI background removal) progress state */
 export interface CutoutState {
@@ -67,7 +66,6 @@ interface EditorState {
   idPhoto: IdPhotoState
   upscale: UpscaleState
   shortcutsOpen: boolean
-  activePage: PageKey | null
 
   setTool: (tool: Tool) => void
   setHasImage: (v: boolean) => void
@@ -87,7 +85,6 @@ interface EditorState {
   setIdPhoto: (partial: Partial<IdPhotoState>) => void
   setUpscale: (partial: Partial<UpscaleState>) => void
   setShortcutsOpen: (open: boolean) => void
-  setActivePage: (page: PageKey | null) => void
 }
 
 const defaultAdjust: AdjustValues = { brightness: 0, contrast: 0, saturation: 0 }
@@ -108,7 +105,6 @@ export const useEditorStore = create<EditorState>((set) => ({
   brushMode: 'foreground',
   brushSize: 40,
   shortcutsOpen: false,
-  activePage: null,
   idPhoto: {
     active: false,
     phase: 'idle',
@@ -152,5 +148,4 @@ export const useEditorStore = create<EditorState>((set) => ({
   setIdPhoto: (partial) => set((s) => ({ idPhoto: { ...s.idPhoto, ...partial } })),
   setUpscale: (partial) => set((s) => ({ upscale: { ...s.upscale, ...partial } })),
   setShortcutsOpen: (shortcutsOpen) => set({ shortcutsOpen }),
-  setActivePage: (activePage) => set({ activePage }),
 }))

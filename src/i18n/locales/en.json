@@ -293,7 +293,8 @@
     "privacy": "Privacy",
     "contact": "Contact",
     "blog": "Blog",
-    "friendLinks": "Links"
+    "friendLinks": "Links",
+    "backToEditor": "Back to Editor"
   },
   "theme": {
     "toDark": "Switch to dark",
@@ -387,7 +388,8 @@
       "more": "More articles coming soon…",
       "loading": "Loading...",
       "readMore": "Read More →",
-      "backToList": "← Back to List"
+      "backToList": "← Back to List",
+      "notFound": "Article not found"
     }
   },
   "admin": {
