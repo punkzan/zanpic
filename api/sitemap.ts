@@ -12,7 +12,7 @@ interface BlogPost {
 }
 
 const KV_KEY = "blog:posts";
-const SITE_URL = "https://zanpic.com";
+const SITE_URL = "https://superzan.net";
 
 const SEED_POST_IDS = [
   { id: 'seed-1', date: '2026-07-05' },

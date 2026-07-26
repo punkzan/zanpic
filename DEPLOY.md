@@ -72,7 +72,7 @@ Vercel 会自动检测 Vite 框架，确认以下配置：
 #### 第 6 步：绑定自定义域名（可选）
 
 1. 进入 Vercel 项目 → **Settings** → **Domains**
-2. 输入你的域名（如 `zanpic.com`）
+2. 输入你的域名（如 `superzan.net`）
 3. 按提示到域名注册商添加 DNS 记录：
    - 添加 `A` 记录指向 `76.76.21.21`
    - 或添加 `CNAME` 记录指向 `cname.vercel-dns.com`

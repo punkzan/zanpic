@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://zanpic.com/sitemap.xml
+Sitemap: https://superzan.net/sitemap.xml
