@@ -63,6 +63,14 @@ export default async function handler(_req: any, res: any) {
     { loc: `${SITE_URL}/blog`, lastmod: today, changefreq: 'weekly', priority: '0.8' },
   ];
 
+  // Tool landing page URLs
+  const toolUrls = [
+    { loc: `${SITE_URL}/id-photo-maker`, lastmod: today, changefreq: 'weekly', priority: '0.9' },
+    { loc: `${SITE_URL}/background-remover`, lastmod: today, changefreq: 'weekly', priority: '0.9' },
+    { loc: `${SITE_URL}/photo-resizer`, lastmod: today, changefreq: 'weekly', priority: '0.7' },
+    { loc: `${SITE_URL}/photo-filter`, lastmod: today, changefreq: 'weekly', priority: '0.7' },
+  ];
+
   // Blog post URLs — try KV first, fallback to seed posts
   let blogPosts: { id: string; slug?: string; date: string }[] = SEED_POSTS;
   try {
@@ -84,7 +92,7 @@ export default async function handler(_req: any, res: any) {
     priority: '0.6',
   }));
 
-  const allUrls = [...staticUrls, ...blogUrls];
+  const allUrls = [...staticUrls, ...toolUrls, ...blogUrls];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -114,8 +114,163 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 ]
 
 /* ================================================================
-   Blog posts
+   Tool landing pages
    ================================================================ */
+
+export const TOOL_PAGES_SEO: SeoPageData[] = [
+  {
+    path: '/id-photo-maker',
+    title: `在线证件照制作 - ${BRAND}`,
+    description: '免费在线证件照生成工具。AI 自动抠图换背景，支持一寸/二寸/小二寸规格，红白蓝三色背景。手机拍照即可生成标准证件照，保护隐私。',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: '如何在线制作证件照',
+        description: '使用 Zan Pic 三步在线生成标准证件照',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: '上传照片', text: '用手机或相机拍一张正面免冠照，上传到 Zan Pic 编辑器。' },
+          { '@type': 'HowToStep', position: 2, name: 'AI 自动处理', text: '点击「证件照」功能，AI 自动识别人像、移除背景、裁剪为标准尺寸。' },
+          { '@type': 'HowToStep', position: 3, name: '选择底色导出', text: '选择红底、白底或蓝底，确认效果后一键下载高清证件照。' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: '证件照可以用于护照和签证吗？', acceptedAnswer: { '@type': 'Answer', text: 'Zan Pic 生成的证件照符合常见规格（1寸、2寸、小2寸），底色可选红白蓝三种标准色。但各国签证要求略有不同，建议在提交前核对具体规格要求。' } },
+          { '@type': 'Question', name: 'AI 自动裁剪准确吗？', acceptedAnswer: { '@type': 'Answer', text: 'Zan Pic 使用 AI 模型分析人像位置，自动识别头部和肩部区域，按标准比例裁剪。对于复杂背景或多人照片，建议先用 AI 抠图移除背景后再生成证件照。' } },
+          { '@type': 'Question', name: '支持哪些证件照规格？', acceptedAnswer: { '@type': 'Answer', text: '目前支持标准一寸照（295×413px）、二寸照（413×579px）、小二寸照（413×531px），均按 300DPI 输出。更多规格持续更新中。' } },
+          { '@type': 'Question', name: '手机拍摄的照片能用吗？', acceptedAnswer: { '@type': 'Answer', text: '完全可以。现代手机摄像头像素足够生成高质量证件照。建议使用后置摄像头、保持 1-2 米距离、在自然光下拍摄，效果最佳。' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallback(
+      '免费在线证件照制作工具',
+      '只需上传一张正面照片，Zan Pic 即可帮你自动生成标准证件照。AI 智能抠图移除背景，精确识别面部位置，自动裁剪为标准尺寸。支持一寸、二寸、小二寸等多种规格，红底、白底、蓝底自由切换。全程在浏览器本地处理，保护隐私安全。',
+      ['AI 智能抠图 — IS-Net 深度学习模型，精准分离人像与背景', '自动人脸定位 — Alpha 通道分析人像位置，智能裁剪', '三色背景 — 红白蓝标准色一键切换', '多规格支持 — 1寸/2寸/小2寸，300DPI 输出', '六寸排版 — 自动在 6 寸相纸上排列多张证件照'],
+    ),
+  },
+  {
+    path: '/background-remover',
+    title: `AI 在线抠图 - ${BRAND}`,
+    description: '免费 AI 在线抠图工具，无需上传到服务器。基于 IS-Net 深度学习模型，WebGPU 加速，发丝级抠图精度。支持智能抠图和涂抹抠图两种模式，完全浏览器本地处理。',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: '如何在线移除图片背景',
+        description: '使用 Zan Pic 三步移除图片背景',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: '上传图片', text: '拖拽或点击上传你的图片，支持 JPEG、PNG、WebP 等格式。' },
+          { '@type': 'HowToStep', position: 2, name: 'AI 自动抠图', text: '点击「智能抠图」，AI 自动识别并移除背景，2-5 秒即可完成。不满意可用「涂抹抠图」手动调整。' },
+          { '@type': 'HowToStep', position: 3, name: '下载透明背景图', text: '确认效果满意后，导出为 PNG 格式，获得透明背景的高质量图片。' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'AI 抠图需要上传图片到服务器吗？', acceptedAnswer: { '@type': 'Answer', text: '不需要。Zan Pic 的 AI 抠图完全在浏览器本地运行，使用 ONNX Runtime 在设备上直接推理。图片数据不会离开你的设备。' } },
+          { '@type': 'Question', name: '抠图速度和效果如何？', acceptedAnswer: { '@type': 'Answer', text: '使用 IS-Net 深度学习模型，在支持 WebGPU 的浏览器上推理速度极快，通常 2-5 秒完成。边缘处理通过形态学精修，可达发丝级精度。' } },
+          { '@type': 'Question', name: '支持哪些图片格式？', acceptedAnswer: { '@type': 'Answer', text: '支持 JPEG、PNG、WebP、AVIF 等常见格式。处理结果可导出为 PNG（保留透明背景）或其他格式。' } },
+          { '@type': 'Question', name: '移动端可以使用吗？', acceptedAnswer: { '@type': 'Answer', text: '可以。移动端浏览器同样支持 WebGPU/WASM 推理。建议使用 Chrome 或 Edge 浏览器。首次使用时需要下载 AI 模型文件（约 24MB），建议在 Wi-Fi 环境下操作。' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallback(
+      'AI 免费在线抠图工具',
+      'Zan Pic 提供强大的 AI 智能抠图功能，一键移除图片背景。基于 IS-Net 深度学习模型，在浏览器本地完成推理，无需上传图片到任何服务器。支持 WebGPU 硬件加速，配备边缘形态学精修算法，输出透明背景 PNG。',
+      ['智能抠图 — IS-Net 模型自动识别主体，全自动移除背景', '涂抹抠图 — AI 辅助 + 手动涂抹，精细调整边缘', '边缘精修 — 形态学 + 高斯羽化 + 对比度锐化', 'WebGPU 加速 — 硬件加速推理速度提升数倍'],
+    ),
+  },
+  {
+    path: '/photo-resizer',
+    title: `图片尺寸调整 - ${BRAND}`,
+    description: '免费在线图片尺寸调整工具。支持自由裁剪、固定比例裁剪、自定义像素尺寸调整。含社媒平台推荐尺寸对照表（Instagram/Facebook/Twitter/YouTube）。浏览器本地处理。',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: '如何在线调整图片尺寸',
+        description: '使用 Zan Pic 三步调整图片尺寸',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: '上传图片', text: '拖拽或点击上传你的图片到编辑器。' },
+          { '@type': 'HowToStep', position: 2, name: '选择裁剪比例', text: '使用裁剪工具，选择自由裁剪或固定比例（1:1/4:3/16:9 等），可旋转辅助线。' },
+          { '@type': 'HowToStep', position: 3, name: '导出设定尺寸', text: '导出时可指定像素宽高、压缩质量和输出格式（PNG/JPEG/WebP/AVIF）。' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: '调整尺寸会降低画质吗？', acceptedAnswer: { '@type': 'Answer', text: '缩小尺寸通常不会明显降低画质。放大尺寸时，Zan Pic 提供 AI 超分辨率功能，可将图片放大 2-4 倍同时保持清晰度。' } },
+          { '@type': 'Question', name: '社交媒体图片需要什么尺寸？', acceptedAnswer: { '@type': 'Answer', text: 'Instagram 方形帖 1080×1080px，竖版故事 1080×1920px。Facebook 封面 820×312px。Twitter 帖图 1200×675px。YouTube 缩略图 1280×720px。' } },
+          { '@type': 'Question', name: '支持哪些导出格式？', acceptedAnswer: { '@type': 'Answer', text: '支持 PNG、JPEG、WebP、AVIF 四种格式导出。JPEG 和 WebP 可调节压缩质量。' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallback(
+      '在线图片尺寸调整工具',
+      '需要将图片调整到特定尺寸？Zan Pic 提供灵活的图片尺寸调整功能。支持自由裁剪、固定比例裁剪（1:1/4:3/3:4/16:9/9:16/3:2）、旋转调整以及自定义像素尺寸缩放。搭配 AI 超分辨率功能，放大图片也能保持清晰。',
+      ['自由裁剪 — 任意比例调整图片构图', '固定比例 — 1:1/4:3/16:9/9:16/3:2 六种比例', '旋转辅助 — 支持旋转裁剪框和三分线参考', '社媒尺寸 — 包含主流平台推荐尺寸对照表'],
+    ),
+  },
+  {
+    path: '/photo-filter',
+    title: `图片滤镜编辑 - ${BRAND}`,
+    description: '免费在线图片滤镜编辑工具，提供黑白、复古、暖色、冷色、鲜艳、褪色、锐化、模糊等 8 种预设滤镜，支持亮度、对比度、饱和度实时调节。浏览器本地处理，保护隐私。',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: '如何为照片添加滤镜',
+        description: '使用 Zan Pic 三步为照片添加滤镜效果',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: '上传照片', text: '拖拽或点击上传需要处理的照片，支持 JPEG、PNG、WebP 等格式。' },
+          { '@type': 'HowToStep', position: 2, name: '选择滤镜 + 精细调色', text: '从 8 款预设滤镜中选择喜欢的风格，再用亮度/对比度/饱和度滑块精细调整。' },
+          { '@type': 'HowToStep', position: 3, name: '导出成品', text: '预览效果满意后，一键导出高质量图片，支持多种格式。' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: '应用滤镜会改变原图吗？', acceptedAnswer: { '@type': 'Answer', text: '不会。Zan Pic 的所有编辑操作均为非破坏性编辑，你可以随时撤销或修改。只有导出时才生成最终效果。' } },
+          { '@type': 'Question', name: '可以叠加多个滤镜吗？', acceptedAnswer: { '@type': 'Answer', text: '可以。你可以在一个图片上应用预设滤镜后再手动调整亮度、对比度、饱和度来微调效果。所有调整实时叠加预览。' } },
+          { '@type': 'Question', name: '滤镜适合哪些场景？', acceptedAnswer: { '@type': 'Answer', text: '预设滤镜适用于快速美化照片、统一社媒图片风格、为产品图添加氛围等。不同的滤镜风格适合不同场景 — 暖色适合人像，冷色适合风景，黑白适合强调构图。' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallback(
+      '免费在线图片滤镜工具',
+      '想让照片更有质感？Zan Pic 提供丰富的图片滤镜和调色功能。8 种预设滤镜一键套用，亮度、对比度、饱和度三大核心参数自由调节。所有效果实时预览，所见即所得。',
+      ['黑白 — 经典黑白效果，适合人文纪实', '复古 — 暖黄调 + 轻微褪色，怀旧质感', '暖色 — 增强暖色温，适合人像和美食', '冷色 — 增加冷色调，清新现代风格', '鲜艳 — 提升饱和度，适合风光摄影', '锐化 — 增强边缘清晰度，弥补轻微模糊'],
+    ),
+  },
+]
+
+/* ================================================================
+   Tool page shared helpers
+   ================================================================ */
+
+function buildToolPageFallback(h1: string, intro: string, features: string[]): string {
+  const featureItems = features.map((f) => `<li>${f}</li>`).join('\n    ')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px">${h1}</h1>
+  <p style="margin-bottom:16px">${intro}</p>
+  <h3 style="margin-bottom:8px">核心功能</h3>
+  <ul style="margin-bottom:20px">
+    ${featureItems}
+  </ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">开始使用</a></p>
+</div>`
+}
 
 export interface BlogPostSeo {
   id: string

@@ -16,6 +16,7 @@ import * as path from 'node:path'
 import {
   STATIC_PAGES_SEO,
   BLOG_POSTS_SEO,
+  TOOL_PAGES_SEO,
   SITE_URL,
   BRAND,
   buildMetaTags,
@@ -137,6 +138,24 @@ function main() {
     count++
   }
 
+  // --- Tool landing pages ---
+  for (const page of TOOL_PAGES_SEO) {
+    const html = injectSEO(template, {
+      title: page.title,
+      description: page.description,
+      canonicalPath: page.path,
+      ogType: page.ogType,
+      jsonLd: page.jsonLd,
+      noscriptHtml: page.noscriptHtml,
+    })
+
+    const dir = path.join(DIST_DIR, ...page.path.split('/').filter(Boolean))
+    ensureDir(dir)
+    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8')
+    console.log(`  ✓ ${page.path}`)
+    count++
+  }
+
   // --- Blog post pages ---
   for (const post of BLOG_POSTS_SEO) {
     const postPath = `/blog/${post.slug}`
@@ -169,7 +188,7 @@ function main() {
     count++
   }
 
-  console.log(`\n  → Pre-rendered ${count} pages (${STATIC_PAGES_SEO.length} static + ${BLOG_POSTS_SEO.length} blog posts)`)
+  console.log(`\n  → Pre-rendered ${count} pages (${STATIC_PAGES_SEO.length} static + ${TOOL_PAGES_SEO.length} tools + ${BLOG_POSTS_SEO.length} blog posts)`)
 }
 
 // ── run ──

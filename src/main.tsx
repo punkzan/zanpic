@@ -12,6 +12,10 @@ const ContactPage = lazy(() => import('./pages/ContactPage'))
 const BlogListPage = lazy(() => import('./pages/BlogListPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
 const AdminPage = lazy(() => import('./pages/AdminPage'))
+const ToolIdPhotoPage = lazy(() => import('./pages/ToolIdPhotoPage'))
+const ToolBackgroundRemoverPage = lazy(() => import('./pages/ToolBackgroundRemoverPage'))
+const ToolPhotoResizerPage = lazy(() => import('./pages/ToolPhotoResizerPage'))
+const ToolPhotoFilterPage = lazy(() => import('./pages/ToolPhotoFilterPage'))
 
 function LazyPage({ children }: { children: ReactNode }) {
   return (
@@ -33,6 +37,10 @@ const router = createBrowserRouter([
   { path: '/blog', element: <LazyPage><BlogListPage /></LazyPage> },
   { path: '/blog/:id', element: <LazyPage><BlogPostPage /></LazyPage> },
   { path: '/admin', element: <LazyPage><AdminPage /></LazyPage> },
+  { path: '/id-photo-maker', element: <LazyPage><ToolIdPhotoPage /></LazyPage> },
+  { path: '/background-remover', element: <LazyPage><ToolBackgroundRemoverPage /></LazyPage> },
+  { path: '/photo-resizer', element: <LazyPage><ToolPhotoResizerPage /></LazyPage> },
+  { path: '/photo-filter', element: <LazyPage><ToolPhotoFilterPage /></LazyPage> },
   { path: '*', element: <Navigate to="/" replace /> },
 ])
 
