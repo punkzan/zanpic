@@ -30,7 +30,7 @@ function upsertCanonical(href: string) {
   el.setAttribute('href', href)
 }
 
-const SITE_URL = 'https://superzan.net'
+const SITE_URL = 'https://www.superzan.net'
 
 interface PageMetaOptions {
   title?: string

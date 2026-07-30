@@ -5,7 +5,7 @@
  * and the client-side usePageMeta hook to keep SEO content consistent.
  */
 
-export const SITE_URL = 'https://superzan.net'
+export const SITE_URL = 'https://www.superzan.net'
 export const BRAND = 'Zan Pic'
 
 /* ================================================================

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://superzan.net/sitemap.xml
+Sitemap: https://www.superzan.net/sitemap.xml
