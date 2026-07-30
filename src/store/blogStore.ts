@@ -3,6 +3,8 @@ import * as blogApi from '../lib/blogApi'
 
 export interface BlogPost {
   id: string
+  /** SEO-friendly URL slug (e.g. "how-to-take-id-photo"). Falls back to id if not set. */
+  slug?: string
   title: string // default text (Chinese or whatever admin types)
   date: string // YYYY-MM-DD
   category: string
@@ -16,7 +18,7 @@ export interface BlogPost {
 /** Default seed posts — shipped with the app. Content comes from i18n locale files. */
 const SEED_POSTS: BlogPost[] = [
   {
-    id: 'seed-1', seedKey: 'seed1', date: '2026-07-05',
+    id: 'seed-1', slug: 'how-to-take-id-photo', seedKey: 'seed1', date: '2026-07-05',
     title: '如何拍出适合证件照的照片',
     category: '证件照技巧',
     excerpt: '证件照是很多人头疼的问题。本文从光线、角度、表情、着装四个方面，教你用手机拍出高质量的证件照原图，配合 Zan Pic 一键生成标准证件照。',
@@ -72,7 +74,7 @@ const SEED_POSTS: BlogPost[] = [
 整个过程不超过 10 秒，效果媲美照相馆专业出品。`,
   },
   {
-    id: 'seed-2', seedKey: 'seed2', date: '2026-07-03',
+    id: 'seed-2', slug: 'ai-background-removal-isnet', seedKey: 'seed2', date: '2026-07-03',
     title: 'AI 抠图技术原理：IS-Net 模型详解',
     category: '技术解析',
     excerpt: 'Zan Pic 的 AI 抠图功能基于 IS-Net（Iterative Spatial Refinement Network）模型。本文深入浅出地讲解模型架构、ONNX 推理流程和 WebGPU 加速原理。',
@@ -143,7 +145,7 @@ graph LR
 这就是为什么 Zan Pic 在支持的浏览器上能实现"秒级抠图"体验的原因。`,
   },
   {
-    id: 'seed-3', seedKey: 'seed3', date: '2026-06-28',
+    id: 'seed-3', slug: 'ecommerce-product-background-removal', seedKey: 'seed3', date: '2026-06-28',
     title: '电商商品图背景移除最佳实践',
     category: '实用教程',
     excerpt: '商品图背景移除是电商运营的高频需求。本文介绍如何用涂抹抠图功能处理复杂边缘（如毛绒玩具、透明材质），以及如何批量处理商品图。',
@@ -212,7 +214,7 @@ graph LR
 处理完成后，记得检查图片是否符合各平台的详细规范。`,
   },
   {
-    id: 'seed-4', seedKey: 'seed4', date: '2026-06-20',
+    id: 'seed-4', slug: 'id-photo-background-color-guide', seedKey: 'seed4', date: '2026-06-20',
     title: '证件照背景色选择指南',
     category: '证件照技巧',
     excerpt: '红色、白色、蓝色背景分别用于什么场景？各国签证照片对背景有什么要求？本文汇总了常见证件照规格和背景色标准。',
@@ -276,7 +278,7 @@ graph LR
 6. 点击「导出」，自动生成符合要求的证件照`,
   },
   {
-    id: 'seed-5', seedKey: 'seed5', date: '2026-06-15',
+    id: 'seed-5', slug: 'photo-filter-color-grading-guide', seedKey: 'seed5', date: '2026-06-15',
     title: '图片滤镜调色入门',
     category: '后期调色',
     excerpt: '亮度、对比度、饱和度是图片调色的三要素。本文从基础概念讲起，配合 Zan Pic 的实时预览功能，帮你快速掌握调色技巧。',
@@ -366,7 +368,7 @@ graph LR
 4. **保存参数** — 调到满意的效果后记住数值，以后同类照片可直接套用`,
   },
   {
-    id: 'seed-6', seedKey: 'seed6', date: '2026-06-10',
+    id: 'seed-6', slug: 'webgpu-ai-inference-acceleration', seedKey: 'seed6', date: '2026-06-10',
     title: 'WebGPU 加速：让浏览器 AI 推理快 10 倍',
     category: '技术解析',
     excerpt: 'WebGPU 是新一代浏览器图形 API，不仅用于渲染，还能加速 AI 推理。本文介绍 Zan Pic 如何利用 WebGPU 将抠图速度提升数倍。',

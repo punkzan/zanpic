@@ -8,19 +8,20 @@ import { createClient, type VercelKV } from "@vercel/kv";
 
 interface BlogPost {
   id: string;
+  slug?: string;
   date: string;
 }
 
 const KV_KEY = "blog:posts";
 const SITE_URL = "https://www.superzan.net";
 
-const SEED_POST_IDS = [
-  { id: 'seed-1', date: '2026-07-05' },
-  { id: 'seed-2', date: '2026-07-03' },
-  { id: 'seed-3', date: '2026-06-28' },
-  { id: 'seed-4', date: '2026-06-20' },
-  { id: 'seed-5', date: '2026-06-15' },
-  { id: 'seed-6', date: '2026-06-10' },
+const SEED_POSTS = [
+  { id: 'seed-1', slug: 'how-to-take-id-photo', date: '2026-07-05' },
+  { id: 'seed-2', slug: 'ai-background-removal-isnet', date: '2026-07-03' },
+  { id: 'seed-3', slug: 'ecommerce-product-background-removal', date: '2026-06-28' },
+  { id: 'seed-4', slug: 'id-photo-background-color-guide', date: '2026-06-20' },
+  { id: 'seed-5', slug: 'photo-filter-color-grading-guide', date: '2026-06-15' },
+  { id: 'seed-6', slug: 'webgpu-ai-inference-acceleration', date: '2026-06-10' },
 ];
 
 function getKvClient(): VercelKV | null {
@@ -62,22 +63,22 @@ export default async function handler(_req: any, res: any) {
     { loc: `${SITE_URL}/blog`, lastmod: today, changefreq: 'weekly', priority: '0.8' },
   ];
 
-  // Blog post URLs — try KV first, fallback to seed IDs
-  let blogPosts: { id: string; date: string }[] = SEED_POST_IDS;
+  // Blog post URLs — try KV first, fallback to seed posts
+  let blogPosts: { id: string; slug?: string; date: string }[] = SEED_POSTS;
   try {
     const client = kv();
     if (client) {
       const posts = await client.get<BlogPost[]>(KV_KEY);
       if (posts && posts.length > 0) {
-        blogPosts = posts.map(p => ({ id: p.id, date: p.date }));
+        blogPosts = posts.map(p => ({ id: p.id, slug: p.slug, date: p.date }));
       }
     }
   } catch {
-    // KV error — use seed IDs as fallback
+    // KV error — use seed posts as fallback
   }
 
   const blogUrls = blogPosts.map(p => ({
-    loc: `${SITE_URL}/blog/${p.id}`,
+    loc: `${SITE_URL}/blog/${p.slug || p.id}`,
     lastmod: p.date,
     changefreq: 'monthly',
     priority: '0.6',

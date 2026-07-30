@@ -41,7 +41,7 @@ export default function BlogListPage() {
             <article
               key={post.id}
               className="blog-card blog-card-article"
-              onClick={() => navigate(`/blog/${post.id}`)}
+              onClick={() => navigate(`/blog/${post.slug || post.id}`)}
               style={{ cursor: 'pointer' }}
             >
               <div className="blog-card-category">

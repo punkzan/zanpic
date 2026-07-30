@@ -101,12 +101,12 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
   <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">经验分享</h1>
   <p>这里分享图片编辑技巧、AI 抠图技术解析、证件照制作指南等实用内容。</p>
   <ul>
-    <li><a href="/blog/seed-1" style="color:#1a73e8">如何拍出适合证件照的照片</a> — 证件照技巧</li>
-    <li><a href="/blog/seed-2" style="color:#1a73e8">AI 抠图技术原理：IS-Net 模型详解</a> — 技术解析</li>
-    <li><a href="/blog/seed-3" style="color:#1a73e8">电商商品图背景移除最佳实践</a> — 实用教程</li>
-    <li><a href="/blog/seed-4" style="color:#1a73e8">证件照背景色选择指南</a> — 证件照技巧</li>
-    <li><a href="/blog/seed-5" style="color:#1a73e8">图片滤镜调色入门</a> — 后期调色</li>
-    <li><a href="/blog/seed-6" style="color:#1a73e8">WebGPU 加速：让浏览器 AI 推理快 10 倍</a> — 技术解析</li>
+    <li><a href="/blog/how-to-take-id-photo" style="color:#1a73e8">如何拍出适合证件照的照片</a> — 证件照技巧</li>
+    <li><a href="/blog/ai-background-removal-isnet" style="color:#1a73e8">AI 抠图技术原理：IS-Net 模型详解</a> — 技术解析</li>
+    <li><a href="/blog/ecommerce-product-background-removal" style="color:#1a73e8">电商商品图背景移除最佳实践</a> — 实用教程</li>
+    <li><a href="/blog/id-photo-background-color-guide" style="color:#1a73e8">证件照背景色选择指南</a> — 证件照技巧</li>
+    <li><a href="/blog/photo-filter-color-grading-guide" style="color:#1a73e8">图片滤镜调色入门</a> — 后期调色</li>
+    <li><a href="/blog/webgpu-ai-inference-acceleration" style="color:#1a73e8">WebGPU 加速：让浏览器 AI 推理快 10 倍</a> — 技术解析</li>
   </ul>
   <p style="margin-top:20px;color:#888">更多文章持续更新中...</p>
 </div>`,
@@ -119,6 +119,7 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 
 export interface BlogPostSeo {
   id: string
+  slug: string
   title: string
   category: string
   excerpt: string
@@ -128,6 +129,7 @@ export interface BlogPostSeo {
 export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   {
     id: 'seed-1',
+    slug: 'how-to-take-id-photo',
     title: '如何拍出适合证件照的照片',
     category: '证件照技巧',
     excerpt:
@@ -136,6 +138,7 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   },
   {
     id: 'seed-2',
+    slug: 'ai-background-removal-isnet',
     title: 'AI 抠图技术原理：IS-Net 模型详解',
     category: '技术解析',
     excerpt:
@@ -144,6 +147,7 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   },
   {
     id: 'seed-3',
+    slug: 'ecommerce-product-background-removal',
     title: '电商商品图背景移除最佳实践',
     category: '实用教程',
     excerpt:
@@ -152,6 +156,7 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   },
   {
     id: 'seed-4',
+    slug: 'id-photo-background-color-guide',
     title: '证件照背景色选择指南',
     category: '证件照技巧',
     excerpt:
@@ -160,6 +165,7 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   },
   {
     id: 'seed-5',
+    slug: 'photo-filter-color-grading-guide',
     title: '图片滤镜调色入门',
     category: '后期调色',
     excerpt:
@@ -168,6 +174,7 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
   },
   {
     id: 'seed-6',
+    slug: 'webgpu-ai-inference-acceleration',
     title: 'WebGPU 加速：让浏览器 AI 推理快 10 倍',
     category: '技术解析',
     excerpt:
@@ -249,7 +256,7 @@ export function buildBlogPostJsonLd(post: BlogPostSeo): object[] {
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `${SITE_URL}/blog/${post.id}`,
+        '@id': `${SITE_URL}/blog/${post.slug}`,
       },
     },
     {

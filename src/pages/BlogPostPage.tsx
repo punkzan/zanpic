@@ -32,7 +32,7 @@ export default function BlogPostPage() {
   const syncFromApi = useBlogStore((s) => s.syncFromApi)
   const loading = useBlogStore((s) => s.loading)
 
-  const post = posts.find((p) => p.id === id)
+  const post = posts.find((p) => p.slug === id || p.id === id)
 
   const title = post ? getPostField(post, 'title', i18n.language, t) : ''
   const category = post ? getPostField(post, 'category', i18n.language, t) : ''
@@ -41,7 +41,7 @@ export default function BlogPostPage() {
   usePageMeta({
     title: post ? `${title} - Zan Pic` : 'Zan Pic',
     description: post ? getPostField(post, 'excerpt', i18n.language, t) : '',
-    path: `/blog/${id}`,
+    path: `/blog/${post?.slug || post?.id || id}`,
     ogType: 'article',
   })
 

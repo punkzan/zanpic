@@ -139,7 +139,7 @@ function main() {
 
   // --- Blog post pages ---
   for (const post of BLOG_POSTS_SEO) {
-    const postPath = `/blog/${post.id}`
+    const postPath = `/blog/${post.slug}`
     const postTitle = `${post.title} - ${BRAND}`
     const jsonLd = buildBlogPostJsonLd(post)
 
@@ -162,7 +162,7 @@ function main() {
       noscriptHtml,
     })
 
-    const dir = path.join(DIST_DIR, 'blog', post.id)
+    const dir = path.join(DIST_DIR, 'blog', post.slug)
     ensureDir(dir)
     fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8')
     console.log(`  ✓ ${postPath}`)

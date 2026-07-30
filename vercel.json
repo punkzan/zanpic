@@ -14,6 +14,14 @@
       "destination": "/index.html"
     }
   ],
+  "redirects": [
+    { "source": "/blog/seed-1", "destination": "/blog/how-to-take-id-photo", "permanent": true },
+    { "source": "/blog/seed-2", "destination": "/blog/ai-background-removal-isnet", "permanent": true },
+    { "source": "/blog/seed-3", "destination": "/blog/ecommerce-product-background-removal", "permanent": true },
+    { "source": "/blog/seed-4", "destination": "/blog/id-photo-background-color-guide", "permanent": true },
+    { "source": "/blog/seed-5", "destination": "/blog/photo-filter-color-grading-guide", "permanent": true },
+    { "source": "/blog/seed-6", "destination": "/blog/webgpu-ai-inference-acceleration", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)\\.wasm",
