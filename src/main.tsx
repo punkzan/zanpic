@@ -16,6 +16,9 @@ const ToolIdPhotoPage = lazy(() => import('./pages/ToolIdPhotoPage'))
 const ToolBackgroundRemoverPage = lazy(() => import('./pages/ToolBackgroundRemoverPage'))
 const ToolPhotoResizerPage = lazy(() => import('./pages/ToolPhotoResizerPage'))
 const ToolPhotoFilterPage = lazy(() => import('./pages/ToolPhotoFilterPage'))
+const IdPhotoSpecPage = lazy(() => import('./pages/IdPhotoSpecPage'))
+const SocialMediaSizePage = lazy(() => import('./pages/SocialMediaSizePage'))
+const BackgroundToolPage = lazy(() => import('./pages/BackgroundToolPage'))
 
 function LazyPage({ children }: { children: ReactNode }) {
   return (
@@ -41,6 +44,9 @@ const router = createBrowserRouter([
   { path: '/background-remover', element: <LazyPage><ToolBackgroundRemoverPage /></LazyPage> },
   { path: '/photo-resizer', element: <LazyPage><ToolPhotoResizerPage /></LazyPage> },
   { path: '/photo-filter', element: <LazyPage><ToolPhotoFilterPage /></LazyPage> },
+  { path: '/id-photo/:slug', element: <LazyPage><IdPhotoSpecPage /></LazyPage> },
+  { path: '/resize/:slug', element: <LazyPage><SocialMediaSizePage /></LazyPage> },
+  { path: '/background/:slug', element: <LazyPage><BackgroundToolPage /></LazyPage> },
   { path: '*', element: <Navigate to="/" replace /> },
 ])
 

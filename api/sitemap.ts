@@ -28,6 +28,62 @@ const SEED_POSTS = [
   { id: 'seed-10', slug: 'ai-background-remover-review', date: '2026-07-28' },
 ];
 
+// Programmatic SEO: ID photo spec pages
+const ID_PHOTO_SPECS = [
+  { slug: 'china-one-inch', date: '2026-07-31' },
+  { slug: 'china-two-inch', date: '2026-07-31' },
+  { slug: 'china-small-two-inch', date: '2026-07-31' },
+  { slug: 'us-passport', date: '2026-07-31' },
+  { slug: 'uk-passport', date: '2026-07-31' },
+  { slug: 'japan-visa', date: '2026-07-31' },
+  { slug: 'schengen-visa', date: '2026-07-31' },
+  { slug: 'india-passport', date: '2026-07-31' },
+  { slug: 'canada-passport', date: '2026-07-31' },
+  { slug: 'australia-passport', date: '2026-07-31' },
+  { slug: 'korea-passport', date: '2026-07-31' },
+  { slug: 'china-driving-license', date: '2026-07-31' },
+  { slug: 'china-graduation', date: '2026-07-31' },
+  { slug: 'china-social-security', date: '2026-07-31' },
+  { slug: 'china-health-certificate', date: '2026-07-31' },
+  { slug: 'china-hong-kong-macau-pass', date: '2026-07-31' },
+  { slug: 'thailand-visa', date: '2026-07-31' },
+  { slug: 'singapore-visa', date: '2026-07-31' },
+  { slug: 'germany-visa', date: '2026-07-31' },
+  { slug: 'russia-visa', date: '2026-07-31' },
+  { slug: 'new-zealand-visa', date: '2026-07-31' },
+  { slug: 'usa-green-card', date: '2026-07-31' },
+  { slug: 'china-residence-permit', date: '2026-07-31' },
+  { slug: 'icao-standard', date: '2026-07-31' },
+  { slug: 'malaysia-visa', date: '2026-07-31' },
+];
+
+// Programmatic SEO: Social media size pages
+const SOCIAL_MEDIA_SIZES = [
+  { slug: 'instagram-profile', date: '2026-07-31' },
+  { slug: 'instagram-story', date: '2026-07-31' },
+  { slug: 'instagram-post-square', date: '2026-07-31' },
+  { slug: 'youtube-thumbnail', date: '2026-07-31' },
+  { slug: 'youtube-banner', date: '2026-07-31' },
+  { slug: 'facebook-cover', date: '2026-07-31' },
+  { slug: 'twitter-header', date: '2026-07-31' },
+  { slug: 'linkedin-cover', date: '2026-07-31' },
+  { slug: 'linkedin-profile-photo', date: '2026-07-31' },
+  { slug: 'facebook-profile', date: '2026-07-31' },
+  { slug: 'tiktok-profile', date: '2026-07-31' },
+  { slug: 'wechat-avatar', date: '2026-07-31' },
+  { slug: 'discord-avatar', date: '2026-07-31' },
+  { slug: 'pinterest-pin', date: '2026-07-31' },
+  { slug: 'whatsapp-profile', date: '2026-07-31' },
+];
+
+// Programmatic SEO: Background color pages
+const BACKGROUND_COLORS = [
+  { slug: 'white', date: '2026-07-31' },
+  { slug: 'blue', date: '2026-07-31' },
+  { slug: 'red', date: '2026-07-31' },
+  { slug: 'gradient', date: '2026-07-31' },
+];
+
 function getKvClient(): VercelKV | null {
   const stdUrl = process.env.KV_REST_API_URL;
   const stdToken = process.env.KV_REST_API_TOKEN;
@@ -96,7 +152,29 @@ export default async function handler(_req: any, res: any) {
     priority: '0.6',
   }));
 
-  const allUrls = [...staticUrls, ...toolUrls, ...blogUrls];
+  // Programmatic SEO URLs
+  const idPhotoUrls = ID_PHOTO_SPECS.map(s => ({
+    loc: `${SITE_URL}/id-photo/${s.slug}`,
+    lastmod: s.date,
+    changefreq: 'monthly',
+    priority: '0.8',
+  }));
+
+  const socialMediaUrls = SOCIAL_MEDIA_SIZES.map(s => ({
+    loc: `${SITE_URL}/resize/${s.slug}`,
+    lastmod: s.date,
+    changefreq: 'monthly',
+    priority: '0.7',
+  }));
+
+  const backgroundUrls = BACKGROUND_COLORS.map(s => ({
+    loc: `${SITE_URL}/background/${s.slug}`,
+    lastmod: s.date,
+    changefreq: 'monthly',
+    priority: '0.7',
+  }));
+
+  const allUrls = [...staticUrls, ...toolUrls, ...blogUrls, ...idPhotoUrls, ...socialMediaUrls, ...backgroundUrls];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -5,6 +5,10 @@
  * and the client-side usePageMeta hook to keep SEO content consistent.
  */
 
+import { ID_PHOTO_SPECS, type IdPhotoSpec } from '../data/id-photo-specs'
+import { SOCIAL_MEDIA_SIZES, type SocialMediaSize } from '../data/social-media-sizes'
+import { BACKGROUND_COLORS, type BackgroundColorSpec } from '../data/background-colors'
+
 export const SITE_URL = 'https://www.superzan.net'
 export const BRAND = 'Zan Pic'
 
@@ -257,6 +261,182 @@ export const TOOL_PAGES_SEO: SeoPageData[] = [
     ),
   },
 ]
+
+/* ================================================================
+   Programmatic SEO: ID photo spec pages
+   ================================================================ */
+
+function buildIdPhotoSpecJsonLd(spec: IdPhotoSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `如何制作${spec.country}${spec.type}`,
+      description: `在线免费制作${spec.country}${spec.type}，规格 ${spec.pixelWidth}×${spec.pixelHeight}px (${spec.mmWidth}×${spec.mmHeight}mm)，${spec.backgroundColor}背景。`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: '上传照片', text: '用手机拍一张正面免冠照，上传到 Zan Pic 编辑器。' },
+        { '@type': 'HowToStep', position: 2, name: 'AI 智能抠图', text: '点击智能抠图，AI 自动移除原背景。' },
+        { '@type': 'HowToStep', position: 3, name: '证件照生成', text: `选择证件照功能，自动裁剪为${spec.mmWidth}×${spec.mmHeight}mm标准尺寸。` },
+        { '@type': 'HowToStep', position: 4, name: '选择底色导出', text: `选择${spec.backgroundColor}背景，导出高清证件照。` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildIdPhotoSpecFallback(spec: IdPhotoSpec): string {
+  const dressItems = spec.dressCode.map((d) => `<li>${escapeHtml(d)}</li>`).join('')
+  const useItems = spec.commonUses.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(spec.country)} · ${escapeHtml(spec.type)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">规格参数</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">像素尺寸</td><td style="padding:8px;font-weight:600">${spec.pixelWidth}×${spec.pixelHeight}px</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">物理尺寸</td><td style="padding:8px;font-weight:600">${spec.mmWidth}×${spec.mmHeight}mm</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">分辨率</td><td style="padding:8px;font-weight:600">${spec.dpi}DPI</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">背景颜色</td><td style="padding:8px;font-weight:600">${escapeHtml(spec.backgroundColor)}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">头部高度</td><td style="padding:8px;font-weight:600">${spec.headHeightMin}-${spec.headHeightMax}mm</td></tr>
+  </table>
+  <h3 style="margin:16px 0 8px">着装要求</h3>
+  <ul>${dressItems}</ul>
+  <h3 style="margin:16px 0 8px">常见用途</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">立即制作${escapeHtml(spec.type)}</a></p>
+</div>`
+}
+
+export const ID_PHOTO_SPECS_SEO: SeoPageData[] = ID_PHOTO_SPECS.map((spec) => ({
+  path: `/id-photo/${spec.slug}`,
+  title: `${spec.title} - 免费在线制作 | ${BRAND}`,
+  description: `${spec.country}${spec.type}规格：${spec.pixelWidth}×${spec.pixelHeight}px (${spec.mmWidth}×${spec.mmHeight}mm)，${spec.backgroundColor}背景。使用 Zan Pic AI 抠图免费在线制作${spec.type}，浏览器本地处理。`,
+  ogType: 'website',
+  jsonLd: buildIdPhotoSpecJsonLd(spec),
+  noscriptHtml: buildIdPhotoSpecFallback(spec),
+}))
+
+/* ================================================================
+   Programmatic SEO: Social media size pages
+   ================================================================ */
+
+function buildSocialMediaSizeJsonLd(size: SocialMediaSize): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `如何裁剪至${size.platform} ${size.type}尺寸`,
+      description: `${size.platform} ${size.type}尺寸：${size.pixelWidth}×${size.pixelHeight}px，宽高比 ${size.aspectRatio}。`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: '上传图片', text: '拖拽或点击上传你的图片到 Zan Pic 编辑器。' },
+        { '@type': 'HowToStep', position: 2, name: '选择比例裁剪', text: `使用裁剪工具，选择 ${size.aspectRatio} 比例或自定义像素尺寸 ${size.pixelWidth}×${size.pixelHeight}px。` },
+        { '@type': 'HowToStep', position: 3, name: '可选 AI 抠图', text: '如果需要换背景，使用 AI 智能抠图移除原背景。' },
+        { '@type': 'HowToStep', position: 4, name: '导出', text: `导出为 ${size.recommendedFormat} 格式，确保文件大小 ${size.maxFileSize} 以内。` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: size.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildSocialMediaSizeFallback(size: SocialMediaSize): string {
+  const tipItems = size.tips.map((t) => `<li>${escapeHtml(t)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(size.platform)} · ${escapeHtml(size.type)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(size.title)}</h1>
+  <p style="color:#555">${escapeHtml(size.intro)}</p>
+  <h3 style="margin:16px 0 8px">规格参数</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">像素尺寸</td><td style="padding:8px;font-weight:600">${size.pixelWidth}×${size.pixelHeight}px</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">宽高比</td><td style="padding:8px;font-weight:600">${size.aspectRatio}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">推荐格式</td><td style="padding:8px;font-weight:600">${escapeHtml(size.recommendedFormat)}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">文件大小限制</td><td style="padding:8px;font-weight:600">${escapeHtml(size.maxFileSize)}</td></tr>
+  </table>
+  <h3 style="margin:16px 0 8px">制作技巧</h3>
+  <ul>${tipItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">立即裁剪图片</a></p>
+</div>`
+}
+
+export const SOCIAL_MEDIA_SIZES_SEO: SeoPageData[] = SOCIAL_MEDIA_SIZES.map((size) => ({
+  path: `/resize/${size.slug}`,
+  title: `${size.title} - 在线裁剪 | ${BRAND}`,
+  description: `${size.platform} ${size.type}尺寸：${size.pixelWidth}×${size.pixelHeight}px，宽高比 ${size.aspectRatio}。使用 Zan Pic 在线裁剪和调整图片尺寸，支持 AI 抠图换背景。`,
+  ogType: 'website',
+  jsonLd: buildSocialMediaSizeJsonLd(size),
+  noscriptHtml: buildSocialMediaSizeFallback(size),
+}))
+
+/* ================================================================
+   Programmatic SEO: Background color pages
+   ================================================================ */
+
+function buildBackgroundColorJsonLd(spec: BackgroundColorSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `如何制作${spec.colorName}底证件照`,
+      description: `使用 Zan Pic AI 抠图在线制作${spec.colorName}背景证件照，色值 ${spec.hexValue}。`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: '上传照片', text: '用手机拍一张正面免冠照，上传到 Zan Pic 编辑器。' },
+        { '@type': 'HowToStep', position: 2, name: 'AI 智能抠图', text: '点击智能抠图，AI 自动识别人像并移除原背景。' },
+        { '@type': 'HowToStep', position: 3, name: `选择${spec.colorName}底导出`, text: `在证件照功能中选择${spec.colorName}背景，导出高清证件照。` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildBackgroundColorFallback(spec: BackgroundColorSpec): string {
+  const useItems = spec.useCases.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <span style="display:inline-block;width:48px;height:48px;border-radius:8px;background:${spec.slug === 'gradient' ? 'linear-gradient(135deg,#667eea,#764ba2)' : spec.hexValue};border:2px solid #ddd"></span>
+    <span style="font-size:18px;font-weight:600">${escapeHtml(spec.colorName)}背景 · ${spec.hexValue}</span>
+  </div>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">适用场景</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">立即制作${escapeHtml(spec.colorName)}底证件照</a></p>
+</div>`
+}
+
+export const BACKGROUND_COLORS_SEO: SeoPageData[] = BACKGROUND_COLORS.map((spec) => ({
+  path: `/background/${spec.slug}`,
+  title: `${spec.title} - AI 抠图换背景 | ${BRAND}`,
+  description: `${spec.colorName}背景证件照制作：色值 ${spec.hexValue}。AI 自动抠图换背景，在线免费生成${spec.colorName}底证件照。浏览器本地处理，保护隐私。`,
+  ogType: 'website',
+  jsonLd: buildBackgroundColorJsonLd(spec),
+  noscriptHtml: buildBackgroundColorFallback(spec),
+}))
 
 /* ================================================================
    Tool page shared helpers
