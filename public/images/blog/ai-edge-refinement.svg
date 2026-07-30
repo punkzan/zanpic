@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="800" height="300" fill="#f8f9fa" rx="16"/>
+  <text x="40" y="40" font-size="22" font-weight="700" fill="#1a1a2e">AI 抠图边缘精修技术 (maskRefine)</text>
+  <text x="40" y="63" font-size="13" fill="#6b7280">Edge Refinement Pipeline — From Raw Mask to Professional Result</text>
+  <!-- Pipeline -->
+  <rect x="40" y="80" width="110" height="65" fill="#ef4444" rx="8" opacity="0.9"/>
+  <text x="95" y="105" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">原始 Mask</text>
+  <text x="95" y="125" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">含噪点/锯齿</text>
+  <text x="165" y="115" font-size="18" fill="#6b7280" text-anchor="middle">→</text>
+  <rect x="185" y="80" width="110" height="65" fill="#f59e0b" rx="8" opacity="0.9"/>
+  <text x="240" y="105" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">形态学处理</text>
+  <text x="240" y="125" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">Dilate + Erode</text>
+  <text x="310" y="115" font-size="18" fill="#6b7280" text-anchor="middle">→</text>
+  <rect x="330" y="80" width="110" height="65" fill="#8b5cf6" rx="8" opacity="0.9"/>
+  <text x="385" y="105" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">高斯羽化</text>
+  <text x="385" y="125" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">GaussianBlur</text>
+  <text x="455" y="115" font-size="18" fill="#6b7280" text-anchor="middle">→</text>
+  <rect x="475" y="80" width="110" height="65" fill="#3b82f6" rx="8" opacity="0.9"/>
+  <text x="530" y="105" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">对比度锐化</text>
+  <text x="530" y="125" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">边缘清晰化</text>
+  <text x="600" y="115" font-size="18" fill="#6b7280" text-anchor="middle">→</text>
+  <rect x="620" y="80" width="140" height="65" fill="#06d6a0" rx="8"/>
+  <text x="690" y="105" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">精细 Mask</text>
+  <text x="690" y="125" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">专业级发丝边缘</text>
+  <!-- Parameters -->
+  <text x="40" y="185" font-size="14" font-weight="700" fill="#1a1a2e">关键参数</text>
+  <rect x="40" y="198" width="220" height="40" fill="#fff" rx="8"/>
+  <text x="60" y="215" font-size="11" fill="#374151">形态学半径：closeRadius=2, openRadius=2</text>
+  <text x="60" y="232" font-size="10" fill="#6b7280">关闭边缘孔洞，保持发丝不被腐蚀</text>
+  <rect x="280" y="198" width="220" height="40" fill="#fff" rx="8"/>
+  <text x="300" y="215" font-size="11" fill="#374151">高斯模糊 sigma：1.5-2.0</text>
+  <text x="300" y="232" font-size="10" fill="#6b7280">羽化边缘过渡，避免硬切割线</text>
+  <rect x="520" y="198" width="240" height="40" fill="#fff" rx="8"/>
+  <text x="540" y="215" font-size="11" fill="#374151">噪点清理：minIslandSize=20</text>
+  <text x="540" y="232" font-size="10" fill="#6b7280">移除<20px孤立噪点，保留主体完整</text>
+</svg>

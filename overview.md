@@ -1,52 +1,56 @@
-# Zan Pic — 博客系统修复总结
+# P3 — SEO Phase 2.2: 4 SEO Blog Articles — 完成报告
 
-## 日期：2026-07-14
-## Commit: `dd5c74c` (已推送到 GitHub main，Vercel 自动部署中)
+## 执行时间
+2026-07-30 21:45
 
----
+## 做了什么
 
-## 修复的两个问题
+为 Zan Pic 新增 4 篇高质量 SEO 博客文章（每篇 2000-2800 字），补齐 Phase 2.2 内容矩阵。
 
-### 问题 1：新文章无法及时更新 ✅
+### 新增文章
 
-**原因**：之前博客数据存在浏览器 localStorage（每台设备独立存储），不同浏览器/设备看到的内容不同。
+| # | 标题 | Slug | 目标关键词 | 字数 |
+|---|------|------|-----------|------|
+| 7 | 免费在线证件照制作完整教程 | make-id-photo-online-free | free online ID photo maker | ~2500 |
+| 8 | 电商商品图白底制作一站式教程 | product-photo-white-background | product photo background remover | ~2500 |
+| 9 | 社媒头像换背景全攻略 | social-media-avatar-background | social media profile photo editor | ~2500 |
+| 10 | 2026 年最佳免费 AI 抠图工具横评 | ai-background-remover-review | AI background remover no signup | ~2800 |
 
-**修复**：
-- `syncFromApi()` 现在始终使用 API 返回的文章列表作为基准
-- 无 Vercel KV 时：所有访客从 API 获取相同的 6 篇种子文章
-- 有 Vercel KV 时：管理员发布的文章实时同步给所有访客
+### 每篇文章结构
+- H1 标题含目标关键词
+- 5-8 个 H2 章节 + 实用对照表格
+- FAQ 章节（4-6 个问答）
+- 3-5 个相关页面内链（工具页 + 其他文章）
+- CTA → Zan Pic 编辑器
 
-### 问题 2：点击文章无法查看全文 ✅
+### 技术变更（5 文件，+762 行）
 
-**原因**：数据模型只有摘要字段、无点击事件、无详情页。
-
-**修复**：
-| 改动 | 说明 |
+| 文件 | 变更 |
 |------|------|
-| BlogPost 新增 `content` 字段 | 存储文章正文 |
-| 6 篇种子文章补充完整正文 | 每篇 500-1500 字，Markdown 格式 |
-| 博客卡片可点击 | 点击 → 打开全文详情视图 |
-| Markdown 渲染器 | 支持 # ## ### 标题 / **粗体** / \`代码\` / 列表 / 表格 / > 引用块 |
-| BlogEditor 增加正文编辑区 | 管理员可输入完整文章内容 |
-| 8 语言 i18n 更全 | 所有新 UI 文字均已翻译 |
+| `src/store/blogStore.ts` | 新增 seed-7~10 + seedKeyMap 映射 |
+| `src/i18n/locales/zh.json` | 中文 title/category/excerpt |
+| `src/i18n/locales/en.json` | 英文 title/category/excerpt |
+| `src/seo/seo-data.ts` | BLOG_POSTS_SEO 新增 4 条 + blog 列表 noscript 更新 |
+| `api/sitemap.ts` | SEED_POSTS 新增 4 条 |
 
----
+### 构建验证
+- ✅ `tsc -b` — TypeScript 零错误
+- ✅ `vite build` — 31.3s，2065 modules
+- ✅ `prerender` — 18 页（4 static + 4 tools + 10 blog posts）
+- ✅ JSON-LD Article + BreadcrumbList 注入所有博客页
 
-## 改动文件清单（13 个文件）
+### 预渲染页面清单（18 页）
+`/about` `/privacy` `/contact` `/blog`
+`/id-photo-maker` `/background-remover` `/photo-resizer` `/photo-filter`
+`/blog/how-to-take-id-photo` `/blog/ai-background-removal-isnet`
+`/blog/ecommerce-product-background-removal` `/blog/id-photo-background-color-guide`
+`/blog/photo-filter-color-grading-guide` `/blog/webgpu-ai-inference-acceleration`
+`/blog/make-id-photo-online-free` `/blog/product-photo-white-background`
+`/blog/social-media-avatar-background` `/blog/ai-background-remover-review`
 
-```
-M  api/posts.ts                    — content 字段 + 完整 DEFAULT_POSTS 正文
-M  src/components/BlogEditor.tsx    — 新增 content 编辑文本域
-M  src/components/PageModal.tsx     — 可点击卡片 + BlogPostDetail 详情组件
-M  src/store/blogStore.ts           — content 字段 + 种子正文 + syncFromApi 修复
-M  src/i18n/locales/*.json          — 8 个语言文件更新
-```
+### 部署状态
+- ✅ Git commit: `52f688f`
+- ⏳ Git push: GitHub 网络不可达，待重试
 
----
-
-## 后续操作
-
-1. **等待 Vercel 部署完成**（通常 1-2 分钟）
-2. **测试**：打开网站 → 经验分享 → 点击任意文章卡片 → 应显示完整正文
-3. **（可选）创建 Vercel KV 数据库**：让管理员新增的文章对所有访客可见
-   - Vercel Dashboard → 项目 → Storage → Create Database → Upstash Redis
+### 下一步
+P4 = Phase 3 程序化 SEO（证件照规格页 50+、背景色页、格式转换页、社媒尺寸页）

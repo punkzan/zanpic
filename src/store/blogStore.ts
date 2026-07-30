@@ -26,6 +26,8 @@ const SEED_POSTS: BlogPost[] = [
 
 一张合格的证件照需要满足光线均匀、正面平视、表情自然、着装得体四个基本条件。下面我们逐一讲解。
 
+![常见证件照尺寸对照表 一寸二寸小二寸像素毫米规格](/images/blog/id-photo-sizes-chart.svg)
+
 ### 1. 光线
 
 选择**自然光**是最好的方案。面向窗户拍摄，让光线均匀地洒在脸上。避免侧光造成面部阴影过重，也避免顶光（如天花板灯直射）产生难看的阴影。
@@ -34,6 +36,8 @@ const SEED_POSTS: BlogPost[] = [
 - 使用两盏台灯分别放在左右两侧 **45° 角**
 - 保持灯光高度与眼睛齐平或略高
 - 避免使用闪光灯直射（会产生红眼和油光）
+
+![证件照三种标准背景色 红白蓝RGB色值参考](/images/blog/bg-color-swatches.svg)
 
 ### 2. 角度
 
@@ -71,7 +75,11 @@ const SEED_POSTS: BlogPost[] = [
 3. 选择需要的背景颜色（红/白/蓝）
 4. 自动裁剪到标准尺寸（1寸/2寸等）
 
-整个过程不超过 10 秒，效果媲美照相馆专业出品。`,
+整个过程不超过 10 秒，效果媲美照相馆专业出品。
+
+![证件照智能裁剪流程 AI抠图人脸定位智能裁剪背景替换](/images/blog/id-photo-crop-pipeline.svg)
+
+![AI智能抠图工作流程 IS-Net深度学习WebGPU加速](/images/blog/ai-removal-workflow.svg)`,
   },
   {
     id: 'seed-2', slug: 'ai-background-removal-isnet', seedKey: 'seed2', date: '2026-07-03',
@@ -91,6 +99,8 @@ Zan Pic 的 AI 抠图功能采用的是 **IS-Net（Iterative Spatial Refinement 
 - **复杂背景** — 背景色与前景色接近时容易混淆
 
 IS-Net 通过**迭代精炼机制**逐层细化分割边界，在这些场景下显著优于其他模型。
+
+![AI智能抠图工作流程 上传识别分离导出四步](/images/blog/ai-removal-workflow.svg)
 
 ### 模型架构
 
@@ -118,6 +128,8 @@ IS-Net 由三个核心模块组成：
 └─────────────┘
 \`\`\`
 
+![AI抠图边缘精修技术 maskRefine形态学高斯羽化对比度锐化](/images/blog/ai-edge-refinement.svg)
+
 ### ONNX Runtime：浏览器中的推理引擎
 
 模型文件以 **ONNX（Open Neural Network Exchange）** 格式存储，这是业界标准的模型交换格式。在浏览器中，我们通过 **ONNX Runtime Web** 执行推理：
@@ -142,7 +154,9 @@ graph LR
 | WebGL | 1-3 秒 |
 | **WebGPU** | **0.3-0.8 秒** |
 
-这就是为什么 Zan Pic 在支持的浏览器上能实现"秒级抠图"体验的原因。`,
+这就是为什么 Zan Pic 在支持的浏览器上能实现"秒级抠图"体验的原因。
+
+![WebGPU对比WebGL WASM AI推理速度性能对比](/images/blog/webgpu-vs-webgl-speed.svg)`,
   },
   {
     id: 'seed-3', slug: 'ecommerce-product-background-removal', seedKey: 'seed3', date: '2026-06-28',
@@ -152,6 +166,8 @@ graph LR
     content: `## 电商商品图背景移除完全指南
 
 对于电商平台卖家来说，一张干净的商品主图直接影响点击率和转化率。本文详细介绍如何用 Zan Pic 高效处理各类商品图片。
+
+![电商平台商品图片要求对比 Amazon eBay Shopify 淘宝 规格](/images/blog/ecommerce-platform-specs.svg)
 
 ### 常见商品类型的处理策略
 
@@ -211,7 +227,11 @@ graph LR
 | 拼多多 | 白底或纯色底 | 740×740+ |
 | Amazon | 纯白底，255 白色值 | 1600×1600+ |
 
-处理完成后，记得检查图片是否符合各平台的详细规范。`,
+处理完成后，记得检查图片是否符合各平台的详细规范。
+
+![商品图白底拍摄布光方案 双灯打光反光板](/images/blog/product-photo-setup.svg)
+
+![AI智能抠图工作流程 一键去背景生成白底商品图](/images/blog/ai-removal-workflow.svg)`,
   },
   {
     id: 'seed-4', slug: 'id-photo-background-color-guide', seedKey: 'seed4', date: '2026-06-20',
@@ -221,6 +241,8 @@ graph LR
     content: `## 证件照背景色完全指南
 
 不同用途的证件照对背景颜色有明确的规定。选错背景可能导致照片被拒收。本文汇总了最常见的背景色标准。
+
+![各国证件照背景色要求指南 中国美国英国日本申根](/images/blog/country-color-guide.svg)
 
 ### 三种标准背景色
 
@@ -275,7 +297,11 @@ graph LR
 3. AI 自动抠图 + 人脸检测定位
 4. 在右侧面板选择背景色：**红色 / 白色 / 蓝色**
 5. 选择输出规格：**1寸 / 2寸 / 小2寸 / 自定义**
-6. 点击「导出」，自动生成符合要求的证件照`,
+6. 点击「导出」，自动生成符合要求的证件照
+
+![证件照红白蓝三种标准背景色 色值RGB参考](/images/blog/bg-color-swatches.svg)
+
+![AI边缘精修技术 形态学去噪高斯羽化对比度锐化](/images/blog/ai-edge-refinement.svg)`,
   },
   {
     id: 'seed-5', slug: 'photo-filter-color-grading-guide', seedKey: 'seed5', date: '2026-06-15',
@@ -285,6 +311,8 @@ graph LR
     content: `## 图片滤镜调色入门教程
 
 好的调色可以让一张普通照片焕然一新。本文从基础概念出发，教你用 Zan Pic 实现专业的调色效果。
+
+![基础色彩理论色轮 冷暖色调对比 情绪影响](/images/blog/color-theory-wheel.svg)
 
 ### 调色三剑客
 
@@ -365,7 +393,9 @@ graph LR
 1. **先调亮度，再调对比度，最后调饱和度** — 这个顺序不容易翻车
 2. **使用实时预览** — Zan Pic 所有调节都是即时反馈，方便反复尝试
 3. **适度原则** — 宁可少调也不要过头，轻微调整往往最自然
-4. **保存参数** — 调到满意的效果后记住数值，以后同类照片可直接套用`,
+4. **保存参数** — 调到满意的效果后记住数值，以后同类照片可直接套用
+
+![8种预设滤镜效果对比 黑白复古暖色冷色鲜艳褪色锐化模糊](/images/blog/filter-comparison.svg)`,
   },
   {
     id: 'seed-6', slug: 'webgpu-ai-inference-acceleration', seedKey: 'seed6', date: '2026-06-10',
@@ -375,6 +405,8 @@ graph LR
     content: `## WebGPU：下一代 Web 计算平台
 
 你可能听说过 WebGL——它让浏览器能进行 3D 图形渲染。而 **WebGPU** 是 WebGL 的继任者，不仅图形能力更强，还引入了**通用计算（GPGPU）** 能力，这意味着可以直接利用 GPU 运行 AI 模型。
+
+![WebGPU vs WebGL WASM AI推理速度性能对比 2.5秒vs5.2秒vs12.8秒](/images/blog/webgpu-vs-webgl-speed.svg)
 
 ### WebGPU vs WebGL vs WASM CPU
 
@@ -450,7 +482,11 @@ Zan Pic 的 AI 抠图功能实现了**三级降级策略**：
 1. 地址栏输入 \`chrome://flags\`
 2. 搜索 "WebGPU"
 3. 确保 "WebGPU" 标志设置为 Enabled
-4. 重启浏览器`,
+4. 重启浏览器
+
+![WebGPU浏览器兼容性矩阵 Chrome Edge Firefox Safari 降级策略](/images/blog/webgpu-browser-compat.svg)
+
+![AI智能抠图工作流程 上传识别分离导出本地处理](/images/blog/ai-removal-workflow.svg)`,
   },
   {
     id: 'seed-7', slug: 'make-id-photo-online-free', seedKey: 'seed7', date: '2026-07-20',
@@ -462,6 +498,8 @@ Zan Pic 的 AI 抠图功能实现了**三级降级策略**：
 每年因为证件照跑照相馆的人有多少？根据我们的调研，**超过 60% 的人每年至少需要 2 次证件照** — 身份证更新、护照申请、驾驶证换发、考试报名、入职材料……这个需求比你想象的多得多。
 
 好消息是：**你现在完全可以在家免费制作标准证件照**，用手机拍张照，用 Zan Pic 在线处理，10 秒出图。而且全程在浏览器本地完成，图片不会上传到任何服务器，保护你的隐私安全。
+
+![常见证件照尺寸对照表 一寸二寸小二寸大二寸 像素毫米规格](/images/blog/id-photo-sizes-chart.svg)
 
 本文是 Zan Pic 证件照制作功能的**完整教程**，从前期拍摄到后期处理、再到规格选择，每一步都有详细指导。
 
@@ -637,7 +675,13 @@ A: Zan Pic 提供「六寸排版」功能，可在一张 6 寸相纸上自动排
 
 > 💡 补充阅读：
 > - [如何拍出适合证件照的照片](/blog/how-to-take-id-photo) — 前期拍摄技巧详细讲解
-> - [证件照背景色选择指南](/blog/id-photo-background-color-guide) — 各国背景色标准对照`,
+> - [证件照背景色选择指南](/blog/id-photo-background-color-guide) — 各国背景色标准对照
+
+![证件照三种标准背景色 红白蓝 一键切换](/images/blog/bg-color-swatches.svg)
+
+![证件照智能裁剪流程 AI抠图人脸定位裁剪导出](/images/blog/id-photo-crop-pipeline.svg)
+
+![Zan Pic核心优势 免费隐私AI无需注册](/images/blog/zanpic-advantages.svg)`,
   },
   {
     id: 'seed-8', slug: 'product-photo-white-background', seedKey: 'seed8', date: '2026-07-22',
@@ -651,6 +695,8 @@ A: Zan Pic 提供「六寸排版」功能，可在一张 6 寸相纸上自动排
 各大电商平台对商品主图有一项近乎统一的要求：**纯白背景**。淘宝要求「白底、无文字水印、产品占比大于 70%」；Amazon 要求「纯白背景 RGB 255,255,255、产品占画面 85% 以上」。一张干净的白底商品图是专业卖家的基本素养。
 
 但在实际运营中，99% 的中小卖家没有专业摄影棚。手机拍摄的商品照片往往背景杂乱、光线不均。本文将教你如何用 Zan Pic 的 AI 抠图功能，**零成本做出照相馆级别的白底商品图**。
+
+![电商平台商品图片要求对比 Amazon eBay Shopify 淘宝 Lazada](/images/blog/ecommerce-platform-specs.svg)
 
 ---
 
@@ -803,7 +849,11 @@ A: Zan Pic 当前支持单张图片处理。我们正在开发批量处理功能
 
 > 📚 相关阅读：
 > - [电商商品图背景移除最佳实践](/blog/ecommerce-product-background-removal) — 不同商品类型的处理策略
-> - [AI 抠图技术原理：IS-Net 模型详解](/blog/ai-background-removal-isnet) — 了解背后的 AI 技术`,
+> - [AI 抠图技术原理：IS-Net 模型详解](/blog/ai-background-removal-isnet) — 了解背后的 AI 技术
+
+![商品图白底拍摄布光方案 双灯打光反光板自然光](/images/blog/product-photo-setup.svg)
+
+![AI智能抠图工作流程 一键去背景生成纯白底商品图](/images/blog/ai-removal-workflow.svg)`,
   },
   {
     id: 'seed-9', slug: 'social-media-avatar-background', seedKey: 'seed9', date: '2026-07-25',
@@ -820,6 +870,8 @@ A: Zan Pic 当前支持单张图片处理。我们正在开发批量处理功能
 - 没有合适的纯色背景来替换
 
 好消息是：你不需要请专业摄影师。用 Zan Pic 就可以为每个社交平台制作一张「定制化」头像，而且每张都看起来专业又好看。
+
+![社媒平台头像图片尺寸速查表 Instagram LinkedIn Twitter YouTube Facebook 微信](/images/blog/social-media-avatar-sizes.svg)
 
 ---
 
@@ -951,7 +1003,11 @@ A: 除 GitHub 偏好 PNG 外，大多数平台都支持 JPEG。建议导出 JPEG
 
 > 📚 相关阅读：
 > - [图片滤镜调色入门](/blog/photo-filter-color-grading-guide) — 掌握调色基本功
-> - [AI 抠图技术原理](/blog/ai-background-removal-isnet) — 了解抠图背后的 AI 技术`,
+> - [AI 抠图技术原理](/blog/ai-background-removal-isnet) — 了解抠图背后的 AI 技术
+
+![证件照三种标准背景色 红白蓝 一键切换不同风格](/images/blog/bg-color-swatches.svg)
+
+![AI智能抠图工作流程 换背景制作专业头像](/images/blog/ai-removal-workflow.svg)`,
   },
   {
     id: 'seed-10', slug: 'ai-background-remover-review', seedKey: 'seed10', date: '2026-07-28',
@@ -965,6 +1021,8 @@ AI 背景移除已经成为图片编辑中最高频的需求之一。无论你�
 但市面上的选择太多了：**remove.bg**（行业鼻祖）、**Adobe Express**（大厂出品）、**Canva**（全能型）、**各种免费工具**……到底哪款最适合你？
 
 我们花了 3 天时间，用相同的测试图片集（人像、商品、复杂边缘各 10 张），全面评测了 7 款主流 AI 抠图工具。以下是完整横评结果。
+
+![AI抠图工具横评对比矩阵 7款工具8个维度 Zan Pic完全免费](/images/blog/tool-comparison-matrix.svg)
 
 ---
 
@@ -1126,7 +1184,13 @@ A: 目前 Zan Pic 暂不支持批量处理（功能开发中）。高频用户�
 
 > 📚 相关阅读：
 > - [AI 抠图技术原理：IS-Net 模型详解](/blog/ai-background-removal-isnet) — 技术内幕
-> - [电商商品图白底制作教程](/blog/product-photo-white-background) — 电商场景实操`,
+> - [电商商品图白底制作教程](/blog/product-photo-white-background) — 电商场景实操
+
+![Zan Pic核心优势 完全免费隐私安全AI驱动无需注册](/images/blog/zanpic-advantages.svg)
+
+![AI抠图边缘精修技术 maskRefine形态学高斯羽化对比度](/images/blog/ai-edge-refinement.svg)
+
+![WebGPU vs WebGL AI推理速度性能对比 2.5秒极致速度](/images/blog/webgpu-vs-webgl-speed.svg)`,
   },
 ]
 

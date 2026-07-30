@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="800" height="400" fill="#f8f9fa" rx="16"/>
+  <text x="40" y="45" font-size="22" font-weight="700" fill="#1a1a2e">电商平台商品图片要求对比</text>
+  <text x="40" y="70" font-size="13" fill="#6b7280">E-commerce Platform Image Requirements</text>
+  <!-- Table header -->
+  <rect x="40" y="90" width="720" height="34" fill="#4361ee" rx="6"/>
+  <text x="60" y="112" font-size="12" fill="#fff" font-weight="600">平台</text>
+  <text x="150" y="112" font-size="12" fill="#fff" font-weight="600">推荐尺寸</text>
+  <text x="280" y="112" font-size="12" fill="#fff" font-weight="600">背景要求</text>
+  <text x="410" y="112" font-size="12" fill="#fff" font-weight="600">格式支持</text>
+  <text x="520" y="112" font-size="12" fill="#fff" font-weight="600">最大文件</text>
+  <!-- Amazon -->
+  <rect x="40" y="126" width="720" height="30" fill="#fff"/>
+  <text x="60" y="146" font-size="12" fill="#1a1a2e" font-weight="600">Amazon</text>
+  <text x="150" y="146" font-size="12" fill="#374151">1000×1000px+</text>
+  <text x="280" y="146" font-size="12" fill="#374151">纯白背景 #FFFFFF</text>
+  <text x="410" y="146" font-size="12" fill="#374151">JPEG/TIFF/PNG</text>
+  <text x="520" y="146" font-size="12" fill="#374151">10MB</text>
+  <!-- eBay -->
+  <rect x="40" y="158" width="720" height="30" fill="#f0f2ff"/>
+  <text x="60" y="178" font-size="12" fill="#1a1a2e" font-weight="600">eBay</text>
+  <text x="150" y="178" font-size="12" fill="#374151">1600×1600px</text>
+  <text x="280" y="178" font-size="12" fill="#374151">白色背景优先</text>
+  <text x="410" y="178" font-size="12" fill="#374151">JPEG/PNG/BMP</text>
+  <text x="520" y="178" font-size="12" fill="#374151">12MB</text>
+  <!-- Shopify -->
+  <rect x="40" y="190" width="720" height="30" fill="#fff"/>
+  <text x="60" y="210" font-size="12" fill="#1a1a2e" font-weight="600">Shopify</text>
+  <text x="150" y="210" font-size="12" fill="#374151">2048×2048px</text>
+  <text x="280" y="210" font-size="12" fill="#374151">浅色/白色背景</text>
+  <text x="410" y="210" font-size="12" fill="#374151">JPEG/PNG/WebP</text>
+  <text x="520" y="210" font-size="12" fill="#374151">20MB</text>
+  <!-- Lazada -->
+  <rect x="40" y="222" width="720" height="30" fill="#f0f2ff"/>
+  <text x="60" y="242" font-size="12" fill="#1a1a2e" font-weight="600">Lazada</text>
+  <text x="150" y="242" font-size="12" fill="#374151">800×800px+</text>
+  <text x="280" y="242" font-size="12" fill="#374151">白色背景</text>
+  <text x="410" y="242" font-size="12" fill="#374151">JPEG/PNG</text>
+  <text x="520" y="242" font-size="12" fill="#374151">5MB</text>
+  <!-- 淘宝 -->
+  <rect x="40" y="254" width="720" height="30" fill="#fff"/>
+  <text x="60" y="274" font-size="12" fill="#1a1a2e" font-weight="600">淘宝/天猫</text>
+  <text x="150" y="274" font-size="12" fill="#374151">800×800px</text>
+  <text x="280" y="274" font-size="12" fill="#374151">白底+品牌视觉</text>
+  <text x="410" y="274" font-size="12" fill="#374151">JPEG/PNG</text>
+  <text x="520" y="274" font-size="12" fill="#374151">3MB</text>
+  <!-- Tips -->
+  <text x="40" y="335" font-size="15" font-weight="700" fill="#1a1a2e">💡 通用建议</text>
+  <text x="40" y="360" font-size="12" fill="#374151">• 白底图是各平台通用要求，建议统一制作 2000×2000px 白底 PNG 作为源文件</text>
+  <text x="40" y="380" font-size="12" fill="#374151">• 使用 Zan Pic AI抠图自动去除背景，一键生成纯白底产品图</text>
+</svg>

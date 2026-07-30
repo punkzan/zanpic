@@ -9,6 +9,9 @@ import i18n from '../i18n'
 /** Simple markdown-to-HTML converter for basic formatting */
 function renderContent(text: string): string {
   return text
+    // Image syntax: ![alt text](url)
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,
+      '<img src="$2" alt="$1" loading="lazy" style="max-width:100%;height:auto;border-radius:12px;margin:16px 0;display:block;" />')
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')

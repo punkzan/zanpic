@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="800" height="500" fill="#f8f9fa" rx="16"/>
+  <text x="40" y="45" font-size="22" font-weight="700" fill="#1a1a2e">常见证件照尺寸对照表</text>
+  <text x="40" y="70" font-size="13" fill="#6b7280">Common ID Photo Size Reference (300 DPI)</text>
+  <!-- Table header -->
+  <rect x="40" y="90" width="720" height="36" fill="#4361ee" rx="6"/>
+  <text x="60" y="114" font-size="13" fill="#fff" font-weight="600">规格</text>
+  <text x="220" y="114" font-size="13" fill="#fff" font-weight="600">像素尺寸 (px)</text>
+  <text x="380" y="114" font-size="13" fill="#fff" font-weight="600">毫米尺寸 (mm)</text>
+  <text x="520" y="114" font-size="13" fill="#fff" font-weight="600">常见用途</text>
+  <!-- Row 1 -->
+  <rect x="40" y="128" width="720" height="32" fill="#fff"/>
+  <text x="60" y="149" font-size="13" fill="#1a1a2e" font-weight="600">一寸</text>
+  <text x="220" y="149" font-size="13" fill="#374151">295 × 413</text>
+  <text x="380" y="149" font-size="13" fill="#374151">25 × 35</text>
+  <text x="520" y="149" font-size="13" fill="#374151">身份证、驾驶证、护照</text>
+  <!-- Row 2 -->
+  <rect x="40" y="162" width="720" height="32" fill="#f0f2ff"/>
+  <text x="60" y="183" font-size="13" fill="#1a1a2e" font-weight="600">二寸</text>
+  <text x="220" y="183" font-size="13" fill="#374151">413 × 579</text>
+  <text x="380" y="183" font-size="13" fill="#374151">35 × 49</text>
+  <text x="520" y="183" font-size="13" fill="#374151">毕业证、工作证、简历</text>
+  <!-- Row 3 -->
+  <rect x="40" y="196" width="720" height="32" fill="#fff"/>
+  <text x="60" y="217" font-size="13" fill="#1a1a2e" font-weight="600">小二寸</text>
+  <text x="220" y="217" font-size="13" fill="#374151">413 × 531</text>
+  <text x="380" y="217" font-size="13" fill="#374151">35 × 45</text>
+  <text x="520" y="217" font-size="13" fill="#374151">护照、港澳通行证</text>
+  <!-- Row 4 -->
+  <rect x="40" y="230" width="720" height="32" fill="#f0f2ff"/>
+  <text x="60" y="251" font-size="13" fill="#1a1a2e" font-weight="600">大二寸</text>
+  <text x="220" y="251" font-size="13" fill="#374151">413 × 626</text>
+  <text x="380" y="251" font-size="13" fill="#374151">35 × 53</text>
+  <text x="520" y="251" font-size="13" fill="#374151">部分国家签证</text>
+  <!-- Row 5 -->
+  <rect x="40" y="264" width="720" height="32" fill="#fff"/>
+  <text x="60" y="285" font-size="13" fill="#1a1a2e" font-weight="600">赴美签证</text>
+  <text x="220" y="285" font-size="13" fill="#374151">600 × 600</text>
+  <text x="380" y="285" font-size="13" fill="#374151">51 × 51</text>
+  <text x="520" y="285" font-size="13" fill="#374151">美国签证 (DS-160)</text>
+  <!-- Row 6 -->
+  <rect x="40" y="298" width="720" height="32" fill="#f0f2ff"/>
+  <text x="60" y="319" font-size="13" fill="#1a1a2e" font-weight="600">申根签证</text>
+  <text x="220" y="319" font-size="13" fill="#374151">413 × 531</text>
+  <text x="380" y="319" font-size="13" fill="#374151">35 × 45</text>
+  <text x="520" y="319" font-size="13" fill="#374151">欧洲申根国家通用</text>
+  <!-- Size comparison boxes -->
+  <text x="40" y="370" font-size="15" font-weight="700" fill="#1a1a2e">尺寸视觉对比</text>
+  <!-- 1寸 box -->
+  <rect x="40" y="385" width="59" height="83" fill="#e8ecff" stroke="#4361ee" stroke-width="1.5" rx="4"/>
+  <text x="70" y="420" font-size="11" fill="#4361ee" text-anchor="middle" font-weight="600">一寸</text>
+  <text x="70" y="457" font-size="10" fill="#6b7280" text-anchor="middle">25×35mm</text>
+  <!-- 小2寸 box -->
+  <rect x="130" y="385" width="83" height="106" fill="#e8ecff" stroke="#4361ee" stroke-width="1.5" rx="4"/>
+  <text x="172" y="430" font-size="11" fill="#4361ee" text-anchor="middle" font-weight="600">小二寸</text>
+  <text x="172" y="480" font-size="10" fill="#6b7280" text-anchor="middle">35×45mm</text>
+  <!-- 2寸 box -->
+  <rect x="245" y="385" width="83" height="116" fill="#e8ecff" stroke="#4361ee" stroke-width="1.5" rx="4"/>
+  <text x="287" y="435" font-size="11" fill="#4361ee" text-anchor="middle" font-weight="600">二寸</text>
+  <text x="287" y="490" font-size="10" fill="#6b7280" text-anchor="middle">35×49mm</text>
+  <!-- 大二寸 box -->
+  <rect x="360" y="385" width="83" height="125" fill="#e8ecff" stroke="#4361ee" stroke-width="1.5" rx="4"/>
+  <text x="402" y="440" font-size="11" fill="#4361ee" text-anchor="middle" font-weight="600">大二寸</text>
+  <text x="402" y="498" font-size="10" fill="#6b7280" text-anchor="middle">35×53mm</text>
+  <!-- Footer -->
+  <text x="400" y="490" font-size="10" fill="#9ca3af" text-anchor="middle">Zan Pic 证件照制作工具 — 自动裁剪到标准尺寸</text>
+</svg>

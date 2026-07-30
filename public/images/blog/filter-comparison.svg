@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="800" height="300" fill="#f8f9fa" rx="16"/>
+  <text x="40" y="45" font-size="22" font-weight="700" fill="#1a1a2e">8 种滤镜效果对比</text>
+  <text x="40" y="70" font-size="13" fill="#6b7280">Zan Pic Built-in Filter Presets Overview</text>
+  <!-- Filter boxes -->
+  <!-- Row 1 -->
+  <rect x="40" y="85" width="80" height="45" fill="#e5e7eb" rx="6"/>
+  <text x="80" y="115" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">黑白</text>
+  <rect x="130" y="85" width="80" height="45" fill="#fef3c7" rx="6"/>
+  <text x="170" y="115" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">复古</text>
+  <rect x="220" y="85" width="80" height="45" fill="#fff7ed" rx="6"/>
+  <text x="260" y="115" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">暖色</text>
+  <rect x="310" y="85" width="80" height="45" fill="#eff6ff" rx="6"/>
+  <text x="350" y="115" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">冷色</text>
+  <!-- Row 2 -->
+  <rect x="40" y="140" width="80" height="45" fill="#fce7f3" rx="6"/>
+  <text x="80" y="170" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">鲜艳</text>
+  <rect x="130" y="140" width="80" height="45" fill="#f5f0ff" rx="6"/>
+  <text x="170" y="170" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">褪色</text>
+  <rect x="220" y="140" width="80" height="45" fill="#f0fdf4" rx="6"/>
+  <text x="260" y="170" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">锐化</text>
+  <rect x="310" y="140" width="80" height="45" fill="#f8fafc" rx="6"/>
+  <text x="350" y="170" font-size="12" fill="#1a1a2e" font-weight="600" text-anchor="middle">模糊</text>
+  <!-- Row 3: Custom -->
+  <rect x="40" y="195" width="350" height="45" fill="url(#grad-custom)" rx="6"/>
+  <text x="215" y="225" font-size="12" fill="#fff" font-weight="600" text-anchor="middle">反转 + 自定义亮度/对比度/饱和度</text>
+  <!-- Right side: filter explanation -->
+  <text x="430" y="115" font-size="14" font-weight="700" fill="#1a1a2e">滤镜分类</text>
+  <rect x="430" y="130" width="340" height="65" fill="#fff" rx="8"/>
+  <text x="450" y="150" font-size="11" fill="#374151">🎨 色调滤镜：黑白、复古、暖色、冷色</text>
+  <text x="450" y="170" font-size="11" fill="#374151">🌈 饱和度滤镜：鲜艳、褪色</text>
+  <text x="450" y="188" font-size="11" fill="#374151">🔧 效果滤镜：锐化、模糊、反转</text>
+  <text x="430" y="220" font-size="14" font-weight="700" fill="#1a1a2e">自定义调整</text>
+  <rect x="430" y="235" width="340" height="50" fill="#fff" rx="8"/>
+  <text x="450" y="253" font-size="11" fill="#374151">亮度 / 对比度 / 饱和度 三滑块实时预览</text>
+  <text x="450" y="273" font-size="11" fill="#6b7280">基于 Fabric.js 色彩矩阵，所有调整可叠加</text>
+</svg>
