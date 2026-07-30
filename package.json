@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
     "terser": "^5.49.0",
+    "tsx": "^4.23.1",
     "typescript": "^5.5.3",
     "vite": "^5.3.4"
   }

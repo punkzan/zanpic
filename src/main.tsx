@@ -41,3 +41,9 @@ createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
   </StrictMode>,
 )
+
+// Hide SEO fallback content once React mounts (pre-rendered pages)
+const seoFallback = document.getElementById('seo-fallback')
+if (seoFallback) {
+  seoFallback.style.display = 'none'
+}
