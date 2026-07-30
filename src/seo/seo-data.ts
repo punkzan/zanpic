@@ -107,6 +107,10 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
     <li><a href="/blog/id-photo-background-color-guide" style="color:#1a73e8">证件照背景色选择指南</a> — 证件照技巧</li>
     <li><a href="/blog/photo-filter-color-grading-guide" style="color:#1a73e8">图片滤镜调色入门</a> — 后期调色</li>
     <li><a href="/blog/webgpu-ai-inference-acceleration" style="color:#1a73e8">WebGPU 加速：让浏览器 AI 推理快 10 倍</a> — 技术解析</li>
+    <li><a href="/blog/make-id-photo-online-free" style="color:#1a73e8">免费在线证件照制作完整教程</a> — 证件照制作</li>
+    <li><a href="/blog/product-photo-white-background" style="color:#1a73e8">电商商品图白底制作一站式教程</a> — 电商运营</li>
+    <li><a href="/blog/social-media-avatar-background" style="color:#1a73e8">社媒头像换背景全攻略</a> — 社媒运营</li>
+    <li><a href="/blog/ai-background-remover-review" style="color:#1a73e8">2026 年最佳免费 AI 抠图工具横评</a> — 工具评测</li>
   </ul>
   <p style="margin-top:20px;color:#888">更多文章持续更新中...</p>
 </div>`,
@@ -335,6 +339,42 @@ export const BLOG_POSTS_SEO: BlogPostSeo[] = [
     excerpt:
       'WebGPU 是新一代浏览器图形 API，不仅用于渲染，还能加速 AI 推理。本文介绍 Zan Pic 如何利用 WebGPU 将抠图速度提升数倍。',
     date: '2026-06-10',
+  },
+  {
+    id: 'seed-7',
+    slug: 'make-id-photo-online-free',
+    title: '免费在线证件照制作完整教程：手机拍照 10 秒生成标准证件照',
+    category: '证件照制作',
+    excerpt:
+      '不用去照相馆！本文手把手教你如何用手机拍照 + 在线工具免费制作标准证件照。覆盖一寸、二寸、小2寸规格，红白蓝三色背景，护照签证驾驶证全能搞定。全程浏览器本地处理，图片不外传。',
+    date: '2026-07-20',
+  },
+  {
+    id: 'seed-8',
+    slug: 'product-photo-white-background',
+    title: '电商商品图白底制作：从拍摄到 AI 抠图一站式教程',
+    category: '电商运营',
+    excerpt:
+      '电商平台对商品主图有严格的白底要求。本文系统讲解商品图白底制作的完整流程，覆盖拍摄技巧、AI 抠图换白底、批量处理方法和主流平台规格对照。适用于淘宝/京东/拼多多/Amazon/Shopify 卖家。',
+    date: '2026-07-22',
+  },
+  {
+    id: 'seed-9',
+    slug: 'social-media-avatar-background',
+    title: '社媒头像换背景全攻略：LinkedIn/Instagram/Facebook 一图搞定',
+    category: '社媒运营',
+    excerpt:
+      '你的社交媒体头像用的是自拍还是背景杂乱的照片？本文教你如何用 AI 抠图换背景，制作专业的 LinkedIn 职业头像、Instagram 风格头像和 Facebook 个人头像。多种社媒平台尺寸对照一次讲清楚。',
+    date: '2026-07-25',
+  },
+  {
+    id: 'seed-10',
+    slug: 'ai-background-remover-review',
+    title: '2026 年最佳免费 AI 抠图工具横评：Zan Pic vs remove.bg vs Adobe vs 其他',
+    category: '工具评测',
+    excerpt:
+      '我们深度评测了 2026 年市面上 7 款主流 AI 抠图工具，从免费策略、抠图精度、处理速度、隐私保护、批量处理等 8 个维度对比。结论：如果你追求免费 + 隐私 + 精细控制，Zan Pic 是最优选择。',
+    date: '2026-07-28',
   },
 ]
 

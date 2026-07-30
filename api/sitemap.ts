@@ -22,6 +22,10 @@ const SEED_POSTS = [
   { id: 'seed-4', slug: 'id-photo-background-color-guide', date: '2026-06-20' },
   { id: 'seed-5', slug: 'photo-filter-color-grading-guide', date: '2026-06-15' },
   { id: 'seed-6', slug: 'webgpu-ai-inference-acceleration', date: '2026-06-10' },
+  { id: 'seed-7', slug: 'make-id-photo-online-free', date: '2026-07-20' },
+  { id: 'seed-8', slug: 'product-photo-white-background', date: '2026-07-22' },
+  { id: 'seed-9', slug: 'social-media-avatar-background', date: '2026-07-25' },
+  { id: 'seed-10', slug: 'ai-background-remover-review', date: '2026-07-28' },
 ];
 
 function getKvClient(): VercelKV | null {

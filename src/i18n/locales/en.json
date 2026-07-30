@@ -539,6 +539,26 @@
       "title": "WebGPU Acceleration: 10x Faster AI Inference in Browsers",
       "category": "Tech Deep Dive",
       "excerpt": "WebGPU is the next-generation browser graphics API—not just for rendering, but also for accelerating AI inference. Learn how Zan Pic leverages WebGPU to boost background removal speed several times over."
+    },
+    "seed7": {
+      "title": "Free Online ID Photo Maker: Complete Tutorial",
+      "category": "ID Photo Maker",
+      "excerpt": "Skip the photo booth! Learn step-by-step how to take a photo with your phone and create a standard ID photo online for free. Covers 1-inch, 2-inch, and small 2-inch sizes, red/white/blue backgrounds—perfect for passports, visas, and driver's licenses."
+    },
+    "seed8": {
+      "title": "E-Commerce Product Photo White Background: A Complete Guide",
+      "category": "E-Commerce",
+      "excerpt": "Most e-commerce platforms require pure white backgrounds for product images. This guide covers the complete workflow from shooting to AI background removal, batch processing, and platform-specific specifications for Taobao, Amazon, Shopify, and more."
+    },
+    "seed9": {
+      "title": "Social Media Avatar Background Changer: The Ultimate Guide",
+      "category": "Social Media",
+      "excerpt": "Learn how to use AI background removal to create professional avatars for LinkedIn, Instagram, Facebook, and more. Includes platform-specific size guides and style recommendations for every social network."
+    },
+    "seed10": {
+      "title": "Best Free AI Background Remover Tools 2026: Zan Pic vs. remove.bg vs. Adobe & More",
+      "category": "Tool Review",
+      "excerpt": "An in-depth comparison of 7 leading AI background removal tools in 2026, rated across accuracy, speed, privacy, free tier limits, and manual editing capabilities. Verdict: if you value free, private, and precise control, Zan Pic is the best choice."
     }
   }
 }
