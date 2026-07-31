@@ -3,6 +3,7 @@ import { useSiteStore } from '../store/siteStore'
 import { Info, Shield, Mail, BookOpen, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { type ReactNode } from 'react'
+import { SiteDirectory } from './SiteDirectory'
 
 const IS_MOBILE = typeof navigator !== 'undefined' && /Mobi|Android|iPhone/i.test(navigator.userAgent)
 
@@ -53,6 +54,9 @@ export function Footer() {
         color: 'var(--text-tertiary)',
       }}
     >
+      {/* Site directory — categorized links to all sitemap pages */}
+      <SiteDirectory isEditor={isEditor} />
+
       {/* Main row: copyright + page links */}
       <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 py-2 text-[14px]">
         <span style={{ opacity: 0.6 }}>
