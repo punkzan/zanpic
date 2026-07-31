@@ -8,6 +8,7 @@
 import { ID_PHOTO_SPECS, type IdPhotoSpec } from '../data/id-photo-specs'
 import { SOCIAL_MEDIA_SIZES, type SocialMediaSize } from '../data/social-media-sizes'
 import { BACKGROUND_COLORS, type BackgroundColorSpec } from '../data/background-colors'
+import { CONVERT_SPECS, type ConvertSpec } from '../data/convert-specs'
 
 export const SITE_URL = 'https://www.superzan.net'
 export const BRAND = 'Zan Pic'
@@ -436,6 +437,64 @@ export const BACKGROUND_COLORS_SEO: SeoPageData[] = BACKGROUND_COLORS.map((spec)
   ogType: 'website',
   jsonLd: buildBackgroundColorJsonLd(spec),
   noscriptHtml: buildBackgroundColorFallback(spec),
+}))
+
+/* ================================================================
+   Programmatic SEO: Image format conversion pages
+   ================================================================ */
+
+function buildConvertSpecJsonLd(spec: ConvertSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `如何将 ${spec.sourceFormat} 转换为 ${spec.targetFormat}`,
+      description: `${spec.sourceFormat} 转 ${spec.targetFormat}：免费在线转换工具，浏览器本地处理，支持自定义压缩质量。`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: '上传图片', text: `将 ${spec.sourceFormat} 图片拖拽到上传区域，或点击选择文件。` },
+        { '@type': 'HowToStep', position: 2, name: '调整参数', text: '根据需要调整压缩质量或背景填充色。' },
+        { '@type': 'HowToStep', position: 3, name: '开始转换', text: `点击转换按钮，浏览器自动完成 ${spec.sourceFormat} 到 ${spec.targetFormat} 的格式转换。` },
+        { '@type': 'HowToStep', position: 4, name: '下载结果', text: `转换完成后点击下载按钮，保存 ${spec.targetExt} 文件到本地。` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildConvertSpecFallback(spec: ConvertSpec): string {
+  const sourcePros = spec.sourcePros.map((p) => `<li>${escapeHtml(p)}</li>`).join('')
+  const targetPros = spec.targetPros.map((p) => `<li>${escapeHtml(p)}</li>`).join('')
+  const useItems = spec.commonUses.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(spec.sourceFormat)} → ${escapeHtml(spec.targetFormat)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">${escapeHtml(spec.sourceFormat)} 优点</h3>
+  <ul>${sourcePros}</ul>
+  <h3 style="margin:16px 0 8px">${escapeHtml(spec.targetFormat)} 优点</h3>
+  <ul>${targetPros}</ul>
+  <h3 style="margin:16px 0 8px">常见使用场景</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">开始转换</a></p>
+</div>`
+}
+
+export const CONVERT_SPECS_SEO: SeoPageData[] = CONVERT_SPECS.map((spec) => ({
+  path: `/convert/${spec.slug}`,
+  title: `${spec.title} | ${BRAND}`,
+  description: `${spec.sourceFormat} 转 ${spec.targetFormat}：免费在线转换，浏览器本地处理，支持自定义压缩质量。${spec.intro.slice(0, 60)}`,
+  ogType: 'website',
+  jsonLd: buildConvertSpecJsonLd(spec),
+  noscriptHtml: buildConvertSpecFallback(spec),
 }))
 
 /* ================================================================

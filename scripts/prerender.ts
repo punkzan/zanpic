@@ -20,6 +20,7 @@ import {
   ID_PHOTO_SPECS_SEO,
   SOCIAL_MEDIA_SIZES_SEO,
   BACKGROUND_COLORS_SEO,
+  CONVERT_SPECS_SEO,
   SITE_URL,
   BRAND,
   buildMetaTags,
@@ -245,7 +246,25 @@ function main() {
     count++
   }
 
-  console.log(`\n  → Pre-rendered ${count} pages (${STATIC_PAGES_SEO.length} static + ${TOOL_PAGES_SEO.length} tools + ${BLOG_POSTS_SEO.length} blog + ${ID_PHOTO_SPECS_SEO.length} id-photo + ${SOCIAL_MEDIA_SIZES_SEO.length} social + ${BACKGROUND_COLORS_SEO.length} background)`)
+  // --- Image format conversion pages (programmatic SEO) ---
+  for (const page of CONVERT_SPECS_SEO) {
+    const html = injectSEO(template, {
+      title: page.title,
+      description: page.description,
+      canonicalPath: page.path,
+      ogType: page.ogType,
+      jsonLd: page.jsonLd,
+      noscriptHtml: page.noscriptHtml,
+    })
+
+    const dir = path.join(DIST_DIR, ...page.path.split('/').filter(Boolean))
+    ensureDir(dir)
+    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf-8')
+    console.log(`  ✓ ${page.path}`)
+    count++
+  }
+
+  console.log(`\n  → Pre-rendered ${count} pages (${STATIC_PAGES_SEO.length} static + ${TOOL_PAGES_SEO.length} tools + ${BLOG_POSTS_SEO.length} blog + ${ID_PHOTO_SPECS_SEO.length} id-photo + ${SOCIAL_MEDIA_SIZES_SEO.length} social + ${BACKGROUND_COLORS_SEO.length} background + ${CONVERT_SPECS_SEO.length} convert)`)
 }
 
 // ── run ──

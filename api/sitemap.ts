@@ -84,6 +84,20 @@ const BACKGROUND_COLORS = [
   { slug: 'gradient', date: '2026-07-31' },
 ];
 
+// Programmatic SEO: Image format conversion pages
+const CONVERT_SPECS = [
+  { slug: 'jpg-to-png', date: '2026-07-31' },
+  { slug: 'png-to-jpg', date: '2026-07-31' },
+  { slug: 'jpg-to-webp', date: '2026-07-31' },
+  { slug: 'webp-to-jpg', date: '2026-07-31' },
+  { slug: 'png-to-webp', date: '2026-07-31' },
+  { slug: 'webp-to-png', date: '2026-07-31' },
+  { slug: 'bmp-to-png', date: '2026-07-31' },
+  { slug: 'bmp-to-jpg', date: '2026-07-31' },
+  { slug: 'gif-to-png', date: '2026-07-31' },
+  { slug: 'gif-to-jpg', date: '2026-07-31' },
+];
+
 function getKvClient(): VercelKV | null {
   const stdUrl = process.env.KV_REST_API_URL;
   const stdToken = process.env.KV_REST_API_TOKEN;
@@ -174,7 +188,14 @@ export default async function handler(_req: any, res: any) {
     priority: '0.7',
   }));
 
-  const allUrls = [...staticUrls, ...toolUrls, ...blogUrls, ...idPhotoUrls, ...socialMediaUrls, ...backgroundUrls];
+  const convertUrls = CONVERT_SPECS.map(s => ({
+    loc: `${SITE_URL}/convert/${s.slug}`,
+    lastmod: s.date,
+    changefreq: 'monthly',
+    priority: '0.8',
+  }));
+
+  const allUrls = [...staticUrls, ...toolUrls, ...blogUrls, ...idPhotoUrls, ...socialMediaUrls, ...backgroundUrls, ...convertUrls];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
