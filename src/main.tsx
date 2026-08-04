@@ -1,6 +1,6 @@
 import { StrictMode, lazy, Suspense, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom'
 import App from './App'
 import { SeoLangProvider } from './components/SeoLangProvider'
 import './index.css'
@@ -57,18 +57,25 @@ const zhContentRoutes = contentRoutes.map((r) => ({
 }))
 
 const router = createBrowserRouter([
-  { path: '/', element: <App /> },
-  ...contentRoutes,
-  ...zhContentRoutes,
-  { path: '/zh', element: <Navigate to="/zh/" replace /> },
-  { path: '*', element: <Navigate to="/" replace /> },
+  {
+    element: (
+      <SeoLangProvider>
+        <Outlet />
+      </SeoLangProvider>
+    ),
+    children: [
+      { index: true, element: <App /> },
+      ...contentRoutes,
+      ...zhContentRoutes,
+      { path: 'zh', element: <App /> },
+      { path: '*', element: <Navigate to="/" replace /> },
+    ],
+  },
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <SeoLangProvider>
-      <RouterProvider router={router} />
-    </SeoLangProvider>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
 
