@@ -6,9 +6,12 @@
  */
 
 import { ID_PHOTO_SPECS, type IdPhotoSpec } from '../data/id-photo-specs'
+import { EN_ID_PHOTO_SPECS } from '../data/en-id-photo-specs'
 import { SOCIAL_MEDIA_SIZES, type SocialMediaSize } from '../data/social-media-sizes'
 import { BACKGROUND_COLORS, type BackgroundColorSpec } from '../data/background-colors'
+import { EN_BACKGROUND_COLORS } from '../data/en-background-colors'
 import { CONVERT_SPECS, type ConvertSpec } from '../data/convert-specs'
+import { EN_CONVERT_SPECS } from '../data/en-convert-specs'
 
 export const SITE_URL = 'https://www.superzan.net'
 export const BRAND = 'Zan Pic'
@@ -34,7 +37,7 @@ export interface SeoPageData {
 
 export const STATIC_PAGES_SEO: SeoPageData[] = [
   {
-    path: '/about',
+    path: '/zh/about',
     title: `关于我们 - ${BRAND}`,
     description: `${BRAND} 是一款纯前端图片编辑工具，所有处理均在浏览器本地完成，图片不会上传到任何服务器。我们相信，好用的图片工具不需要牺牲你的隐私。`,
     ogType: 'website',
@@ -58,7 +61,7 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 </div>`,
   },
   {
-    path: '/privacy',
+    path: '/zh/privacy',
     title: `隐私政策 - ${BRAND}`,
     description: '简而言之：您的图片永远不会离开您的设备。',
     ogType: 'website',
@@ -80,7 +83,7 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 </div>`,
   },
   {
-    path: '/contact',
+    path: '/zh/contact',
     title: `联系我们 - ${BRAND}`,
     description: '如果您在使用过程中遇到问题，或有功能建议，欢迎联系我们',
     ogType: 'website',
@@ -97,7 +100,7 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 </div>`,
   },
   {
-    path: '/blog',
+    path: '/zh/blog',
     title: `经验分享 - ${BRAND}`,
     description: '这里分享图片编辑技巧、AI 抠图技术解析、证件照制作指南等实用内容。',
     ogType: 'website',
@@ -106,16 +109,16 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
   <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">经验分享</h1>
   <p>这里分享图片编辑技巧、AI 抠图技术解析、证件照制作指南等实用内容。</p>
   <ul>
-    <li><a href="/blog/how-to-take-id-photo" style="color:#1a73e8">如何拍出适合证件照的照片</a> — 证件照技巧</li>
-    <li><a href="/blog/ai-background-removal-isnet" style="color:#1a73e8">AI 抠图技术原理：IS-Net 模型详解</a> — 技术解析</li>
-    <li><a href="/blog/ecommerce-product-background-removal" style="color:#1a73e8">电商商品图背景移除最佳实践</a> — 实用教程</li>
-    <li><a href="/blog/id-photo-background-color-guide" style="color:#1a73e8">证件照背景色选择指南</a> — 证件照技巧</li>
-    <li><a href="/blog/photo-filter-color-grading-guide" style="color:#1a73e8">图片滤镜调色入门</a> — 后期调色</li>
-    <li><a href="/blog/webgpu-ai-inference-acceleration" style="color:#1a73e8">WebGPU 加速：让浏览器 AI 推理快 10 倍</a> — 技术解析</li>
-    <li><a href="/blog/make-id-photo-online-free" style="color:#1a73e8">免费在线证件照制作完整教程</a> — 证件照制作</li>
-    <li><a href="/blog/product-photo-white-background" style="color:#1a73e8">电商商品图白底制作一站式教程</a> — 电商运营</li>
-    <li><a href="/blog/social-media-avatar-background" style="color:#1a73e8">社媒头像换背景全攻略</a> — 社媒运营</li>
-    <li><a href="/blog/ai-background-remover-review" style="color:#1a73e8">2026 年最佳免费 AI 抠图工具横评</a> — 工具评测</li>
+    <li><a href="/zh/blog/how-to-take-id-photo" style="color:#1a73e8">如何拍出适合证件照的照片</a> — 证件照技巧</li>
+    <li><a href="/zh/blog/ai-background-removal-isnet" style="color:#1a73e8">AI 抠图技术原理：IS-Net 模型详解</a> — 技术解析</li>
+    <li><a href="/zh/blog/ecommerce-product-background-removal" style="color:#1a73e8">电商商品图背景移除最佳实践</a> — 实用教程</li>
+    <li><a href="/zh/blog/id-photo-background-color-guide" style="color:#1a73e8">证件照背景色选择指南</a> — 证件照技巧</li>
+    <li><a href="/zh/blog/photo-filter-color-grading-guide" style="color:#1a73e8">图片滤镜调色入门</a> — 后期调色</li>
+    <li><a href="/zh/blog/webgpu-ai-inference-acceleration" style="color:#1a73e8">WebGPU 加速：让浏览器 AI 推理快 10 倍</a> — 技术解析</li>
+    <li><a href="/zh/blog/make-id-photo-online-free" style="color:#1a73e8">免费在线证件照制作完整教程</a> — 证件照制作</li>
+    <li><a href="/zh/blog/product-photo-white-background" style="color:#1a73e8">电商商品图白底制作一站式教程</a> — 电商运营</li>
+    <li><a href="/zh/blog/social-media-avatar-background" style="color:#1a73e8">社媒头像换背景全攻略</a> — 社媒运营</li>
+    <li><a href="/zh/blog/ai-background-remover-review" style="color:#1a73e8">2026 年最佳免费 AI 抠图工具横评</a> — 工具评测</li>
   </ul>
   <p style="margin-top:20px;color:#888">更多文章持续更新中...</p>
 </div>`,
@@ -128,7 +131,7 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 
 export const TOOL_PAGES_SEO: SeoPageData[] = [
   {
-    path: '/id-photo-maker',
+    path: '/zh/id-photo-maker',
     title: `在线证件照制作 - ${BRAND}`,
     description: '免费在线证件照生成工具。AI 自动抠图换背景，支持一寸/二寸/小二寸规格，红白蓝三色背景。手机拍照即可生成标准证件照，保护隐私。',
     ogType: 'website',
@@ -162,7 +165,7 @@ export const TOOL_PAGES_SEO: SeoPageData[] = [
     ),
   },
   {
-    path: '/background-remover',
+    path: '/zh/background-remover',
     title: `AI 在线抠图 - ${BRAND}`,
     description: '免费 AI 在线抠图工具，无需上传到服务器。基于 IS-Net 深度学习模型，WebGPU 加速，发丝级抠图精度。支持智能抠图和涂抹抠图两种模式，完全浏览器本地处理。',
     ogType: 'website',
@@ -196,7 +199,7 @@ export const TOOL_PAGES_SEO: SeoPageData[] = [
     ),
   },
   {
-    path: '/photo-resizer',
+    path: '/zh/photo-resizer',
     title: `图片尺寸调整 - ${BRAND}`,
     description: '免费在线图片尺寸调整工具。支持自由裁剪、固定比例裁剪、自定义像素尺寸调整。含社媒平台推荐尺寸对照表（Instagram/Facebook/Twitter/YouTube）。浏览器本地处理。',
     ogType: 'website',
@@ -229,7 +232,7 @@ export const TOOL_PAGES_SEO: SeoPageData[] = [
     ),
   },
   {
-    path: '/photo-filter',
+    path: '/zh/photo-filter',
     title: `图片滤镜编辑 - ${BRAND}`,
     description: '免费在线图片滤镜编辑工具，提供黑白、复古、暖色、冷色、鲜艳、褪色、锐化、模糊等 8 种预设滤镜，支持亮度、对比度、饱和度实时调节。浏览器本地处理，保护隐私。',
     ogType: 'website',
@@ -318,7 +321,7 @@ function buildIdPhotoSpecFallback(spec: IdPhotoSpec): string {
 }
 
 export const ID_PHOTO_SPECS_SEO: SeoPageData[] = ID_PHOTO_SPECS.map((spec) => ({
-  path: `/id-photo/${spec.slug}`,
+  path: `/zh/id-photo/${spec.slug}`,
   title: `${spec.title} - 免费在线制作 | ${BRAND}`,
   description: `${spec.country}${spec.type}规格：${spec.pixelWidth}×${spec.pixelHeight}px (${spec.mmWidth}×${spec.mmHeight}mm)，${spec.backgroundColor}背景。使用 Zan Pic AI 抠图免费在线制作${spec.type}，浏览器本地处理。`,
   ogType: 'website',
@@ -377,7 +380,7 @@ function buildSocialMediaSizeFallback(size: SocialMediaSize): string {
 }
 
 export const SOCIAL_MEDIA_SIZES_SEO: SeoPageData[] = SOCIAL_MEDIA_SIZES.map((size) => ({
-  path: `/resize/${size.slug}`,
+  path: `/zh/resize/${size.slug}`,
   title: `${size.title} - 在线裁剪 | ${BRAND}`,
   description: `${size.platform} ${size.type}尺寸：${size.pixelWidth}×${size.pixelHeight}px，宽高比 ${size.aspectRatio}。使用 Zan Pic 在线裁剪和调整图片尺寸，支持 AI 抠图换背景。`,
   ogType: 'website',
@@ -431,7 +434,7 @@ function buildBackgroundColorFallback(spec: BackgroundColorSpec): string {
 }
 
 export const BACKGROUND_COLORS_SEO: SeoPageData[] = BACKGROUND_COLORS.map((spec) => ({
-  path: `/background/${spec.slug}`,
+  path: `/zh/background/${spec.slug}`,
   title: `${spec.title} - AI 抠图换背景 | ${BRAND}`,
   description: `${spec.colorName}背景证件照制作：色值 ${spec.hexValue}。AI 自动抠图换背景，在线免费生成${spec.colorName}底证件照。浏览器本地处理，保护隐私。`,
   ogType: 'website',
@@ -489,12 +492,473 @@ function buildConvertSpecFallback(spec: ConvertSpec): string {
 }
 
 export const CONVERT_SPECS_SEO: SeoPageData[] = CONVERT_SPECS.map((spec) => ({
-  path: `/convert/${spec.slug}`,
+  path: `/zh/convert/${spec.slug}`,
   title: `${spec.title} | ${BRAND}`,
   description: `${spec.sourceFormat} 转 ${spec.targetFormat}：免费在线转换，浏览器本地处理，支持自定义压缩质量。${spec.intro.slice(0, 60)}`,
   ogType: 'website',
   jsonLd: buildConvertSpecJsonLd(spec),
   noscriptHtml: buildConvertSpecFallback(spec),
+}))
+
+/* ================================================================
+   English SEO: Static content pages
+   ================================================================ */
+
+export const EN_STATIC_PAGES_SEO: SeoPageData[] = [
+  {
+    path: '/about',
+    title: `About Us - ${BRAND}`,
+    description: `${BRAND} is a client-side image editing tool. All processing happens locally in your browser — images are never uploaded to any server. We believe great tools don't need to sacrifice your privacy.`,
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">About Us</h1>
+  <p>${BRAND} is a client-side image editing tool. All processing happens locally in your browser — images are never uploaded to any server.</p>
+  <h3>Features</h3>
+  <ul>
+    <li>Basic Adjustments — Brightness, contrast, saturation sliders with real-time preview</li>
+    <li>Preset Filters — B&W, vintage, warm, cool, vibrant, faded, sharpen, blur — 8 styles</li>
+    <li>Smart Crop — Free crop + 6 fixed ratios, rotation & rule-of-thirds guide</li>
+    <li>AI Background Removal — IS-Net model, WebGPU accelerated, morphological edge refinement</li>
+    <li>ID Photo Maker — AI removal + smart crop + red/white/blue background, 1"/2" sizes & 6" print layout</li>
+    <li>Image Compression — Quality slider + size constraints + file size estimation</li>
+    <li>Format Conversion — PNG / JPEG / WebP / AVIF inter-conversion</li>
+    <li>Custom Watermark — Text or image watermark, 8 positions</li>
+    <li>Multi-format Export — PNG / JPEG / WebP / AVIF, quality & size controllable</li>
+  </ul>
+  <p style="margin-top:20px;padding:16px;background:#f5f5f5;border-radius:8px">No sign-up. No installation. Just open and use. Your images stay on your device.</p>
+</div>`,
+  },
+  {
+    path: '/privacy',
+    title: `Privacy Policy - ${BRAND}`,
+    description: 'In short: Your images never leave your device.',
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">Privacy Policy</h1>
+  <p style="padding:12px;background:#f0f7ff;border-radius:8px"><strong>In short: Your images never leave your device.</strong></p>
+  <h3>1. Data Processing</h3>
+  <p>${BRAND} is a client-side application. All image editing, AI background removal, ID photo generation, and other operations run locally in your browser. We do not collect, store, or upload any of your image data.</p>
+  <h3>2. AI Model Execution</h3>
+  <p>AI background removal uses ONNX Runtime for local inference on your device. Model files are downloaded from CDN on first use and cached. Inference runs entirely in the browser — image data is never sent to any remote server.</p>
+  <h3>3. Local Storage</h3>
+  <p>The app uses browser localStorage to store your preferences (e.g., theme mode). This data is stored only on your device and is not synced to the cloud.</p>
+  <h3>4. Third-Party Services</h3>
+  <p>This site may use third-party services including Google AdSense, Google Fonts, and CDNs.</p>
+  <h3>5. Exported Files</h3>
+  <p>Exported image files are fully under your control and saved to your chosen local path. We have no access to exported files.</p>
+  <p style="color:#888;font-size:13px;margin-top:24px">Last updated: July 2026</p>
+</div>`,
+  },
+  {
+    path: '/contact',
+    title: `Contact Us - ${BRAND}`,
+    description: 'If you encounter issues or have feature suggestions, feel free to contact us.',
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">Contact Us</h1>
+  <p>If you encounter issues or have feature suggestions, please contact us through:</p>
+  <h3>Contact Info</h3>
+  <ul><li>Email: fanlnq@163.com</li></ul>
+  <h3>FAQ</h3>
+  <p><strong>AI background removal is slow?</strong> — First-time use requires downloading the AI model (~24MB), which is then cached. WebGPU-enabled browsers run much faster.</p>
+  <p><strong>ID photo face positioning is inaccurate?</strong> — We recommend uploading a front-facing photo with clear facial features and even lighting.</p>
+  <p><strong>Which browsers are supported?</strong> — We recommend the latest Chrome / Edge / Firefox.</p>
+</div>`,
+  },
+  {
+    path: '/blog',
+    title: `Blog - ${BRAND}`,
+    description: 'Image editing tips, AI background removal tech deep-dives, ID photo guides, and more practical content.',
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">Blog</h1>
+  <p>Image editing tips, AI background removal tech deep-dives, ID photo guides, and more.</p>
+  <ul>
+    <li><a href="/blog/how-to-take-id-photo" style="color:#1a73e8">How to Take Perfect ID Photos</a> — Tips</li>
+    <li><a href="/blog/ai-background-removal-isnet" style="color:#1a73e8">How AI Background Removal Works: IS-Net Explained</a> — Tech</li>
+    <li><a href="/blog/ecommerce-product-background-removal" style="color:#1a73e8">E-commerce Product Background Removal Best Practices</a> — Tutorial</li>
+    <li><a href="/blog/id-photo-background-color-guide" style="color:#1a73e8">ID Photo Background Color Guide</a> — Guide</li>
+    <li><a href="/blog/photo-filter-color-grading-guide" style="color:#1a73e8">Photo Filter Color Grading Guide</a> — Editing</li>
+    <li><a href="/blog/webgpu-ai-inference-acceleration" style="color:#1a73e8">WebGPU Acceleration: 10x Faster Browser AI Inference</a> — Tech</li>
+    <li><a href="/blog/make-id-photo-online-free" style="color:#1a73e8">Free Online ID Photo Maker Tutorial</a> — ID Photo</li>
+    <li><a href="/blog/product-photo-white-background" style="color:#1a73e8">Product Photo White Background Guide</a> — E-commerce</li>
+    <li><a href="/blog/social-media-avatar-background" style="color:#1a73e8">Social Media Avatar Background Guide</a> — Social</li>
+    <li><a href="/blog/ai-background-remover-review" style="color:#1a73e8">2026 Best Free AI Background Remover Comparison</a> — Review</li>
+  </ul>
+  <p style="margin-top:20px;color:#888">More articles coming soon...</p>
+</div>`,
+  },
+]
+
+/* ================================================================
+   English SEO: Tool landing pages
+   ================================================================ */
+
+export const EN_TOOL_PAGES_SEO: SeoPageData[] = [
+  {
+    path: '/id-photo-maker',
+    title: `Online ID Photo Maker - ${BRAND}`,
+    description: 'Free online ID photo generator. AI auto background removal, supports 1-inch/2-inch/small 2-inch sizes, red/white/blue backgrounds. Take a photo with your phone and generate standard ID photos instantly. Privacy protected.',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Make ID Photos Online',
+        description: 'Generate standard ID photos online in 3 steps with Zan Pic',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: 'Upload Photo', text: 'Take a front-facing photo with your phone or camera and upload it to the Zan Pic editor.' },
+          { '@type': 'HowToStep', position: 2, name: 'AI Auto Processing', text: 'Click the ID Photo feature and AI automatically detects faces, removes backgrounds, and crops to standard sizes.' },
+          { '@type': 'HowToStep', position: 3, name: 'Choose Background & Export', text: 'Select red, white, or blue background, confirm the result, and download a high-resolution ID photo.' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Can ID photos be used for passports and visas?', acceptedAnswer: { '@type': 'Answer', text: 'Zan Pic generates ID photos that meet common specifications (1-inch, 2-inch, small 2-inch) with three standard background colors (red, white, blue). However, visa requirements vary by country — we recommend verifying specific requirements before submission.' } },
+          { '@type': 'Question', name: 'How accurate is AI auto-cropping?', acceptedAnswer: { '@type': 'Answer', text: 'Zan Pic uses AI models to analyze face position, automatically detecting head and shoulder areas and cropping to standard proportions. For complex backgrounds or group photos, we recommend using AI background removal first.' } },
+          { '@type': 'Question', name: 'Which ID photo sizes are supported?', acceptedAnswer: { '@type': 'Answer', text: 'Currently supports standard 1-inch (295×413px), 2-inch (413×579px), and small 2-inch (413×531px) sizes, all at 300DPI. More sizes coming soon.' } },
+          { '@type': 'Question', name: 'Can I use photos taken with my phone?', acceptedAnswer: { '@type': 'Answer', text: 'Absolutely. Modern smartphone cameras have sufficient resolution for high-quality ID photos. For best results, use the rear camera, maintain 1-2 meters distance, and shoot in natural light.' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallbackEn(
+      'Free Online ID Photo Maker',
+      'Simply upload a front-facing photo, and Zan Pic will automatically generate a standard ID photo. AI smart background removal, precise face detection, and automatic cropping to standard sizes. Supports 1-inch, 2-inch, and small 2-inch specifications with red, white, and blue backgrounds. All processing happens locally in your browser.',
+      ['AI Background Removal — IS-Net deep learning model for precise person-background separation', 'Auto Face Detection — Alpha channel analysis for face positioning and smart cropping', 'Three Background Colors — Red, white, and blue standard colors with one-click switching', 'Multi-Size Support — 1"/2"/small 2", 300DPI output', '6-Inch Print Layout — Auto-arrange multiple ID photos on 6-inch photo paper'],
+    ),
+  },
+  {
+    path: '/background-remover',
+    title: `AI Background Remover - ${BRAND}`,
+    description: 'Free AI online background remover. No upload to servers. IS-Net deep learning model, WebGPU acceleration, hair-level precision. Supports smart removal and brush removal modes. All processing happens locally in your browser.',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Remove Image Backgrounds Online',
+        description: 'Remove image backgrounds in 3 steps with Zan Pic',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: 'Upload Image', text: 'Drag and drop or click to upload your image. Supports JPEG, PNG, WebP, and more.' },
+          { '@type': 'HowToStep', position: 2, name: 'AI Auto Removal', text: 'Click "Smart Remove BG" and AI automatically detects and removes the background in 2-5 seconds. Use "Brush Remove BG" for manual fine-tuning.' },
+          { '@type': 'HowToStep', position: 3, name: 'Download Transparent Image', text: 'Once satisfied, export as PNG to get a high-quality image with a transparent background.' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Does AI background removal upload images to a server?', acceptedAnswer: { '@type': 'Answer', text: 'No. Zan Pic\'s AI background removal runs entirely in your browser using ONNX Runtime for local inference. Image data never leaves your device.' } },
+          { '@type': 'Question', name: 'How fast and accurate is the background removal?', acceptedAnswer: { '@type': 'Answer', text: 'Using the IS-Net deep learning model, inference is extremely fast on WebGPU-enabled browsers, typically 2-5 seconds. Edge refinement through morphological processing achieves hair-level precision.' } },
+          { '@type': 'Question', name: 'Which image formats are supported?', acceptedAnswer: { '@type': 'Answer', text: 'Supports JPEG, PNG, WebP, AVIF, and other common formats. Processed results can be exported as PNG (preserving transparency) or other formats.' } },
+          { '@type': 'Question', name: 'Can I use this on mobile?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Mobile browsers also support WebGPU/WASM inference. We recommend Chrome or Edge. First-time use requires downloading the AI model (~24MB) — use Wi-Fi if possible.' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallbackEn(
+      'Free AI Online Background Remover',
+      'Zan Pic offers powerful AI background removal — one click to remove image backgrounds. Based on the IS-Net deep learning model, inference runs locally in your browser with no image upload required. Supports WebGPU hardware acceleration and morphological edge refinement for transparent PNG output.',
+      ['Smart Removal — IS-Net model auto-detects subjects and removes backgrounds', 'Brush Removal — AI-assisted + manual brush for edge fine-tuning', 'Edge Refinement — Morphological processing + Gaussian feathering + contrast sharpening', 'WebGPU Acceleration — Hardware-accelerated inference for multiple speed improvements'],
+    ),
+  },
+  {
+    path: '/photo-resizer',
+    title: `Image Resizer - ${BRAND}`,
+    description: 'Free online image resizing tool. Supports free crop, fixed-ratio crop, and custom pixel dimensions. Includes social media recommended size reference (Instagram/Facebook/Twitter/YouTube). Browser-based local processing.',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Resize Images Online',
+        description: 'Resize images in 3 steps with Zan Pic',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: 'Upload Image', text: 'Drag and drop or click to upload your image to the editor.' },
+          { '@type': 'HowToStep', position: 2, name: 'Choose Crop Ratio', text: 'Use the crop tool with free crop or fixed ratios (1:1/4:3/16:9 etc.), rotate support and rule-of-thirds guide.' },
+          { '@type': 'HowToStep', position: 3, name: 'Export with Custom Size', text: 'Specify pixel dimensions, compression quality, and output format (PNG/JPEG/WebP/AVIF) when exporting.' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Will resizing reduce image quality?', acceptedAnswer: { '@type': 'Answer', text: 'Downsizing typically doesn\'t noticeably reduce quality. When upscaling, Zan Pic offers AI super-resolution to enlarge images 2-4x while maintaining clarity.' } },
+          { '@type': 'Question', name: 'What sizes do social media images need?', acceptedAnswer: { '@type': 'Answer', text: 'Instagram square posts 1080×1080px, vertical stories 1080×1920px. Facebook covers 820×312px. Twitter post images 1200×675px. YouTube thumbnails 1280×720px.' } },
+          { '@type': 'Question', name: 'Which export formats are supported?', acceptedAnswer: { '@type': 'Answer', text: 'PNG, JPEG, WebP, and AVIF. JPEG and WebP support adjustable compression quality.' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallbackEn(
+      'Online Image Resizer Tool',
+      'Need to resize images to specific dimensions? Zan Pic offers flexible image resizing. Supports free crop, fixed-ratio crop (1:1/4:3/3:4/16:9/9:16/3:2), rotation adjustments, and custom pixel scaling. Combined with AI super-resolution, you can enlarge images while maintaining clarity.',
+      ['Free Crop — Adjust image composition at any ratio', 'Fixed Ratios — 1:1/4:3/16:9/9:16/3:2 — six presets', 'Rotation Support — Rotatable crop frame with rule-of-thirds guide', 'Social Media Sizes — Recommended size reference for major platforms'],
+    ),
+  },
+  {
+    path: '/photo-filter',
+    title: `Photo Filter Editor - ${BRAND}`,
+    description: 'Free online photo filter editor with 8 preset filters: B&W, vintage, warm, cool, vibrant, faded, sharpen, blur. Real-time brightness, contrast, and saturation adjustments. Browser-based local processing, privacy protected.',
+    ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to Apply Filters to Photos',
+        description: 'Apply filters to photos in 3 steps with Zan Pic',
+        step: [
+          { '@type': 'HowToStep', position: 1, name: 'Upload Photo', text: 'Drag and drop or click to upload your photo. Supports JPEG, PNG, WebP, and more.' },
+          { '@type': 'HowToStep', position: 2, name: 'Choose Filter & Fine-Tune', text: 'Select from 8 preset filters, then fine-tune with brightness/contrast/saturation sliders.' },
+          { '@type': 'HowToStep', position: 3, name: 'Export Result', text: 'Once satisfied with the preview, export a high-quality image in your preferred format.' },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          { '@type': 'Question', name: 'Will applying filters modify the original image?', acceptedAnswer: { '@type': 'Answer', text: 'No. All edits in Zan Pic are non-destructive. You can undo or modify at any time. The original is only affected when you export.' } },
+          { '@type': 'Question', name: 'Can I stack multiple filters?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. You can apply a preset filter and then manually adjust brightness, contrast, and saturation to fine-tune. All adjustments stack in real-time preview.' } },
+          { '@type': 'Question', name: 'What scenarios are filters suitable for?', acceptedAnswer: { '@type': 'Answer', text: 'Preset filters are ideal for quick photo enhancement, unifying social media image styles, and adding atmosphere to product photos. Different styles suit different scenarios — warm for portraits, cool for landscapes, B&W for emphasizing composition.' } },
+        ],
+      },
+    ],
+    noscriptHtml: buildToolPageFallbackEn(
+      'Free Online Photo Filter Tool',
+      'Want to add more texture to your photos? Zan Pic offers rich photo filters and color grading. Apply 8 preset filters with one click and freely adjust brightness, contrast, and saturation. All effects preview in real-time — what you see is what you get.',
+      ['B&W — Classic black and white, great for documentary and street photography', 'Vintage — Warm yellow tones + slight fade for nostalgic feel', 'Warm — Enhanced warm color temperature for portraits and food', 'Cool — Blue-tinted for fresh, modern looks', 'Vibrant — Boosted saturation for landscape photography', 'Sharpen — Edge clarity enhancement to compensate for slight blur'],
+    ),
+  },
+]
+
+/* ================================================================
+   English SEO: ID photo spec pages (programmatic)
+   ================================================================ */
+
+function buildEnIdPhotoSpecJsonLd(spec: IdPhotoSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Make ${spec.country} ${spec.type}`,
+      description: `Generate ${spec.country} ${spec.type} online for free. Size: ${spec.pixelWidth}×${spec.pixelHeight}px (${spec.mmWidth}×${spec.mmHeight}mm), ${spec.backgroundColor} background.`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Upload Photo', text: 'Take a front-facing photo with your phone and upload it to the Zan Pic editor.' },
+        { '@type': 'HowToStep', position: 2, name: 'AI Background Removal', text: 'Click Smart Remove BG and AI automatically removes the original background.' },
+        { '@type': 'HowToStep', position: 3, name: 'ID Photo Generation', text: `Select the ID Photo feature and auto-crop to ${spec.mmWidth}×${spec.mmHeight}mm standard size.` },
+        { '@type': 'HowToStep', position: 4, name: 'Choose Background & Export', text: `Select ${spec.backgroundColor} background and export a high-resolution ID photo.` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildEnIdPhotoSpecFallback(spec: IdPhotoSpec): string {
+  const dressItems = spec.dressCode.map((d) => `<li>${escapeHtml(d)}</li>`).join('')
+  const useItems = spec.commonUses.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(spec.country)} · ${escapeHtml(spec.type)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">Specifications</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Pixel Size</td><td style="padding:8px;font-weight:600">${spec.pixelWidth}×${spec.pixelHeight}px</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Physical Size</td><td style="padding:8px;font-weight:600">${spec.mmWidth}×${spec.mmHeight}mm</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Resolution</td><td style="padding:8px;font-weight:600">${spec.dpi}DPI</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Background Color</td><td style="padding:8px;font-weight:600">${escapeHtml(spec.backgroundColor)}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Head Height</td><td style="padding:8px;font-weight:600">${spec.headHeightMin}-${spec.headHeightMax}mm</td></tr>
+  </table>
+  <h3 style="margin:16px 0 8px">Dress Code</h3>
+  <ul>${dressItems}</ul>
+  <h3 style="margin:16px 0 8px">Common Uses</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">Make ${escapeHtml(spec.type)} Now</a></p>
+</div>`
+}
+
+export const EN_ID_PHOTO_SPECS_SEO: SeoPageData[] = EN_ID_PHOTO_SPECS.map((spec) => ({
+  path: `/id-photo/${spec.slug}`,
+  title: `${spec.title} — Free Online Maker | ${BRAND}`,
+  description: `${spec.country} ${spec.type}: ${spec.pixelWidth}×${spec.pixelHeight}px (${spec.mmWidth}×${spec.mmHeight}mm), ${spec.backgroundColor} background. Generate ${spec.type} free online with ${BRAND} AI background removal. Browser-based, privacy-first.`,
+  ogType: 'website',
+  jsonLd: buildEnIdPhotoSpecJsonLd(spec),
+  noscriptHtml: buildEnIdPhotoSpecFallback(spec),
+}))
+
+/* ================================================================
+   English SEO: Social media size pages (programmatic)
+   Data is already in English, just prefix paths with /en/
+   ================================================================ */
+
+export const EN_SOCIAL_MEDIA_SIZES_SEO: SeoPageData[] = SOCIAL_MEDIA_SIZES.map((size) => ({
+  path: `/resize/${size.slug}`,
+  title: `${size.title} — Online Cropping | ${BRAND}`,
+  description: `${size.platform} ${size.type}: ${size.pixelWidth}×${size.pixelHeight}px, aspect ratio ${size.aspectRatio}. Crop and resize images online with ${BRAND}. Supports AI background removal.`,
+  ogType: 'website',
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Crop to ${size.platform} ${size.type} Size`,
+      description: `${size.platform} ${size.type}: ${size.pixelWidth}×${size.pixelHeight}px, aspect ratio ${size.aspectRatio}.`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Upload Image', text: 'Drag and drop or click to upload your image to the Zan Pic editor.' },
+        { '@type': 'HowToStep', position: 2, name: 'Choose Ratio & Crop', text: `Use the crop tool, select ${size.aspectRatio} ratio or custom ${size.pixelWidth}×${size.pixelHeight}px.` },
+        { '@type': 'HowToStep', position: 3, name: 'Optional AI Background Removal', text: 'If you need to change the background, use AI smart background removal.' },
+        { '@type': 'HowToStep', position: 4, name: 'Export', text: `Export as ${size.recommendedFormat}, keep file size under ${size.maxFileSize}.` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: size.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+  noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(size.platform)} · ${escapeHtml(size.type)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(size.title)}</h1>
+  <p style="color:#555">${escapeHtml(size.intro)}</p>
+  <h3 style="margin:16px 0 8px">Specifications</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px">
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Pixel Size</td><td style="padding:8px;font-weight:600">${size.pixelWidth}×${size.pixelHeight}px</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Aspect Ratio</td><td style="padding:8px;font-weight:600">${size.aspectRatio}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Recommended Format</td><td style="padding:8px;font-weight:600">${escapeHtml(size.recommendedFormat)}</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px;color:#888">Max File Size</td><td style="padding:8px;font-weight:600">${escapeHtml(size.maxFileSize)}</td></tr>
+  </table>
+  <h3 style="margin:16px 0 8px">Tips</h3>
+  <ul>${size.tips.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">Crop Image Now</a></p>
+</div>`,
+}))
+
+/* ================================================================
+   English SEO: Background color pages (programmatic)
+   ================================================================ */
+
+function buildEnBackgroundColorJsonLd(spec: BackgroundColorSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Make ${spec.colorName} Background ID Photos`,
+      description: `Generate ${spec.colorName} background ID photos online with ${BRAND} AI background removal. Color value: ${spec.hexValue}.`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Upload Photo', text: 'Take a front-facing photo with your phone and upload it to the Zan Pic editor.' },
+        { '@type': 'HowToStep', position: 2, name: 'AI Background Removal', text: 'Click Smart Remove BG and AI automatically detects and removes the original background.' },
+        { '@type': 'HowToStep', position: 3, name: `Choose ${spec.colorName} Background`, text: `Select the ${spec.colorName} background in the ID photo tool and export a high-resolution ID photo.` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildEnBackgroundColorFallback(spec: BackgroundColorSpec): string {
+  const useItems = spec.useCases.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <span style="display:inline-block;width:48px;height:48px;border-radius:8px;background:${spec.slug === 'gradient' ? 'linear-gradient(135deg,#667eea,#764ba2)' : spec.hexValue};border:2px solid #ddd"></span>
+    <span style="font-size:18px;font-weight:600">${escapeHtml(spec.colorName)} Background · ${spec.hexValue}</span>
+  </div>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">Use Cases</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">Make ${escapeHtml(spec.colorName)} Background ID Photo Now</a></p>
+</div>`
+}
+
+export const EN_BACKGROUND_COLORS_SEO: SeoPageData[] = EN_BACKGROUND_COLORS.map((spec) => ({
+  path: `/background/${spec.slug}`,
+  title: `${spec.title} — AI Background Replacement | ${BRAND}`,
+  description: `${spec.colorName} background ID photo maker: ${spec.hexValue}. AI auto background removal and replacement. Generate ${spec.colorName} ID photos free online. Browser-based, privacy protected.`,
+  ogType: 'website',
+  jsonLd: buildEnBackgroundColorJsonLd(spec),
+  noscriptHtml: buildEnBackgroundColorFallback(spec),
+}))
+
+/* ================================================================
+   English SEO: Image format conversion pages (programmatic)
+   ================================================================ */
+
+function buildEnConvertSpecJsonLd(spec: ConvertSpec): object[] {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Convert ${spec.sourceFormat} to ${spec.targetFormat}`,
+      description: `${spec.sourceFormat} to ${spec.targetFormat}: Free online converter, browser-based local processing, custom compression quality.`,
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Upload Image', text: `Drag your ${spec.sourceFormat} image into the upload area or click to select a file.` },
+        { '@type': 'HowToStep', position: 2, name: 'Adjust Settings', text: 'Adjust compression quality or background fill color as needed.' },
+        { '@type': 'HowToStep', position: 3, name: 'Start Conversion', text: `Click the convert button and the browser automatically converts ${spec.sourceFormat} to ${spec.targetFormat}.` },
+        { '@type': 'HowToStep', position: 4, name: 'Download Result', text: `After conversion, click the download button to save the ${spec.targetExt} file locally.` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: spec.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ]
+}
+
+function buildEnConvertSpecFallback(spec: ConvertSpec): string {
+  const sourcePros = spec.sourcePros.map((p) => `<li>${escapeHtml(p)}</li>`).join('')
+  const targetPros = spec.targetPros.map((p) => `<li>${escapeHtml(p)}</li>`).join('')
+  const useItems = spec.commonUses.map((u) => `<li>${escapeHtml(u)}</li>`).join('')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <p style="display:inline-block;padding:2px 10px;background:#e8f0fe;border-radius:4px;font-size:12px;color:#1a73e8;margin-bottom:12px">${escapeHtml(spec.sourceFormat)} → ${escapeHtml(spec.targetFormat)}</p>
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px;line-height:1.3">${escapeHtml(spec.title)}</h1>
+  <p style="color:#555">${escapeHtml(spec.intro)}</p>
+  <h3 style="margin:16px 0 8px">${escapeHtml(spec.sourceFormat)} Pros</h3>
+  <ul>${sourcePros}</ul>
+  <h3 style="margin:16px 0 8px">${escapeHtml(spec.targetFormat)} Pros</h3>
+  <ul>${targetPros}</ul>
+  <h3 style="margin:16px 0 8px">Common Uses</h3>
+  <ul>${useItems}</ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">Start Conversion</a></p>
+</div>`
+}
+
+export const EN_CONVERT_SPECS_SEO: SeoPageData[] = EN_CONVERT_SPECS.map((spec) => ({
+  path: `/convert/${spec.slug}`,
+  title: `${spec.title} | ${BRAND}`,
+  description: `${spec.sourceFormat} to ${spec.targetFormat}: Free online conversion, browser-based local processing, custom compression quality. ${spec.intro.slice(0, 60)}`,
+  ogType: 'website',
+  jsonLd: buildEnConvertSpecJsonLd(spec),
+  noscriptHtml: buildEnConvertSpecFallback(spec),
 }))
 
 /* ================================================================
@@ -512,6 +976,20 @@ function buildToolPageFallback(h1: string, intro: string, features: string[]): s
     ${featureItems}
   </ul>
   <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">开始使用</a></p>
+</div>`
+}
+
+function buildToolPageFallbackEn(h1: string, intro: string, features: string[]): string {
+  const featureItems = features.map((f) => `<li>${f}</li>`).join('\n    ')
+  return `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:16px">${h1}</h1>
+  <p style="margin-bottom:16px">${intro}</p>
+  <h3 style="margin-bottom:8px">Core Features</h3>
+  <ul style="margin-bottom:20px">
+    ${featureItems}
+  </ul>
+  <p style="margin-top:20px"><a href="${SITE_URL}" style="display:inline-block;padding:10px 24px;background:#2563eb;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">Get Started</a></p>
 </div>`
 }
 
@@ -645,7 +1123,7 @@ export const HOMEPAGE_JSON_LD: object[] = [
     url: SITE_URL,
     description:
       '免费在线图片编辑器，支持AI智能抠图、证件照生成、滤镜调色、裁剪旋转、图片压缩、格式转换、自定义水印。',
-    inLanguage: 'zh-CN',
+    inLanguage: 'en',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -727,10 +1205,19 @@ export function buildMetaTags(page: SeoPageData): string {
   const canonical = `${SITE_URL}${page.path}`
   const ogType = page.ogType || 'website'
 
+  // Compute hreflang alternates (English is default/root, Chinese at /zh/)
+  const isZh = page.path.startsWith('/zh')
+  const enPath = isZh ? page.path.replace(/^\/zh/, '') || '/' : page.path
+  const zhPath = enPath === '/' ? '/zh/' : `/zh${enPath}`
+
   let tags = ''
   tags += `<title>${escapeHtml(page.title)}</title>\n`
   tags += `<meta name="description" content="${escapeHtml(page.description)}">\n`
   tags += `<link rel="canonical" href="${escapeHtml(canonical)}">\n`
+  // hreflang
+  tags += `<link rel="alternate" hreflang="en" href="${escapeHtml(SITE_URL + enPath)}">\n`
+  tags += `<link rel="alternate" hreflang="zh-CN" href="${escapeHtml(SITE_URL + zhPath)}">\n`
+  tags += `<link rel="alternate" hreflang="x-default" href="${escapeHtml(SITE_URL)}">\n`
   // OG
   tags += `<meta property="og:title" content="${escapeHtml(page.title)}">\n`
   tags += `<meta property="og:description" content="${escapeHtml(page.description)}">\n`

@@ -30,6 +30,32 @@ function upsertCanonical(href: string) {
   el.setAttribute('href', href)
 }
 
+/**
+ * Upsert <link rel="alternate" hreflang="..."> tags.
+ * Removes stale tags on unmount / option change.
+ */
+function upsertHreflang(alternates: { lang: string; url: string }[]) {
+  // Remove existing hreflang tags we manage
+  document.head.querySelectorAll('link[data-hreflang-managed="true"]').forEach((el) => el.remove())
+
+  alternates.forEach(({ lang, url }) => {
+    const el = document.createElement('link')
+    el.setAttribute('rel', 'alternate')
+    el.setAttribute('hreflang', lang)
+    el.setAttribute('href', url)
+    el.setAttribute('data-hreflang-managed', 'true')
+    document.head.appendChild(el)
+  })
+
+  // Always add x-default pointing to the English homepage
+  const xDefault = document.createElement('link')
+  xDefault.setAttribute('rel', 'alternate')
+  xDefault.setAttribute('hreflang', 'x-default')
+  xDefault.setAttribute('href', SITE_URL)
+  xDefault.setAttribute('data-hreflang-managed', 'true')
+  document.head.appendChild(xDefault)
+}
+
 const SITE_URL = 'https://www.superzan.net'
 
 interface PageMetaOptions {
@@ -37,6 +63,8 @@ interface PageMetaOptions {
   description?: string
   path?: string
   ogType?: string
+  /** If provided, injects hreflang alternate links for zh and en */
+  alternates?: { lang: string; url: string }[]
 }
 
 /**
@@ -82,5 +110,15 @@ export function usePageMeta(options?: PageMetaOptions) {
 
     // Canonical
     upsertCanonical(canonical)
+
+    // Hreflang alternate links (SEO language versions)
+    if (options?.alternates) {
+      upsertHreflang(options.alternates)
+    } else {
+      upsertHreflang([
+        { lang: 'en', url: `${SITE_URL}/` },
+        { lang: 'zh-CN', url: `${SITE_URL}/zh/` },
+      ])
+    }
   }, [seo, options])
 }

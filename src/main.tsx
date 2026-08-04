@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import App from './App'
+import { SeoLangProvider } from './components/SeoLangProvider'
 import './index.css'
 import './i18n'
 
@@ -33,28 +34,41 @@ function LazyPage({ children }: { children: ReactNode }) {
   )
 }
 
+const contentRoutes = [
+  { path: 'about', element: <LazyPage><AboutPage /></LazyPage> },
+  { path: 'privacy', element: <LazyPage><PrivacyPage /></LazyPage> },
+  { path: 'contact', element: <LazyPage><ContactPage /></LazyPage> },
+  { path: 'blog', element: <LazyPage><BlogListPage /></LazyPage> },
+  { path: 'blog/:id', element: <LazyPage><BlogPostPage /></LazyPage> },
+  { path: 'admin', element: <LazyPage><AdminPage /></LazyPage> },
+  { path: 'id-photo-maker', element: <LazyPage><ToolIdPhotoPage /></LazyPage> },
+  { path: 'background-remover', element: <LazyPage><ToolBackgroundRemoverPage /></LazyPage> },
+  { path: 'photo-resizer', element: <LazyPage><ToolPhotoResizerPage /></LazyPage> },
+  { path: 'photo-filter', element: <LazyPage><ToolPhotoFilterPage /></LazyPage> },
+  { path: 'id-photo/:slug', element: <LazyPage><IdPhotoSpecPage /></LazyPage> },
+  { path: 'resize/:slug', element: <LazyPage><SocialMediaSizePage /></LazyPage> },
+  { path: 'background/:slug', element: <LazyPage><BackgroundToolPage /></LazyPage> },
+  { path: 'convert/:slug', element: <LazyPage><ConvertPage /></LazyPage> },
+]
+
+const zhContentRoutes = contentRoutes.map((r) => ({
+  ...r,
+  path: `zh/${r.path}`,
+}))
+
 const router = createBrowserRouter([
   { path: '/', element: <App /> },
-  { path: '/about', element: <LazyPage><AboutPage /></LazyPage> },
-  { path: '/privacy', element: <LazyPage><PrivacyPage /></LazyPage> },
-  { path: '/contact', element: <LazyPage><ContactPage /></LazyPage> },
-  { path: '/blog', element: <LazyPage><BlogListPage /></LazyPage> },
-  { path: '/blog/:id', element: <LazyPage><BlogPostPage /></LazyPage> },
-  { path: '/admin', element: <LazyPage><AdminPage /></LazyPage> },
-  { path: '/id-photo-maker', element: <LazyPage><ToolIdPhotoPage /></LazyPage> },
-  { path: '/background-remover', element: <LazyPage><ToolBackgroundRemoverPage /></LazyPage> },
-  { path: '/photo-resizer', element: <LazyPage><ToolPhotoResizerPage /></LazyPage> },
-  { path: '/photo-filter', element: <LazyPage><ToolPhotoFilterPage /></LazyPage> },
-  { path: '/id-photo/:slug', element: <LazyPage><IdPhotoSpecPage /></LazyPage> },
-  { path: '/resize/:slug', element: <LazyPage><SocialMediaSizePage /></LazyPage> },
-  { path: '/background/:slug', element: <LazyPage><BackgroundToolPage /></LazyPage> },
-  { path: '/convert/:slug', element: <LazyPage><ConvertPage /></LazyPage> },
+  ...contentRoutes,
+  ...zhContentRoutes,
+  { path: '/zh', element: <Navigate to="/zh/" replace /> },
   { path: '*', element: <Navigate to="/" replace /> },
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <SeoLangProvider>
+      <RouterProvider router={router} />
+    </SeoLangProvider>
   </StrictMode>,
 )
 

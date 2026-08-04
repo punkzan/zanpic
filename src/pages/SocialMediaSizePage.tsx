@@ -1,22 +1,32 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { ContentLayout } from '../components/ContentLayout'
 import { usePageMeta } from '../hooks/usePageMeta'
+import { useSeoLang } from '../hooks/useSeoLang'
 import { getSocialMediaSize, SOCIAL_MEDIA_SIZES } from '../data/social-media-sizes'
+import { t } from '../lib/seo-ui-strings'
+import { buildAlternates } from '../lib/seo-lang'
 
 export default function SocialMediaSizePage() {
   const { slug } = useParams<{ slug: string }>()
+  const lang = useSeoLang()
+  const isEn = lang === 'en'
   const size = slug ? getSocialMediaSize(slug) : undefined
 
   usePageMeta({
-    title: size ? `${size.title} | Zan Pic` : '社媒图片尺寸 | Zan Pic',
+    title: size ? `${size.title} | Zan Pic` : isEn ? 'Social Media Image Sizes | Zan Pic' : '社媒图片尺寸 | Zan Pic',
     description: size
-      ? `${size.platform} ${size.type}尺寸：${size.pixelWidth}×${size.pixelHeight}px，宽高比 ${size.aspectRatio}。使用 Zan Pic 在线裁剪和调整图片尺寸。`
-      : '社交媒体图片尺寸大全',
+      ? isEn
+        ? `${size.platform} ${size.type} size: ${size.pixelWidth}×${size.pixelHeight}px, aspect ratio ${size.aspectRatio}. Use Zan Pic to crop and resize images online.`
+        : `${size.platform} ${size.type}尺寸：${size.pixelWidth}×${size.pixelHeight}px，宽高比 ${size.aspectRatio}。使用 Zan Pic 在线裁剪和调整图片尺寸。`
+      : isEn
+        ? 'Social media image size guide for Instagram, Facebook, YouTube, Twitter, LinkedIn, and more.'
+        : '社交媒体图片尺寸大全',
     path: `/resize/${slug || ''}`,
+    alternates: buildAlternates(`/resize/${slug || ''}`),
   })
 
   if (!size) {
-    return <Navigate to="/photo-resizer" replace />
+    return <Navigate to={isEn ? '/photo-resizer' : '/zh/photo-resizer'} replace />
   }
 
   const related = SOCIAL_MEDIA_SIZES.filter((s) => s.slug !== size.slug).slice(0, 6)
@@ -25,9 +35,9 @@ export default function SocialMediaSizePage() {
     <ContentLayout>
       {/* Breadcrumb */}
       <nav style={{ fontSize: '13px', color: 'var(--text-tertiary)', marginBottom: '12px' }}>
-        <Link to="/" style={{ color: 'var(--accent)' }}>首页</Link>
+        <Link to={isEn ? '/' : '/zh/'} style={{ color: 'var(--accent)' }}>{t('home', lang)}</Link>
         {' / '}
-        <Link to="/photo-resizer" style={{ color: 'var(--accent)' }}>图片尺寸调整</Link>
+        <Link to={isEn ? '/photo-resizer' : '/zh/photo-resizer'} style={{ color: 'var(--accent)' }}>{t('photoResizer', lang)}</Link>
         {' / '}
         <span style={{ color: 'var(--text-secondary)' }}>{size.platform} {size.type}</span>
       </nav>
@@ -41,36 +51,36 @@ export default function SocialMediaSizePage() {
 
       {/* CTA */}
       <Link
-        to="/"
+        to={isEn ? '/' : '/zh/'}
         style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 28px',
           background: 'var(--accent)', color: '#fff', borderRadius: '8px', fontWeight: 600,
           textDecoration: 'none', fontSize: '15px', marginBottom: '32px',
         }}
       >
-        立即裁剪图片
+        {t('ctaCropImage', lang)}
       </Link>
 
       {/* Specs table */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        规格参数
+        {t('specsTitle', lang)}
       </h2>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '28px', fontSize: '14px' }}>
         <tbody>
           <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)', width: '40%' }}>像素尺寸</td>
+            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)', width: '40%' }}>{t('pixelSize', lang)}</td>
             <td style={{ padding: '10px 12px', color: 'var(--text-primary)', fontWeight: 600 }}>{size.pixelWidth} × {size.pixelHeight} px</td>
           </tr>
           <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>宽高比</td>
+            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>{t('aspectRatio', lang)}</td>
             <td style={{ padding: '10px 12px', color: 'var(--text-primary)', fontWeight: 600 }}>{size.aspectRatio}</td>
           </tr>
           <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>推荐格式</td>
+            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>{t('recommendedFormat', lang)}</td>
             <td style={{ padding: '10px 12px', color: 'var(--text-primary)', fontWeight: 600 }}>{size.recommendedFormat}</td>
           </tr>
           <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>文件大小限制</td>
+            <td style={{ padding: '10px 12px', color: 'var(--text-tertiary)' }}>{t('maxFileSize', lang)}</td>
             <td style={{ padding: '10px 12px', color: 'var(--text-primary)', fontWeight: 600 }}>{size.maxFileSize}</td>
           </tr>
         </tbody>
@@ -78,7 +88,7 @@ export default function SocialMediaSizePage() {
 
       {/* Tips */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
-        制作技巧
+        {t('tips', lang)}
       </h2>
       <ul style={{ marginBottom: '28px', color: 'var(--text-secondary)', lineHeight: 1.9, paddingLeft: '20px' }}>
         {size.tips.map((tip) => (
@@ -88,14 +98,38 @@ export default function SocialMediaSizePage() {
 
       {/* How to */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        如何用 Zan Pic 裁剪至 {size.aspectRatio}
+        {t('howToCrop', lang)} {size.aspectRatio}
       </h2>
       <div style={{ display: 'grid', gap: '10px', marginBottom: '32px' }}>
         {[
-          { step: '1', title: '上传图片', desc: '拖拽或点击上传你的图片到 Zan Pic 编辑器。' },
-          { step: '2', title: '选择比例裁剪', desc: `使用裁剪工具，选择 ${size.aspectRatio} 比例或自定义像素尺寸 ${size.pixelWidth}×${size.pixelHeight}px。` },
-          { step: '3', title: '可选 AI 抠图', desc: '如果需要换背景，使用 AI 智能抠图移除原背景。' },
-          { step: '4', title: '导出', desc: `导出为 ${size.recommendedFormat} 格式，确保文件大小 ${size.maxFileSize} 以内。` },
+          {
+            step: '1',
+            title: t('stepUpload', lang),
+            desc: isEn
+              ? 'Drag or click to upload your image to the Zan Pic editor.'
+              : '拖拽或点击上传你的图片到 Zan Pic 编辑器。',
+          },
+          {
+            step: '2',
+            title: t('stepCrop', lang),
+            desc: isEn
+              ? `Use the crop tool to select the ${size.aspectRatio} ratio or custom pixel size ${size.pixelWidth}×${size.pixelHeight}px.`
+              : `使用裁剪工具，选择 ${size.aspectRatio} 比例或自定义像素尺寸 ${size.pixelWidth}×${size.pixelHeight}px。`,
+          },
+          {
+            step: '3',
+            title: t('stepOptionalBg', lang),
+            desc: isEn
+              ? 'If you need to change the background, use AI background removal to remove the original background.'
+              : '如果需要换背景，使用 AI 智能抠图移除原背景。',
+          },
+          {
+            step: '4',
+            title: t('stepDownload', lang),
+            desc: isEn
+              ? `Export as ${size.recommendedFormat} format, keeping the file size within ${size.maxFileSize}.`
+              : `导出为 ${size.recommendedFormat} 格式，确保文件大小 ${size.maxFileSize} 以内。`,
+          },
         ].map((item) => (
           <div key={item.step} style={{
             display: 'flex', gap: '14px', padding: '12px 14px',
@@ -120,7 +154,7 @@ export default function SocialMediaSizePage() {
 
       {/* FAQ */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        常见问题
+        {t('faq', lang)}
       </h2>
       <div style={{ marginBottom: '32px' }}>
         {size.faq.map((item, i) => (
@@ -137,12 +171,12 @@ export default function SocialMediaSizePage() {
 
       {/* Related sizes */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
-        其他社媒尺寸规格
+        {t('relatedSizes', lang)}
       </h2>
       <ul style={{ marginBottom: '40px', paddingLeft: '20px' }}>
         {related.map((s) => (
           <li key={s.slug} style={{ marginBottom: '6px' }}>
-            <Link to={`/resize/${s.slug}`} style={{ color: 'var(--accent)', fontSize: '14px' }}>
+            <Link to={isEn ? `/resize/${s.slug}` : `/zh/resize/${s.slug}`} style={{ color: 'var(--accent)', fontSize: '14px' }}>
               {s.title}
             </Link>
           </li>

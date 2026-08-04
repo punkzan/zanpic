@@ -2,18 +2,32 @@ import { useState, useRef, useCallback, type DragEvent } from 'react'
 import { useParams, Navigate, Link } from 'react-router-dom'
 import { ContentLayout } from '../components/ContentLayout'
 import { usePageMeta } from '../hooks/usePageMeta'
+import { useSeoLang } from '../hooks/useSeoLang'
 import { getConvertSpec, CONVERT_SPECS } from '../data/convert-specs'
+import { getEnConvertSpec, EN_CONVERT_SPECS } from '../data/en-convert-specs'
+import { t } from '../lib/seo-ui-strings'
+import { buildAlternates } from '../lib/seo-lang'
 
 export default function ConvertPage() {
   const { slug } = useParams<{ slug: string }>()
-  const spec = slug ? getConvertSpec(slug) : undefined
+  const lang = useSeoLang()
+  const isEn = lang === 'en'
+
+  // Try Chinese spec first, fallback to English
+  const spec = slug
+    ? (getConvertSpec(slug) ?? (isEn ? getEnConvertSpec(slug) : undefined))
+    : undefined
+  const allSpecs = isEn ? EN_CONVERT_SPECS : CONVERT_SPECS
 
   usePageMeta({
-    title: spec ? `${spec.title} | Zan Pic` : '图片格式转换 | Zan Pic',
+    title: spec ? `${spec.title} | Zan Pic` : isEn
+      ? 'Image Format Converter | Zan Pic'
+      : '图片格式转换 | Zan Pic',
     description: spec
-      ? `${spec.sourceFormat} 转 ${spec.targetFormat}：免费在线转换，浏览器本地处理，支持自定义压缩质量。${spec.intro.slice(0, 80)}`
-      : '图片格式转换工具',
+      ? `${spec.sourceFormat} ${isEn ? 'to' : '转'} ${spec.targetFormat}：${spec.intro.slice(0, isEn ? 100 : 80)}`
+      : isEn ? 'Image format conversion tool' : '图片格式转换工具',
     path: `/convert/${slug || ''}`,
+    alternates: buildAlternates(`/convert/${slug || ''}`),
   })
 
   const [originalFile, setOriginalFile] = useState<File | null>(null)
@@ -47,7 +61,11 @@ export default function ConvertPage() {
         validTypes.includes(file.type) || fileExt === sourceExt || file.type === ''
 
       if (!isTypeMatch) {
-        setError(`请上传 ${spec.sourceFormat} 格式的图片（.${sourceExt}）`)
+        setError(
+          isEn
+            ? `Please upload a ${spec.sourceFormat} image (.${sourceExt})`
+            : `请上传 ${spec.sourceFormat} 格式的图片（.${sourceExt}）`
+        )
         return
       }
 
@@ -56,7 +74,7 @@ export default function ConvertPage() {
       const url = URL.createObjectURL(file)
       setOriginalUrl(url)
     },
-    [spec],
+    [spec, isEn],
   )
 
   const handleDrop = useCallback(
@@ -82,7 +100,7 @@ export default function ConvertPage() {
 
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve()
-        img.onerror = () => reject(new Error('图片加载失败'))
+        img.onerror = () => reject(new Error(t('errImageLoad', lang)))
       })
 
       const canvas = document.createElement('canvas')
@@ -105,7 +123,7 @@ export default function ConvertPage() {
       canvas.toBlob(
         (blob) => {
           if (!blob) {
-            setError('转换失败，请尝试其他图片')
+            setError(t('errConvertFailed', lang))
             setConverting(false)
             return
           }
@@ -117,10 +135,10 @@ export default function ConvertPage() {
         qualityVal,
       )
     } catch {
-      setError('图片处理失败，请确保文件未损坏')
+      setError(t('errProcessFailed', lang))
       setConverting(false)
     }
-  }, [originalFile, originalUrl, spec, quality, bgColor])
+  }, [originalFile, originalUrl, spec, quality, bgColor, lang])
 
   const download = useCallback(() => {
     if (!convertedUrl || !spec || !originalFile) return
@@ -141,10 +159,10 @@ export default function ConvertPage() {
   }, [])
 
   if (!spec) {
-    return <Navigate to="/photo-resizer" replace />
+    return <Navigate to={isEn ? '/photo-resizer' : '/zh/photo-resizer'} replace />
   }
 
-  const relatedSpecs = CONVERT_SPECS.filter((s) => s.slug !== spec.slug).slice(0, 6)
+  const relatedSpecs = allSpecs.filter((s) => s.slug !== spec.slug).slice(0, 6)
   const sizeDiff = convertedSize > 0 ? ((originalSize - convertedSize) / originalSize) * 100 : 0
 
   const formatBytes = (bytes: number) => {
@@ -162,12 +180,12 @@ export default function ConvertPage() {
     <ContentLayout>
       {/* Breadcrumb */}
       <nav style={{ fontSize: '13px', color: 'var(--text-tertiary)', marginBottom: '12px' }}>
-        <Link to="/" style={{ color: 'var(--accent)' }}>
-          首页
+        <Link to={isEn ? '/' : '/zh/'} style={{ color: 'var(--accent)' }}>
+          {t('home', lang)}
         </Link>
         {' / '}
         <span style={{ color: 'var(--text-secondary)' }}>
-          {spec.sourceFormat} 转 {spec.targetFormat}
+          {spec.sourceFormat} {isEn ? 'to' : '转'} {spec.targetFormat}
         </span>
       </nav>
 
@@ -225,10 +243,14 @@ export default function ConvertPage() {
           >
             <div style={{ fontSize: '40px', marginBottom: '12px' }}>📁</div>
             <p style={{ fontSize: '16px', color: 'var(--text-primary)', fontWeight: 600, marginBottom: '6px' }}>
-              拖拽 {spec.sourceFormat} 图片到此处，或点击上传
+              {isEn
+                ? `Drag ${spec.sourceFormat} images here, or click to upload`
+                : `拖拽 ${spec.sourceFormat} 图片到此处，或点击上传`}
             </p>
             <p style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>
-              支持 {spec.sourceExt} 格式，浏览器本地处理，图片不上传服务器
+              {isEn
+                ? `Supports ${spec.sourceExt} format. Browser-based local processing. Images are never uploaded.`
+                : `支持 ${spec.sourceExt} 格式，浏览器本地处理，图片不上传服务器`}
             </p>
             <input
               ref={fileInputRef}
@@ -259,7 +281,7 @@ export default function ConvertPage() {
                   padding: '4px 8px',
                 }}
               >
-                重新上传
+                {t('reupload', lang)}
               </button>
             </div>
 
@@ -267,7 +289,7 @@ export default function ConvertPage() {
               {/* Original */}
               <div>
                 <p style={{ fontSize: '13px', color: 'var(--text-tertiary)', marginBottom: '8px', fontWeight: 600 }}>
-                  原图 ({spec.sourceFormat})
+                  {t('original', lang)} ({spec.sourceFormat})
                 </p>
                 <div
                   style={{
@@ -282,7 +304,7 @@ export default function ConvertPage() {
                 >
                   <img
                     src={originalUrl}
-                    alt={`原始 ${spec.sourceFormat} 图片`}
+                    alt={isEn ? `Original ${spec.sourceFormat} image` : `原始 ${spec.sourceFormat} 图片`}
                     style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }}
                   />
                 </div>
@@ -294,7 +316,7 @@ export default function ConvertPage() {
               {/* Converted */}
               <div>
                 <p style={{ fontSize: '13px', color: 'var(--text-tertiary)', marginBottom: '8px', fontWeight: 600 }}>
-                  转换后 ({spec.targetFormat})
+                  {t('converted', lang)} ({spec.targetFormat})
                 </p>
                 <div
                   style={{
@@ -310,12 +332,12 @@ export default function ConvertPage() {
                   {convertedUrl ? (
                     <img
                       src={convertedUrl}
-                      alt={`转换后 ${spec.targetFormat} 图片`}
+                      alt={isEn ? `Converted ${spec.targetFormat} image` : `转换后 ${spec.targetFormat} 图片`}
                       style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '4px' }}
                     />
                   ) : (
                     <span style={{ color: 'var(--text-tertiary)', fontSize: '13px' }}>
-                      {converting ? '转换中…' : '点击下方按钮开始转换'}
+                      {converting ? t('converting', lang) : t('clickToStart', lang)}
                     </span>
                   )}
                 </div>
@@ -349,7 +371,7 @@ export default function ConvertPage() {
                       marginBottom: '4px',
                     }}
                   >
-                    压缩质量: {quality}%
+                    {t('compressionQuality', lang)}: {quality}%
                   </label>
                   <input
                     type="range"
@@ -375,7 +397,7 @@ export default function ConvertPage() {
                       marginBottom: '4px',
                     }}
                   >
-                    背景填充色
+                    {t('backgroundFillColor', lang)}
                   </label>
                   <input
                     type="color"
@@ -408,7 +430,7 @@ export default function ConvertPage() {
                   cursor: converting ? 'not-allowed' : 'pointer',
                 }}
               >
-                {converting ? '转换中…' : `转换为 ${spec.targetFormat}`}
+                {converting ? t('converting', lang) : `${isEn ? 'Convert to' : '转换为'} ${spec.targetFormat}`}
               </button>
               {convertedUrl && (
                 <button
@@ -424,7 +446,7 @@ export default function ConvertPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  ⬇ 下载
+                  ⬇ {t('download', lang)}
                 </button>
               )}
             </div>
@@ -438,7 +460,7 @@ export default function ConvertPage() {
 
       {/* Format Comparison */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        {spec.sourceFormat} vs {spec.targetFormat} 格式对比
+        {spec.sourceFormat} vs {spec.targetFormat} {t('formatComparison', lang)}
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '32px' }}>
         {/* Source format */}
@@ -453,13 +475,13 @@ export default function ConvertPage() {
           <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
             {spec.sourceFormat}
           </h3>
-          <p style={{ fontSize: '13px', color: '#16a34a', fontWeight: 600, marginBottom: '6px' }}>优点</p>
+          <p style={{ fontSize: '13px', color: '#16a34a', fontWeight: 600, marginBottom: '6px' }}>{t('pros', lang)}</p>
           <ul style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.8, paddingLeft: '18px', marginBottom: '12px' }}>
             {spec.sourcePros.map((p) => (
               <li key={p}>{p}</li>
             ))}
           </ul>
-          <p style={{ fontSize: '13px', color: '#dc2626', fontWeight: 600, marginBottom: '6px' }}>缺点</p>
+          <p style={{ fontSize: '13px', color: '#dc2626', fontWeight: 600, marginBottom: '6px' }}>{t('cons', lang)}</p>
           <ul style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.8, paddingLeft: '18px' }}>
             {spec.sourceCons.map((c) => (
               <li key={c}>{c}</li>
@@ -478,13 +500,13 @@ export default function ConvertPage() {
           <h3 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px', color: 'var(--accent)' }}>
             {spec.targetFormat}
           </h3>
-          <p style={{ fontSize: '13px', color: '#16a34a', fontWeight: 600, marginBottom: '6px' }}>优点</p>
+          <p style={{ fontSize: '13px', color: '#16a34a', fontWeight: 600, marginBottom: '6px' }}>{t('pros', lang)}</p>
           <ul style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.8, paddingLeft: '18px', marginBottom: '12px' }}>
             {spec.targetPros.map((p) => (
               <li key={p}>{p}</li>
             ))}
           </ul>
-          <p style={{ fontSize: '13px', color: '#dc2626', fontWeight: 600, marginBottom: '6px' }}>缺点</p>
+          <p style={{ fontSize: '13px', color: '#dc2626', fontWeight: 600, marginBottom: '6px' }}>{t('cons', lang)}</p>
           <ul style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.8, paddingLeft: '18px' }}>
             {spec.targetCons.map((c) => (
               <li key={c}>{c}</li>
@@ -495,7 +517,7 @@ export default function ConvertPage() {
 
       {/* Common Uses */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
-        常见使用场景
+        {t('commonUses', lang)}
       </h2>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px' }}>
         {spec.commonUses.map((use) => (
@@ -517,7 +539,7 @@ export default function ConvertPage() {
 
       {/* Tips */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
-        转换技巧
+        {t('conversionTips', lang)}
       </h2>
       <ul style={{ marginBottom: '32px', color: 'var(--text-secondary)', lineHeight: 1.9, paddingLeft: '20px' }}>
         {spec.tips.map((tip) => (
@@ -529,14 +551,44 @@ export default function ConvertPage() {
 
       {/* How to convert */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        如何将 {spec.sourceFormat} 转为 {spec.targetFormat}
+        {isEn
+          ? `How to Convert ${spec.sourceFormat} to ${spec.targetFormat}`
+          : `如何将 ${spec.sourceFormat} 转为 ${spec.targetFormat}`}
       </h2>
       <div style={{ display: 'grid', gap: '10px', marginBottom: '32px' }}>
         {[
-          { step: '1', title: '上传图片', desc: `将 ${spec.sourceFormat} 图片拖拽到上方上传区域，或点击选择文件。` },
-          { step: '2', title: '调整参数', desc: showQualitySlider ? '根据需要调整压缩质量，PNG 和 BMP 转换无需设置。' : '无需额外设置，直接进行下一步。' },
-          { step: '3', title: '开始转换', desc: `点击「转换为 ${spec.targetFormat}」按钮，浏览器自动完成格式转换。` },
-          { step: '4', title: '下载结果', desc: `转换完成后点击「下载」按钮，保存 ${spec.targetExt} 文件到本地。` },
+          {
+            step: '1',
+            title: t('stepUpload', lang),
+            desc: isEn
+              ? `Drag your ${spec.sourceFormat} image into the upload area above, or click to select a file.`
+              : `将 ${spec.sourceFormat} 图片拖拽到上方上传区域，或点击选择文件。`,
+          },
+          {
+            step: '2',
+            title: t('stepAdjust', lang),
+            desc: isEn
+              ? showQualitySlider
+                ? 'Adjust compression quality as needed. PNG and BMP conversions do not require quality settings.'
+                : 'No additional settings needed. Proceed directly to the next step.'
+              : showQualitySlider
+                ? '根据需要调整压缩质量，PNG 和 BMP 转换无需设置。'
+                : '无需额外设置，直接进行下一步。',
+          },
+          {
+            step: '3',
+            title: t('stepConvert', lang),
+            desc: isEn
+              ? `Click "Convert to ${spec.targetFormat}" and the browser will automatically complete the format conversion.`
+              : `点击「转换为 ${spec.targetFormat}」按钮，浏览器自动完成格式转换。`,
+          },
+          {
+            step: '4',
+            title: t('stepDownload', lang),
+            desc: isEn
+              ? `Click the "Download" button after conversion to save the ${spec.targetExt} file locally.`
+              : `转换完成后点击「下载」按钮，保存 ${spec.targetExt} 文件到本地。`,
+          },
         ].map((item) => (
           <div
             key={item.step}
@@ -576,7 +628,7 @@ export default function ConvertPage() {
 
       {/* FAQ */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '14px', color: 'var(--text-primary)' }}>
-        常见问题
+        {t('faq', lang)}
       </h2>
       <div style={{ marginBottom: '32px' }}>
         {spec.faq.map((item, i) => (
@@ -598,13 +650,13 @@ export default function ConvertPage() {
 
       {/* Related conversions */}
       <h2 style={{ fontSize: '19px', fontWeight: 600, marginBottom: '12px', color: 'var(--text-primary)' }}>
-        其他格式转换
+        {t('otherConversions', lang)}
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '8px', marginBottom: '40px' }}>
         {relatedSpecs.map((s) => (
           <Link
             key={s.slug}
-            to={`/convert/${s.slug}`}
+            to={isEn ? `/convert/${s.slug}` : `/zh/convert/${s.slug}`}
             style={{
               display: 'block',
               padding: '10px 14px',

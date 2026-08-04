@@ -197,9 +197,32 @@ export default async function handler(_req: any, res: any) {
 
   const allUrls = [...staticUrls, ...toolUrls, ...blogUrls, ...idPhotoUrls, ...socialMediaUrls, ...backgroundUrls, ...convertUrls];
 
+  // Add Chinese (/zh/) variants for all SEO pages
+  const prefixZh = (u: { loc: string; lastmod: string; changefreq: string; priority: string }) => ({
+    ...u,
+    loc: u.loc.replace(SITE_URL, `${SITE_URL}/zh`),
+  });
+
+  const zhStaticUrls = [
+    prefixZh(staticUrls[0]), // homepage -> /zh/
+    ...staticUrls.slice(1).map(prefixZh), // /zh/about, /zh/privacy, etc.
+  ];
+  // Fix homepage URL (it was /zh → now becomes /zh/)
+  zhStaticUrls[0].loc = `${SITE_URL}/zh/`;
+
+  const zhToolUrls = toolUrls.map(prefixZh);
+  const zhIdPhotoUrls = idPhotoUrls.map(prefixZh);
+  const zhSocialMediaUrls = socialMediaUrls.map(prefixZh);
+  const zhBackgroundUrls = backgroundUrls.map(prefixZh);
+  const zhConvertUrls = convertUrls.map(prefixZh);
+
+  const allZhUrls = [...zhStaticUrls, ...zhToolUrls, ...zhIdPhotoUrls, ...zhSocialMediaUrls, ...zhBackgroundUrls, ...zhConvertUrls];
+
+  const allFinalUrls = [...allUrls, ...allZhUrls];
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allUrls.map(u => `  <url>
+${allFinalUrls.map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
