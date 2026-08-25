@@ -10,7 +10,7 @@
       "destination": "/api/sitemap"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/((?!api/|ads\\.txt|robots\\.txt|sitemap\\.xml|.*\\.svg|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.webp|.*\\.gif|.*\\.woff2?).*)",
       "destination": "/index.html"
     }
   ],
