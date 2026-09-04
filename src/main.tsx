@@ -9,6 +9,7 @@ import './i18n'
 // Lazy-load all content pages for better code splitting
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
+const TermsPage = lazy(() => import('./pages/TermsPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const BlogListPage = lazy(() => import('./pages/BlogListPage'))
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'))
@@ -37,6 +38,7 @@ function LazyPage({ children }: { children: ReactNode }) {
 const contentRoutes = [
   { path: 'about', element: <LazyPage><AboutPage /></LazyPage> },
   { path: 'privacy', element: <LazyPage><PrivacyPage /></LazyPage> },
+  { path: 'terms', element: <LazyPage><TermsPage /></LazyPage> },
   { path: 'contact', element: <LazyPage><ContactPage /></LazyPage> },
   { path: 'blog', element: <LazyPage><BlogListPage /></LazyPage> },
   { path: 'blog/:id', element: <LazyPage><BlogPostPage /></LazyPage> },

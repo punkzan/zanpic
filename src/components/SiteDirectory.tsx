@@ -65,10 +65,11 @@ export function SiteDirectory({ isEditor }: { isEditor: boolean }) {
       label: p.title.length > 30 ? p.title.slice(0, 28) + '…' : p.title,
     }))
 
-    // Info pages (3)
+    // Info pages (4)
     const infoPages: LinkItem[] = [
       { path: '/about', label: '关于我们' },
       { path: '/privacy', label: '隐私政策' },
+      { path: '/terms', label: '服务条款' },
       { path: '/contact', label: '联系我们' },
     ]
 

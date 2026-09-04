@@ -133,6 +133,7 @@ export default async function handler(_req: any, res: any) {
     { loc: `${SITE_URL}/`, lastmod: today, changefreq: 'weekly', priority: '1.0' },
     { loc: `${SITE_URL}/about`, lastmod: today, changefreq: 'monthly', priority: '0.5' },
     { loc: `${SITE_URL}/privacy`, lastmod: today, changefreq: 'monthly', priority: '0.3' },
+    { loc: `${SITE_URL}/terms`, lastmod: today, changefreq: 'monthly', priority: '0.3' },
     { loc: `${SITE_URL}/contact`, lastmod: today, changefreq: 'monthly', priority: '0.3' },
     { loc: `${SITE_URL}/blog`, lastmod: today, changefreq: 'weekly', priority: '0.8' },
   ];

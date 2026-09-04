@@ -14,6 +14,7 @@ import { CutoutOverlay } from './components/CutoutOverlay'
 import { BrushPanel } from './components/BrushPanel'
 import { IdPhotoOverlay } from './components/IdPhotoOverlay'
 import { Footer } from './components/Footer'
+import { HomepageContent } from './components/HomepageContent'
 
 export default function App() {
   useTheme()
@@ -65,9 +66,12 @@ export default function App() {
   }, [exportOpen, shortcutsOpen])
 
   return (
-    <div className="flex h-full flex-col relative">
+    <div className="flex min-h-screen flex-col relative">
       <Toolbar />
-      <main className="relative flex flex-1 overflow-hidden">
+      <main
+        className="relative flex flex-1 overflow-hidden"
+        style={{ minHeight: 'calc(100vh - 200px)' }}
+      >
         <div className="relative flex flex-1 overflow-hidden">
           <EditorCanvas />
           {!hasImage && <UploadZone />}
@@ -79,6 +83,7 @@ export default function App() {
       <CutoutOverlay />
       <IdPhotoOverlay />
       <Footer />
+      <HomepageContent />
     </div>
   )
 }

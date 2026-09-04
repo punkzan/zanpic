@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useSiteStore } from '../store/siteStore'
-import { Info, Shield, Mail, BookOpen, ExternalLink } from 'lucide-react'
+import { Info, Shield, Mail, BookOpen, ScrollText, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { type ReactNode } from 'react'
 import { SiteDirectory } from './SiteDirectory'
@@ -21,6 +21,7 @@ export function Footer() {
   const links: { path: string; label: string; icon: typeof Info }[] = [
     { path: '/about', label: t('footer.about'), icon: Info },
     { path: '/privacy', label: t('footer.privacy'), icon: Shield },
+    { path: '/terms', label: t('footer.terms'), icon: ScrollText },
     { path: '/contact', label: t('footer.contact'), icon: Mail },
     { path: '/blog', label: t('footer.blog'), icon: BookOpen },
   ]

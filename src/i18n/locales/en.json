@@ -291,6 +291,7 @@
   "footer": {
     "about": "About",
     "privacy": "Privacy",
+    "terms": "Terms",
     "contact": "Contact",
     "blog": "Blog",
     "friendLinks": "Links",
@@ -381,6 +382,31 @@
       "faq3A": "Latest Chrome / Edge / Firefox are recommended. Some features may be limited in Safari.",
       "footer": "For more questions, feel free to contact us via email."
     },
+    "terms": {
+      "title": "Terms of Service",
+      "summary": "These terms govern your use of Zan Pic. By using the service, you agree to these terms.",
+      "s1Title": "1. Acceptance of Terms",
+      "s1Body": "By accessing or using Zan Pic (the \"Service\"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service.",
+      "s2Title": "2. Service Description",
+      "s2Body": "Zan Pic is a free, browser-based image editing tool. All image processing runs locally in your browser. We do not upload, store, or have access to your images. The Service is provided free of charge for personal and commercial use.",
+      "s3Title": "3. User Conduct",
+      "s3Body": "You agree not to use the Service to:",
+      "s3a": "Process images containing illegal content, including child exploitation, hate speech, or incitement to violence",
+      "s3b": "Infringe on the intellectual property rights of others (copyright, trademarks, or privacy rights)",
+      "s3c": "Attempt to reverse engineer, decompile, or otherwise extract the source code of the Service for commercial purposes",
+      "s3d": "Use automated systems to scrape, crawl, or otherwise extract content from the Service at scale",
+      "s4Title": "4. Intellectual Property",
+      "s4Body": "The Service, including its design, code, AI models, and branding, is owned by Zan Pic and protected by copyright and other intellectual property laws. You retain all rights to the images you create with the Service. We claim no rights over your outputs.",
+      "s5Title": "5. Disclaimer of Warranties",
+      "s5Body": "The Service is provided \"as is\" and \"as available\" without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted, secure, or error-free, or that defects will be corrected.",
+      "s6Title": "6. Modifications to the Service",
+      "s6Body": "We reserve the right to modify, suspend, or discontinue the Service or any feature at any time, with or without notice. We may update these Terms from time to time; continued use after changes constitutes acceptance of the updated terms.",
+      "s7Title": "7. Contact",
+      "s7Body": "If you have questions about these Terms, please contact us at {{email}}.",
+      "s8Title": "8. Governing Law",
+      "s8Body": "These Terms are governed by the laws of the People's Republic of China, without regard to conflict of law principles. Any disputes arising from these Terms shall be resolved through amicable negotiation first; failing that, through the competent courts of the People's Republic of China.",
+      "lastUpdated": "Last updated: September 2026"
+    },
     "blog": {
       "title": "Blog",
       "intro": "Sharing image editing tips, AI cutout technology insights, and ID photo guides.",
@@ -390,6 +416,82 @@
       "readMore": "Read More →",
       "backToList": "← Back to List",
       "notFound": "Article not found"
+    }
+  },
+  "homepage": {
+    "heading": "Free Online Image Editor — AI Background Remover, ID Photo Maker & More",
+    "intro": "Zan Pic is a free, browser-based image editor for AI background removal, ID photo generation, photo filters, cropping, compression, format conversion, and watermarking. Every operation runs locally in your browser — your images never leave your device. No signup, no watermark, no usage limits.",
+    "featuresTitle": "Core Tools",
+    "features": {
+      "aiCutout": {
+        "title": "AI Background Remover",
+        "body": "Powered by the IS-Net deep learning model and WebGPU acceleration, removes image backgrounds in 2-5 seconds with hair-level precision. Brush mode supports manual edge refinement."
+      },
+      "idPhoto": {
+        "title": "ID Photo Maker",
+        "body": "Generate standard 1-inch, 2-inch, and small 2-inch ID photos from a phone photo. AI removes the background, detects the face, and crops to spec. Choose red, white, or blue background; auto 6-inch print layout included."
+      },
+      "crop": {
+        "title": "Smart Crop & Resize",
+        "body": "Free crop with six fixed aspect ratios (1:1, 4:3, 3:4, 16:9, 9:16, 3:2), rotation, and rule-of-thirds grid. AI super-resolution enlarges up to 4x without quality loss."
+      },
+      "filter": {
+        "title": "Photo Filters & Color Grading",
+        "body": "Eight preset filters (B&W, vintage, warm, cool, vivid, faded, sharpen, blur) plus live brightness, contrast, and saturation sliders. All adjustments are non-destructive and stackable."
+      },
+      "compress": {
+        "title": "Image Compression",
+        "body": "Quality slider plus target file-size constraint for JPEG, PNG, and WebP. Live size estimation shows expected output before export."
+      },
+      "convert": {
+        "title": "Format Conversion",
+        "body": "Convert between PNG, JPEG, WebP, and AVIF with custom compression quality. Convert in-place without uploading to a server."
+      },
+      "watermark": {
+        "title": "Custom Watermark",
+        "body": "Add text or image watermark with eight position presets (corners, edges, center, tile). Font size, color, opacity, and rotation are fully adjustable."
+      }
+    },
+    "stepsTitle": "How It Works",
+    "steps": {
+      "step1": {
+        "title": "Upload Image",
+        "body": "Drag and drop a PNG, JPG, or WebP file into the editor, or click to browse. Files stay on your device."
+      },
+      "step2": {
+        "title": "Edit",
+        "body": "Apply AI cutout, filters, crop, compression, watermark, or any combination. All edits preview in real time and can be undone."
+      },
+      "step3": {
+        "title": "Export",
+        "body": "Choose output format and quality, then download the result. No watermark, no registration, no usage limits."
+      }
+    },
+    "useCasesTitle": "Common Use Cases",
+    "useCases": [
+      "E-commerce product photos — clean white backgrounds, batch compress for faster page loads",
+      "ID and visa photos — generate standard sizes with red, white, or blue backgrounds from a phone snap",
+      "Social media avatars — LinkedIn, Instagram, Facebook covers sized for each platform's specs",
+      "Personal photo editing — quick adjustments, vintage filters, watermarking before sharing",
+      "Blog and document images — compress and convert to WebP to save bandwidth and load faster"
+    ],
+    "privacyTitle": "Privacy by Design",
+    "privacyBody": "Zan Pic is a 100% client-side application. All image editing, AI inference, and ID photo generation run locally in your browser via ONNX Runtime and WebGPU. We do not collect, store, or upload your images. The AI model downloads once from a CDN and is cached on your device — subsequent uses work fully offline.",
+    "privacyLink": "Read the full Privacy Policy",
+    "faqTitle": "Frequently Asked Questions",
+    "faq": {
+      "q1": "Is Zan Pic really free?",
+      "a1": "Yes. Zan Pic is free to use, with no registration, no watermark, and no usage limits. We display ads on a few pages to support the service.",
+      "q2": "Are my images uploaded to a server?",
+      "a2": "No. Every image operation runs locally in your browser. Your images never leave your device. The AI model files (~24MB) are downloaded once and cached on your device.",
+      "q3": "Which image formats are supported?",
+      "a3": "Upload: PNG, JPG, WebP, AVIF, BMP, GIF. Export: PNG, JPEG, WebP, AVIF with adjustable quality.",
+      "q4": "Does the AI background remover work on mobile?",
+      "a4": "Yes. Modern mobile browsers (Chrome, Edge, Safari 17+) support WebGPU. AI cutout takes about 5-10 seconds on a recent phone. The first use downloads the AI model (~24MB); subsequent uses load instantly from cache.",
+      "q5": "Can I use the exported images commercially?",
+      "a5": "Yes. The images you create with Zan Pic are entirely yours. We do not claim any rights over your outputs. For uploaded source images, please ensure you have the right to modify them.",
+      "q6": "Why is the AI cutout slow on first use?",
+      "a6": "The first cutout downloads the AI model (~24MB) from a CDN. After that, the model is cached locally. WebGPU-capable browsers (Chrome 113+, Edge 113+) run inference 3-10x faster than WASM fallback."
     }
   },
   "admin": {

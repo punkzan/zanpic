@@ -80,11 +80,37 @@
   <body>
     <div id="root"></div>
     <noscript>
-      <div style="max-width:1200px;margin:0 auto;padding:20px;font-family:sans-serif;color:#333;">
-        <h1>Zan Pic - Free Online Photo Editor</h1>
-        <p>Zan Pic is a free online photo editor with AI background removal, ID photo maker, photo filters, cropping, compression, and format conversion. All processing happens locally in your browser — no upload needed, privacy protected. Please enable JavaScript to use the full features.</p>
+      <div style="max-width:960px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+        <h1 style="font-size:26px;font-weight:700;margin-bottom:12px">Zan Pic - Free Online Image Editor</h1>
+        <p><strong>Free, browser-based image editor for AI background removal, ID photo generation, photo filters, cropping, image compression, format conversion, and watermarking.</strong> Every operation runs locally in your browser — your images never leave your device. No signup, no watermark, no usage limits.</p>
 
-        <h2>Core Tools</h2>
+        <h2 style="font-size:20px;font-weight:600;margin-top:20px">How It Works</h2>
+        <ol>
+          <li><strong>Upload</strong> — drag-and-drop a PNG, JPG, or WebP file into the editor</li>
+          <li><strong>Edit</strong> — apply AI cutout, filters, crop, compression, watermark, or any combination</li>
+          <li><strong>Export</strong> — choose output format and quality, then download</li>
+        </ol>
+
+        <h2 style="font-size:20px;font-weight:600;margin-top:20px">Core Tools</h2>
+        <ul>
+          <li><a href="/id-photo-maker">ID Photo Maker</a> — 1"/2"/small 2" with red/white/blue backgrounds</li>
+          <li><a href="/background-remover">AI Background Remover</a> — IS-Net model, WebGPU accelerated</li>
+          <li><a href="/photo-resizer">Image Crop &amp; Resize</a> — fixed ratios + AI super-resolution</li>
+          <li><a href="/photo-filter">Photo Filters &amp; Color Grading</a> — 8 presets + live sliders</li>
+        </ul>
+
+        <h2 style="font-size:20px;font-weight:600;margin-top:20px">Privacy by Design</h2>
+        <p>Zan Pic is a 100% client-side application. All image editing, AI inference, and ID photo generation run locally in your browser via ONNX Runtime and WebGPU. We do not collect, store, or upload your images. The AI model downloads once from a CDN and is cached on your device — subsequent uses work fully offline.</p>
+
+        <h2 style="font-size:20px;font-weight:600;margin-top:20px">FAQ</h2>
+        <p><strong>Q: Are my images uploaded to a server?</strong><br />A: No. Every image operation runs locally in your browser. Your images never leave your device.</p>
+        <p><strong>Q: Is Zan Pic really free?</strong><br />A: Yes. No registration, no watermark, no usage limits.</p>
+        <p><strong>Q: Does the AI background remover work on mobile?</strong><br />A: Yes. Modern mobile browsers (Chrome, Edge, Safari 17+) support WebGPU. The first use downloads the AI model (~24MB), then it's cached locally.</p>
+        <p><strong>Q: Which image formats are supported?</strong><br />A: Upload: PNG, JPG, WebP, AVIF, BMP, GIF. Export: PNG, JPEG, WebP, AVIF with adjustable quality.</p>
+        <p><strong>Q: Can I use exported images commercially?</strong><br />A: Yes. The images you create are entirely yours.</p>
+        <p><strong>Q: Why is the AI cutout slow on first use?</strong><br />A: First cutout downloads the AI model (~24MB). After that, it's cached. WebGPU-capable browsers run inference 3-10x faster than WASM fallback.</p>
+
+        <h2 style="font-size:20px;font-weight:600;margin-top:20px">ID Photo Specifications</h2>
         <ul>
           <li><a href="/id-photo-maker">ID Photo Maker</a></li>
           <li><a href="/background-remover">AI Background Remover</a></li>
@@ -181,6 +207,7 @@
         <ul>
           <li><a href="/about">About Us</a></li>
           <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
           <li><a href="/contact">Contact Us</a></li>
         </ul>
       </div>

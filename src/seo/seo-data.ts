@@ -100,6 +100,40 @@ export const STATIC_PAGES_SEO: SeoPageData[] = [
 </div>`,
   },
   {
+    path: '/zh/terms',
+    title: `服务条款 - ${BRAND}`,
+    description: 'Zan Pic 服务条款：本服务为免费、纯浏览器端的图片编辑工具；用户使用即视为同意相关条款。',
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">服务条款</h1>
+  <p style="padding:12px;background:#f0f7ff;border-radius:8px"><strong>本条款约束你对 Zan Pic 的使用。继续使用即视为同意以下约定。</strong></p>
+  <h3>1. 条款接受</h3>
+  <p>访问或使用 Zan Pic（简称「本服务」）即视为你同意本服务条款。如不同意，请勿使用本服务。</p>
+  <h3>2. 服务说明</h3>
+  <p>Zan Pic 是一款免费、纯浏览器端的图片编辑工具。所有图片处理在你的浏览器本地完成，我们不上传、不存储、也无法访问你的图像。本服务对个人和商业用途均免费提供。</p>
+  <h3>3. 用户行为规范</h3>
+  <p>你承诺不会使用本服务进行以下行为：</p>
+  <ul>
+    <li>处理含违法内容的图片，包括儿童剥削、仇恨言论或煽动暴力</li>
+    <li>侵犯他人知识产权（版权、商标）或肖像权、隐私权</li>
+    <li>试图对本服务进行反向工程、反编译或以其他方式提取源代码用于商业目的</li>
+    <li>使用自动化系统大规模抓取、爬取本服务内容</li>
+  </ul>
+  <h3>4. 知识产权</h3>
+  <p>本服务（包括其设计、代码、AI 模型、品牌）归 Zan Pic 所有，受版权及其他知识产权法律保护。你使用本服务所创作的图片的所有权仍归你所有，我们不主张任何权利。</p>
+  <h3>5. 免责声明</h3>
+  <p>本服务按「现状」和「可用」原则提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权的保证。我们不保证服务不会中断、安全、无错误，也不保证缺陷一定会被修复。</p>
+  <h3>6. 服务变更</h3>
+  <p>我们保留随时修改、暂停或终止本服务或任何功能的权利，无论是否事先通知。我们可能不定期更新本条款；更新后继续使用即视为同意更新后的条款。</p>
+  <h3>7. 联系方式</h3>
+  <p>如对本条款有任何疑问，请通过 fanlnq@163.com 与我们联系。</p>
+  <h3>8. 法律适用</h3>
+  <p>本条款适用中华人民共和国法律。因本条款产生的争议应优先通过友好协商解决；协商不成的，提交中华人民共和国具有管辖权的人民法院诉讼解决。</p>
+  <p style="color:#888;font-size:13px;margin-top:24px">最后更新：2026 年 9 月</p>
+</div>`,
+  },
+  {
     path: '/zh/blog',
     title: `经验分享 - ${BRAND}`,
     description: '这里分享图片编辑技巧、AI 抠图技术解析、证件照制作指南等实用内容。',
@@ -566,6 +600,40 @@ export const EN_STATIC_PAGES_SEO: SeoPageData[] = [
   <p><strong>AI background removal is slow?</strong> — First-time use requires downloading the AI model (~24MB), which is then cached. WebGPU-enabled browsers run much faster.</p>
   <p><strong>ID photo face positioning is inaccurate?</strong> — We recommend uploading a front-facing photo with clear facial features and even lighting.</p>
   <p><strong>Which browsers are supported?</strong> — We recommend the latest Chrome / Edge / Firefox.</p>
+</div>`,
+  },
+  {
+    path: '/terms',
+    title: `Terms of Service - ${BRAND}`,
+    description: 'Terms of Service for Zan Pic, the free browser-based image editor. By using the service you accept these terms.',
+    ogType: 'website',
+    noscriptHtml: `
+<div id="seo-fallback" style="max-width:768px;margin:0 auto;padding:24px 20px;font-family:sans-serif;color:#333;line-height:1.8">
+  <h1 style="font-size:24px;font-weight:700;margin-bottom:20px">Terms of Service</h1>
+  <p style="padding:12px;background:#f0f7ff;border-radius:8px"><strong>These terms govern your use of Zan Pic. By using the service, you agree to these terms.</strong></p>
+  <h3>1. Acceptance of Terms</h3>
+  <p>By accessing or using Zan Pic (the "Service"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Service.</p>
+  <h3>2. Service Description</h3>
+  <p>Zan Pic is a free, browser-based image editing tool. All image processing runs locally in your browser. We do not upload, store, or have access to your images. The Service is provided free of charge for personal and commercial use.</p>
+  <h3>3. User Conduct</h3>
+  <p>You agree not to use the Service to:</p>
+  <ul>
+    <li>Process images containing illegal content, including child exploitation, hate speech, or incitement to violence</li>
+    <li>Infringe on the intellectual property rights of others (copyright, trademarks, or privacy rights)</li>
+    <li>Attempt to reverse engineer, decompile, or otherwise extract the source code for commercial purposes</li>
+    <li>Use automated systems to scrape, crawl, or extract content from the Service at scale</li>
+  </ul>
+  <h3>4. Intellectual Property</h3>
+  <p>The Service, including its design, code, AI models, and branding, is owned by Zan Pic and protected by copyright and other intellectual property laws. You retain all rights to images you create with the Service. We claim no rights over your outputs.</p>
+  <h3>5. Disclaimer of Warranties</h3>
+  <p>The Service is provided "as is" and "as available" without warranties of any kind, express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted, secure, or error-free.</p>
+  <h3>6. Modifications to the Service</h3>
+  <p>We reserve the right to modify, suspend, or discontinue the Service or any feature at any time, with or without notice. We may update these Terms from time to time; continued use after changes constitutes acceptance of the updated terms.</p>
+  <h3>7. Contact</h3>
+  <p>If you have questions about these Terms, please contact us at fanlnq@163.com.</p>
+  <h3>8. Governing Law</h3>
+  <p>These Terms are governed by the laws of the People's Republic of China. Any disputes arising from these Terms shall be resolved through amicable negotiation first; failing that, through the competent courts of the People's Republic of China.</p>
+  <p style="color:#888;font-size:13px;margin-top:24px">Last updated: September 2026</p>
 </div>`,
   },
   {
